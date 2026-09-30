@@ -8,7 +8,7 @@ export interface PasswordHasher {
 
 export type PasswordHashProfile = "standard" | "fast";
 
-const profiles: Record<PasswordHashProfile, argon2.Options> = {
+const profiles: Record<PasswordHashProfile, argon2.HashOptions> = {
   standard: { type: argon2.argon2id },
   fast: { type: argon2.argon2id, memoryCost: 4096, timeCost: 2, parallelism: 1 },
 };
