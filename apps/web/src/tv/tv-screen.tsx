@@ -71,10 +71,11 @@ function TvStage({ slug, initial, theme, qrSvg, displayUrl, backdrop }: TvScreen
   const clock = useClock(locale);
   useStageScale();
 
+  const { refresh } = feed;
   useEffect(() => {
-    const timer = window.setInterval(() => void feed.refresh(), 60_000);
+    const timer = window.setInterval(() => void refresh(), 60_000);
     return () => window.clearInterval(timer);
-  }, [feed]);
+  }, [refresh]);
 
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -338,7 +339,7 @@ const visualizerBars = Array.from({ length: 56 }, (_, index) => {
   const wave = Math.sin(index * 0.42) * 0.5 + Math.sin(index * 0.17 + 1.3) * 0.5;
   return {
     id: index,
-    height: 90 + Math.round((wave + 1) * 110),
+    height: 60 + Math.round((wave + 1) * 55),
     duration: 900 + ((index * 173) % 900),
     delay: -((index * 97) % 1200),
   };
@@ -376,7 +377,7 @@ function IdleLayout({
             {t.tvIdleText}
           </p>
         </div>
-        <div aria-hidden="true" className="flex h-[240px] items-end gap-[10px]">
+        <div aria-hidden="true" className="flex h-[170px] items-end gap-[10px]">
           {visualizerBars.map((bar) => (
             <span
               key={bar.id}
@@ -386,7 +387,7 @@ function IdleLayout({
                   height: bar.height,
                   "--tv-bar-duration": `${bar.duration}ms`,
                   "--tv-bar-delay": `${bar.delay}ms`,
-                  opacity: 0.45 + (bar.height / 220) * 0.55,
+                  opacity: 0.45 + (bar.height / 170) * 0.55,
                 } as CSSProperties
               }
             />
@@ -432,11 +433,11 @@ function TvFooter({ venue, mode }: { venue: VenueState | null; mode: TvMode }) {
     <footer className="jm-glass flex h-[96px] shrink-0 items-center rounded-none border-x-0 border-b-0">
       <span className="flex h-full shrink-0 items-center gap-3 bg-brand-gradient-strong px-12 text-[22px] font-extrabold uppercase tracking-[0.14em] text-on-brand">
         <Radio aria-hidden="true" className="size-7" />
-        {t.tvUpNext}
+        {fallback ? t.tvOrder : t.tvUpNext}
       </span>
       {fallback ? (
         <p className="min-w-0 flex-1 truncate px-14 text-[26px] font-bold text-fg-muted">
-          {t.tvOrder} · {t.tvScan}
+          {t.tvHint}
         </p>
       ) : !scrolling ? (
         <div className="flex min-w-0 flex-1 items-center gap-2 overflow-hidden">

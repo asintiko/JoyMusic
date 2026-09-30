@@ -68,6 +68,7 @@ try {
       output: "json",
       logLevel: "error",
       onlyCategories: ["performance", "accessibility", "best-practices", "seo"],
+      throttlingMethod: process.env.THROTTLING ?? "simulate",
     });
     if (!result) throw new Error("Lighthouse returned no result");
     runs.push(summarize(result));

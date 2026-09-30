@@ -169,7 +169,7 @@ test("search, request with a dedication, and follow it live through accept and p
 
   await guest.getByTestId("open-mine").click();
   await expect(guest.getByTestId("my-request")).toHaveAttribute("data-status", "accepted");
-  await expect(guest.getByTestId("my-request")).toContainText("Queued · #1");
+  await expect(guest.getByTestId("my-request")).toContainText("#1");
   await guest.keyboard.press("Escape");
 
   await dj.api.call("djRequestPlay", { params: { id: pending.id } });

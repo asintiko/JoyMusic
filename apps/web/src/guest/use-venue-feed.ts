@@ -156,6 +156,13 @@ export function useVenueFeed({
     };
   }, [slug, role, store, sample, refresh, status, startDelayMs]);
 
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      if (status.get() !== "open") void refresh();
+    }, 20_000);
+    return () => window.clearInterval(timer);
+  }, [status, refresh]);
+
   const venue = useMemo(
     () => (live.venue ? overlayMine(live.venue, live.mine) : null),
     [live.venue, live.mine],

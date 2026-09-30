@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import apple from "@joymusic/brand/assets/icons/apple-touch-icon.png";
 import faviconSvg from "@joymusic/brand/assets/icons/favicon.svg";
 import { RootShell } from "@/components/root-shell";
+import { preloadFonts } from "@/lib/font-preload";
 import { ServiceWorkerRegister } from "@/components/sw-register";
 import { resolveRequestLocale, lookupVenue } from "@/lib/server";
 import { themeCanvas } from "@/lib/theme";
@@ -45,6 +46,7 @@ export async function generateMetadata({ params }: Pick<LayoutProps, "params">):
 }
 
 export default async function GuestLayout({ children, params }: LayoutProps) {
+  preloadFonts();
   const { slug } = await params;
   const lookup = await lookupVenue(slug);
   const venue = lookup.status === "ok" ? lookup.state.venue : null;
