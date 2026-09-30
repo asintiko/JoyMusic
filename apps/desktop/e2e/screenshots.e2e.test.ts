@@ -1,5 +1,6 @@
 import { execFileSync } from "node:child_process";
 import { mkdirSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterAll, beforeAll, describe, expect, inject, it } from "vitest";
 import { chromium } from "playwright-core";
@@ -443,7 +444,7 @@ describe.skipIf(!enabled)("design screenshots", () => {
         name,
         diagonal.has(`${theme}-${locale}`)
           ? outputDirectory
-          : extraDirectory || join(outputDirectory, "..", "desktop-extra-unused"),
+          : extraDirectory || join(tmpdir(), "joy-desktop-shots-extra"),
       );
     }
 

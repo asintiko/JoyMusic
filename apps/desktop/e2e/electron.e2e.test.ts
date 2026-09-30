@@ -237,9 +237,6 @@ describe.skipIf(!runnable)("real Electron app", () => {
     await expectContains(page.locator("[data-testid=adapter-serato]"), "not found", 8000);
     await expectVisible(page.locator("[data-testid=status-prolink]"));
     await page.waitForTimeout(1500);
-    await page.evaluate(() =>
-      document.querySelector("[data-testid=settings] .overflow-y-auto")?.scrollTo(0, 240),
-    );
     await saveShot(page, "electron-hardware-en");
     await page.click("[data-testid=settings-back]");
     await page.waitForSelector("[data-testid=console]");

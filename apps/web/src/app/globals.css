@@ -11,6 +11,12 @@ body {
   overflow-x: hidden;
 }
 
+.hero-art span[data-status] > img {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
 .guest-shell {
   min-height: 100dvh;
   min-height: 100svh;
