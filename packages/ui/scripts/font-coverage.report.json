@@ -1,43 +1,65 @@
 {
-  "Unbounded": {
+  "display (Unbounded)": {
     "uz-latin-letters": {
       "total": 52,
-      "missing": []
+      "missing": [],
+      "servedBy": {
+        "unbounded": 52
+      }
     },
     "uz-latin-apostrophes": {
       "total": 6,
-      "missing": []
+      "missing": [],
+      "servedBy": {
+        "unbounded": 6
+      }
     },
     "ru-cyrillic": {
       "total": 66,
-      "missing": []
+      "missing": [],
+      "servedBy": {
+        "unbounded": 66
+      }
     },
     "uz-cyrillic-extras": {
       "total": 8,
-      "missing": [
-        "U+0492 Ғ",
-        "U+0493 ғ",
-        "U+049A Қ",
-        "U+049B қ",
-        "U+04B2 Ҳ",
-        "U+04B3 ҳ"
-      ]
+      "missing": [],
+      "servedBy": {
+        "unbounded": 2,
+        "Joy Cyrillic Patch": 6
+      }
     },
     "digits-and-punctuation": {
       "total": 49,
-      "missing": []
+      "missing": [],
+      "servedBy": {
+        "unbounded": 49
+      }
     },
     "ui-symbols": {
-      "total": 9,
+      "total": 4,
+      "missing": [],
+      "servedBy": {
+        "unbounded": 4
+      }
+    },
+    "currency": {
+      "total": 3,
+      "missing": [],
+      "servedBy": {
+        "unbounded": 3
+      }
+    },
+    "arrows-and-check": {
+      "total": 5,
       "missing": [
         "U+2190 ←",
         "U+2192 →",
         "U+2713 ✓"
-      ]
-    },
-    "currency": {
-      "total": 3,
-      "missing": []
+      ],
+      "servedBy": {
+        "unbounded": 2
+      }
     },
     "modifier-keys": {
       "total": 6,
@@ -48,51 +70,72 @@
         "U+2318 ⌘",
         "U+2325 ⌥",
         "U+23CE ⏎"
-      ]
+      ],
+      "servedBy": {}
     }
   },
-  "Manrope": {
+  "sans (Manrope)": {
     "uz-latin-letters": {
       "total": 52,
-      "missing": []
+      "missing": [],
+      "servedBy": {
+        "manrope": 52
+      }
     },
     "uz-latin-apostrophes": {
       "total": 6,
-      "missing": [
-        "U+02BB ʻ",
-        "U+02BC ʼ"
-      ]
+      "missing": [],
+      "servedBy": {
+        "Joy Manrope Patch": 2,
+        "manrope": 4
+      }
     },
     "ru-cyrillic": {
       "total": 66,
-      "missing": []
+      "missing": [],
+      "servedBy": {
+        "manrope": 66
+      }
     },
     "uz-cyrillic-extras": {
       "total": 8,
-      "missing": [
-        "U+0492 Ғ",
-        "U+0493 ғ",
-        "U+049A Қ",
-        "U+049B қ",
-        "U+04B2 Ҳ",
-        "U+04B3 ҳ"
-      ]
+      "missing": [],
+      "servedBy": {
+        "manrope": 2,
+        "Joy Cyrillic Patch": 6
+      }
     },
     "digits-and-punctuation": {
       "total": 49,
-      "missing": []
+      "missing": [],
+      "servedBy": {
+        "manrope": 49
+      }
     },
     "ui-symbols": {
-      "total": 9,
+      "total": 4,
+      "missing": [],
+      "servedBy": {
+        "manrope": 4
+      }
+    },
+    "currency": {
+      "total": 3,
+      "missing": [],
+      "servedBy": {
+        "manrope": 3
+      }
+    },
+    "arrows-and-check": {
+      "total": 5,
       "missing": [
         "U+2190 ←",
         "U+2192 →",
         "U+2713 ✓"
-      ]
-    },
-    "currency": {
-      "total": 3,
-      "missing": []
+      ],
+      "servedBy": {
+        "manrope": 2
+      }
     },
     "modifier-keys": {
       "total": 6,
@@ -103,50 +146,72 @@
         "U+2318 ⌘",
         "U+2325 ⌥",
         "U+23CE ⏎"
-      ]
+      ],
+      "servedBy": {}
     }
   },
-  "JetBrains Mono": {
+  "mono (JetBrains Mono)": {
     "uz-latin-letters": {
       "total": 52,
-      "missing": []
+      "missing": [],
+      "servedBy": {
+        "jetbrains-mono": 52
+      }
     },
     "uz-latin-apostrophes": {
       "total": 6,
-      "missing": [
-        "U+02BB ʻ"
-      ]
+      "missing": [],
+      "servedBy": {
+        "Joy Mono Patch": 1,
+        "jetbrains-mono": 5
+      }
     },
     "ru-cyrillic": {
       "total": 66,
-      "missing": []
+      "missing": [],
+      "servedBy": {
+        "jetbrains-mono": 66
+      }
     },
     "uz-cyrillic-extras": {
       "total": 8,
-      "missing": [
-        "U+0492 Ғ",
-        "U+0493 ғ",
-        "U+049A Қ",
-        "U+049B қ",
-        "U+04B2 Ҳ",
-        "U+04B3 ҳ"
-      ]
+      "missing": [],
+      "servedBy": {
+        "jetbrains-mono": 2,
+        "Joy Cyrillic Patch": 6
+      }
     },
     "digits-and-punctuation": {
       "total": 49,
-      "missing": []
+      "missing": [],
+      "servedBy": {
+        "jetbrains-mono": 49
+      }
     },
     "ui-symbols": {
-      "total": 9,
+      "total": 4,
+      "missing": [],
+      "servedBy": {
+        "jetbrains-mono": 4
+      }
+    },
+    "currency": {
+      "total": 3,
+      "missing": [],
+      "servedBy": {
+        "jetbrains-mono": 3
+      }
+    },
+    "arrows-and-check": {
+      "total": 5,
       "missing": [
         "U+2190 ←",
         "U+2192 →",
         "U+2713 ✓"
-      ]
-    },
-    "currency": {
-      "total": 3,
-      "missing": []
+      ],
+      "servedBy": {
+        "jetbrains-mono": 2
+      }
     },
     "modifier-keys": {
       "total": 6,
@@ -157,7 +222,8 @@
         "U+2318 ⌘",
         "U+2325 ⌥",
         "U+23CE ⏎"
-      ]
+      ],
+      "servedBy": {}
     }
   }
 }
