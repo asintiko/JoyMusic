@@ -5,7 +5,7 @@ import {
   type CatalogProvider,
 } from "@joymusic/catalog";
 import type { AdminVenue, SessionSummary, Track, VenueSettings } from "@joymusic/shared";
-import { createApi } from "./api";
+import type { createApi } from "./api";
 import { createTestContext, type TestContext, type TestContextOptions } from "./context";
 import { addMember, apiOf, createVenue, registerOwner, type Actor } from "./factories";
 
