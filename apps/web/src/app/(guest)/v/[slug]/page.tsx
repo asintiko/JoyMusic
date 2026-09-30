@@ -14,7 +14,7 @@ export default async function GuestPage({ params }: { params: Promise<{ slug: st
   const locale = await resolveRequestLocale(state?.venue.settings.defaultLocale ?? "uz");
   const playing = state?.nowPlaying;
   if (playing && state?.venue.settings.showArtwork) {
-    const cover = artworkSrc(playing.artworkUrl ?? playing.track?.artworkUrl ?? null, 250);
+    const cover = artworkSrc(playing.artworkUrl ?? playing.track?.artworkUrl ?? null, 500);
     if (cover) preload(cover, { as: "image", fetchPriority: "high" });
   }
   return <GuestApp slug={slug} initial={state} initialLocale={locale} />;

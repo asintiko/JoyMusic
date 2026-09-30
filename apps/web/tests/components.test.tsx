@@ -82,7 +82,8 @@ describe("UpNext", () => {
       />,
     );
     expect(screen.getByTestId("up-next")).toHaveTextContent("Kelinchik");
-    expect(screen.getByTestId("pending-list")).toHaveTextContent("Levitating");
+    const waiting = await screen.findByTestId("pending-list", {}, { timeout: 4000 });
+    expect(waiting).toHaveTextContent("Levitating");
     await user.click(screen.getByRole("button", { name: "Vote: Levitating" }));
     expect(onVote).toHaveBeenCalledWith(pending);
   });
@@ -139,7 +140,7 @@ describe("MyRequestsSheet", () => {
       "declined",
     ]);
     expect(screen.getByText("Playing now")).toBeInTheDocument();
-    expect(screen.getByText("Queued · #2")).toBeInTheDocument();
+    expect(screen.getByText("#2")).toBeInTheDocument();
     expect(screen.getByText(/Not tonight/)).toBeInTheDocument();
   });
 

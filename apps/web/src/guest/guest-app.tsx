@@ -51,7 +51,6 @@ const NowPlayingSection = dynamic(() =>
 const UpNext = dynamic(() => import("./up-next").then((module) => module.UpNext));
 
 const startDelayMs = 700;
-const heroPreviewSize = 250;
 
 export interface GuestAppProps {
   slug: string;
@@ -217,9 +216,8 @@ function GuestScreen({ slug, initial }: { slug: string; initial: VenueState | nu
 
   const artwork = useMemo(() => {
     if (!nowPlaying || !settings?.showArtwork) return null;
-    const source = nowPlaying.artworkUrl ?? nowPlaying.track?.artworkUrl ?? null;
-    return artworkSrc(source, ambientReady ? 500 : heroPreviewSize);
-  }, [nowPlaying, settings?.showArtwork, ambientReady]);
+    return artworkSrc(nowPlaying.artworkUrl ?? nowPlaying.track?.artworkUrl ?? null, 500);
+  }, [nowPlaying, settings?.showArtwork]);
 
   const openMine = useCallback(() => {
     setSheetsLoaded((previous) => (previous.mine ? previous : { ...previous, mine: true }));
@@ -338,7 +336,7 @@ function GuestScreen({ slug, initial }: { slug: string; initial: VenueState | nu
               ) : (
                 <EmptyState
                   illustration="queue"
-                  size="lg"
+                  size="md"
                   title={t.idleTitle}
                   description={t.idleText}
                   className="jm-rise"
