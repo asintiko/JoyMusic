@@ -1,0 +1,14 @@
+node_modules
+dist
+out
+release
+.next
+.turbo
+coverage
+playwright-report
+test-results
+pnpm-lock.yaml
+skills-lock.json
+.claude
+drizzle
+packages/brand/assets
