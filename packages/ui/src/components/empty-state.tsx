@@ -3,13 +3,7 @@ import type { ReactNode } from "react";
 import { cx } from "../lib/cx";
 
 export type EmptyIllustration =
-  | "search"
-  | "queue"
-  | "inbox"
-  | "closed"
-  | "offline"
-  | "qr"
-  | "error";
+  "search" | "queue" | "inbox" | "closed" | "offline" | "qr" | "error";
 
 export interface EmptyStateProps {
   illustration?: EmptyIllustration;
@@ -30,12 +24,30 @@ const surface = "var(--jm-surface-3)";
 const surfaceHigh = "var(--jm-surface-4)";
 const lineStrong = "var(--jm-line-strong)";
 
-function Vinyl({ cx: x, cy: y, r, gradient }: { cx: number; cy: number; r: number; gradient: string }) {
+function Vinyl({
+  cx: x,
+  cy: y,
+  r,
+  gradient,
+}: {
+  cx: number;
+  cy: number;
+  r: number;
+  gradient: string;
+}) {
   return (
     <g>
       <circle cx={x} cy={y} r={r} fill={surface} stroke={lineStrong} />
       {[0.82, 0.66, 0.5].map((factor) => (
-        <circle key={factor} cx={x} cy={y} r={r * factor} fill="none" stroke={lineStrong} strokeWidth={1} />
+        <circle
+          key={factor}
+          cx={x}
+          cy={y}
+          r={r * factor}
+          fill="none"
+          stroke={lineStrong}
+          strokeWidth={1}
+        />
       ))}
       <circle cx={x} cy={y} r={r * 0.3} fill={`url(#${gradient})`} />
       <circle cx={x} cy={y} r={r * 0.06} fill="var(--jm-canvas)" />
@@ -49,8 +61,20 @@ function Search({ gradient }: DrawProps) {
       <Vinyl cx={62} cy={62} r={40} gradient={gradient} />
       <circle cx={94} cy={72} r={22} fill="var(--jm-canvas)" fillOpacity={0.55} />
       <circle cx={94} cy={72} r={22} fill="none" stroke={`url(#${gradient})`} strokeWidth={6} />
-      <path d="M110 88 L128 106" stroke={`url(#${gradient})`} strokeWidth={8} strokeLinecap="round" />
-      <path d="M86 72 Q94 62 102 72" fill="none" stroke="var(--jm-fg)" strokeOpacity={0.55} strokeWidth={2.4} strokeLinecap="round" />
+      <path
+        d="M110 88 L128 106"
+        stroke={`url(#${gradient})`}
+        strokeWidth={8}
+        strokeLinecap="round"
+      />
+      <path
+        d="M86 72 Q94 62 102 72"
+        fill="none"
+        stroke="var(--jm-fg)"
+        strokeOpacity={0.55}
+        strokeWidth={2.4}
+        strokeLinecap="round"
+      />
     </>
   );
 }
@@ -60,12 +84,29 @@ function Queue({ gradient }: DrawProps) {
     <>
       <rect x={30} y={22} width={100} height={26} rx={9} fill={surface} opacity={0.5} />
       <rect x={22} y={40} width={116} height={30} rx={10} fill={surface} opacity={0.8} />
-      <rect x={14} y={60} width={132} height={40} rx={12} fill={surfaceHigh} stroke={lineStrong} strokeDasharray="4 4" />
+      <rect
+        x={14}
+        y={60}
+        width={132}
+        height={40}
+        rx={12}
+        fill={surfaceHigh}
+        stroke={lineStrong}
+        strokeDasharray="4 4"
+      />
       <rect x={24} y={70} width={20} height={20} rx={6} fill={`url(#${gradient})`} />
       <rect x={52} y={73} width={54} height={5} rx={2.5} fill="var(--jm-fg)" fillOpacity={0.5} />
       <rect x={52} y={83} width={34} height={4} rx={2} fill="var(--jm-fg)" fillOpacity={0.24} />
       {[0, 1, 2].map((index) => (
-        <rect key={index} x={118 + index * 6} y={88 - [8, 14, 6][index]!} width={3.6} height={[8, 14, 6][index]} rx={1.8} fill="var(--jm-playing)" />
+        <rect
+          key={index}
+          x={118 + index * 6}
+          y={88 - [8, 14, 6][index]!}
+          width={3.6}
+          height={[8, 14, 6][index]}
+          rx={1.8}
+          fill="var(--jm-playing)"
+        />
       ))}
     </>
   );
@@ -74,11 +115,27 @@ function Queue({ gradient }: DrawProps) {
 function Inbox({ gradient }: DrawProps) {
   return (
     <>
-      <path d="M22 70 L40 34 H120 L138 70 V96 a8 8 0 0 1 -8 8 H30 a8 8 0 0 1 -8 -8 Z" fill={surface} stroke={lineStrong} />
-      <path d="M22 70 H58 a6 6 0 0 1 6 6 a16 16 0 0 0 32 0 a6 6 0 0 1 6 -6 H138" fill="none" stroke={lineStrong} strokeWidth={1.5} />
+      <path
+        d="M22 70 L40 34 H120 L138 70 V96 a8 8 0 0 1 -8 8 H30 a8 8 0 0 1 -8 -8 Z"
+        fill={surface}
+        stroke={lineStrong}
+      />
+      <path
+        d="M22 70 H58 a6 6 0 0 1 6 6 a16 16 0 0 0 32 0 a6 6 0 0 1 6 -6 H138"
+        fill="none"
+        stroke={lineStrong}
+        strokeWidth={1.5}
+      />
       <g transform="translate(80 28)">
         <circle r={17} fill={`url(#${gradient})`} />
-        <path d="M-3 6 V-7 L7 -9 V3" fill="none" stroke="#fff" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" />
+        <path
+          d="M-3 6 V-7 L7 -9 V3"
+          fill="none"
+          stroke="#fff"
+          strokeWidth={2.4}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
         <circle cx={-5} cy={6} r={3} fill="#fff" />
         <circle cx={5} cy={3.6} r={3} fill="#fff" />
       </g>
@@ -117,7 +174,13 @@ function Offline({ gradient }: DrawProps) {
         />
       ))}
       <circle cx={80} cy={92} r={7} fill={`url(#${gradient})`} />
-      <path d="M38 26 L122 108" stroke="var(--jm-canvas)" strokeWidth={13} strokeLinecap="round" opacity={0.7} />
+      <path
+        d="M38 26 L122 108"
+        stroke="var(--jm-canvas)"
+        strokeWidth={13}
+        strokeLinecap="round"
+        opacity={0.7}
+      />
       <path d="M38 26 L122 108" stroke="var(--jm-danger)" strokeWidth={5} strokeLinecap="round" />
     </>
   );
@@ -126,13 +189,36 @@ function Offline({ gradient }: DrawProps) {
 function Qr({ gradient }: DrawProps) {
   const finder = (x: number, y: number) => (
     <g key={`${x}-${y}`}>
-      <rect x={x} y={y} width={32} height={32} rx={8} fill="none" stroke={`url(#${gradient})`} strokeWidth={5} />
+      <rect
+        x={x}
+        y={y}
+        width={32}
+        height={32}
+        rx={8}
+        fill="none"
+        stroke={`url(#${gradient})`}
+        strokeWidth={5}
+      />
       <rect x={x + 10} y={y + 10} width={12} height={12} rx={3.5} fill={`url(#${gradient})`} />
     </g>
   );
   const dots = [
-    [68, 30], [68, 42], [80, 24], [80, 36], [64, 62], [76, 68], [88, 60], [100, 68],
-    [112, 62], [124, 68], [64, 88], [76, 100], [88, 90], [100, 102], [112, 92], [124, 100],
+    [68, 30],
+    [68, 42],
+    [80, 24],
+    [80, 36],
+    [64, 62],
+    [76, 68],
+    [88, 60],
+    [100, 68],
+    [112, 62],
+    [124, 68],
+    [64, 88],
+    [76, 100],
+    [88, 90],
+    [100, 102],
+    [112, 92],
+    [124, 100],
   ];
   return (
     <>
@@ -140,9 +226,27 @@ function Qr({ gradient }: DrawProps) {
       {finder(104, 22)}
       {finder(24, 82)}
       {dots.map(([x, y]) => (
-        <rect key={`${x}-${y}`} x={x} y={y} width={8} height={8} rx={2.4} fill="var(--jm-fg)" fillOpacity={0.35} />
+        <rect
+          key={`${x}-${y}`}
+          x={x}
+          y={y}
+          width={8}
+          height={8}
+          rx={2.4}
+          fill="var(--jm-fg)"
+          fillOpacity={0.35}
+        />
       ))}
-      <rect x={116} y={78} width={22} height={22} rx={8} fill="none" stroke={lineStrong} strokeDasharray="3 3" />
+      <rect
+        x={116}
+        y={78}
+        width={22}
+        height={22}
+        rx={8}
+        fill="none"
+        stroke={lineStrong}
+        strokeDasharray="3 3"
+      />
     </>
   );
 }
@@ -151,7 +255,14 @@ function ErrorArt({ gradient }: DrawProps) {
   return (
     <>
       <Vinyl cx={80} cy={62} r={44} gradient={gradient} />
-      <path d="M48 24 L58 36 L50 44 L62 56" fill="none" stroke="var(--jm-canvas)" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M48 24 L58 36 L50 44 L62 56"
+        fill="none"
+        stroke="var(--jm-canvas)"
+        strokeWidth={3}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
       <g transform="translate(80 62)">
         <path d="M0 -10 V3" stroke="#fff" strokeWidth={4} strokeLinecap="round" />
         <circle cy={10} r={2.4} fill="#fff" />
@@ -222,9 +333,7 @@ export function EmptyState({
 }: EmptyStateProps) {
   const style = sizeClasses[size];
   return (
-    <div
-      className={cx("flex flex-col items-center text-center", style.gap, style.pad, className)}
-    >
+    <div className={cx("flex flex-col items-center text-center", style.gap, style.pad, className)}>
       <EmptyIllustrationArt name={illustration} className={style.art} />
       <div className="max-w-[34ch]">
         <p className="type-title-sm text-fg">{title}</p>

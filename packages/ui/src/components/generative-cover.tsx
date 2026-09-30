@@ -118,7 +118,14 @@ function Sunrise({ spec, random, ids }: PatternContext) {
         />
       ))}
       <rect x={0} y={cy + 40} width={100} height={30} fill={spec.colors.backgroundFrom} />
-      <rect x={0} y={cy + 27} width={100} height={0.6} fill={spec.colors.accent} fillOpacity={0.9} />
+      <rect
+        x={0}
+        y={cy + 27}
+        width={100}
+        height={0.6}
+        fill={spec.colors.accent}
+        fillOpacity={0.9}
+      />
     </>
   );
 }
@@ -167,7 +174,13 @@ function Halftone({ spec, random }: PatternContext) {
           cx={x}
           cy={y}
           r={radius}
-          fill={distance < 26 ? spec.colors.accent : distance < 48 ? spec.colors.secondary : spec.colors.primary}
+          fill={
+            distance < 26
+              ? spec.colors.accent
+              : distance < 48
+                ? spec.colors.secondary
+                : spec.colors.primary
+          }
         />,
       );
     }
@@ -191,7 +204,10 @@ function Arcs({ spec, random }: PatternContext) {
       const rotation = Math.floor(random() * 4) * 90;
       const fill = fills[Math.floor(random() * fills.length)];
       tiles.push(
-        <g key={`${row}-${column}`} transform={`rotate(${rotation} ${x + size / 2} ${y + size / 2})`}>
+        <g
+          key={`${row}-${column}`}
+          transform={`rotate(${rotation} ${x + size / 2} ${y + size / 2})`}
+        >
           <path
             d={`M${x} ${y + size} A${size} ${size} 0 0 1 ${x + size} ${y} L${x + size} ${y + size} Z`}
             fill={fill}
@@ -290,10 +306,7 @@ export function GenerativeCover({
       className={cx("block size-full", className)}
     >
       <defs>
-        <linearGradient
-          id={ids.background}
-          gradientTransform={`rotate(${spec.angle} 0.5 0.5)`}
-        >
+        <linearGradient id={ids.background} gradientTransform={`rotate(${spec.angle} 0.5 0.5)`}>
           <stop offset="0" stopColor={spec.colors.backgroundTo} />
           <stop offset="1" stopColor={spec.colors.backgroundFrom} />
         </linearGradient>

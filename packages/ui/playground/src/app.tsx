@@ -34,7 +34,9 @@ function readParams() {
   const langParam = params.get("lang");
   return {
     theme: isThemeId(themeParam) ? themeParam : ("club" as ThemeId),
-    lang: (locales as readonly string[]).includes(langParam ?? "") ? (langParam as Locale) : ("uz" as Locale),
+    lang: (locales as readonly string[]).includes(langParam ?? "")
+      ? (langParam as Locale)
+      : ("uz" as Locale),
     view: params.get("view") ?? "gallery",
     bare: params.get("bare") === "1",
     photo: params.get("photo") === "1",
@@ -116,14 +118,26 @@ export function App() {
               </nav>
               <div className="flex items-center gap-1.5" role="group" aria-label="Theme">
                 {themeIds.map((id) => (
-                  <Chip key={id} size="sm" tone="brand" selected={id === theme} onClick={() => setTheme(id)}>
+                  <Chip
+                    key={id}
+                    size="sm"
+                    tone="brand"
+                    selected={id === theme}
+                    onClick={() => setTheme(id)}
+                  >
                     {id}
                   </Chip>
                 ))}
               </div>
               <div className="flex items-center gap-1.5" role="group" aria-label="Language">
                 {locales.map((id) => (
-                  <Chip key={id} size="sm" tone="outline" selected={id === lang} onClick={() => setLang(id)}>
+                  <Chip
+                    key={id}
+                    size="sm"
+                    tone="outline"
+                    selected={id === lang}
+                    onClick={() => setLang(id)}
+                  >
                     {id.toUpperCase()}
                   </Chip>
                 ))}

@@ -9,7 +9,9 @@ function normalizedMarkup(container: HTMLElement): string {
 
 describe("generative cover", () => {
   it("returns the same spec for the same seed", () => {
-    expect(coverSpec("Ozod & Nilufar Oydin kecha")).toEqual(coverSpec("Ozod & Nilufar Oydin kecha"));
+    expect(coverSpec("Ozod & Nilufar Oydin kecha")).toEqual(
+      coverSpec("Ozod & Nilufar Oydin kecha"),
+    );
   });
 
   it("normalizes case and surrounding whitespace", () => {
@@ -65,7 +67,11 @@ describe("palette extraction", () => {
   }
 
   it("prefers the dominant saturated hues", () => {
-    const pixels = [...fill([220, 40, 60], 300), ...fill([40, 90, 230], 200), ...fill([20, 20, 20], 500)];
+    const pixels = [
+      ...fill([220, 40, 60], 300),
+      ...fill([40, 90, 230], 200),
+      ...fill([20, 20, 20], 500),
+    ];
     const colors = extractPalette(pixels);
     expect(colors).not.toBeNull();
     expect(colors).toHaveLength(3);

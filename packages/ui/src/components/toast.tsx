@@ -126,7 +126,9 @@ export function Toaster({
             data-testid="toast-viewport"
             className={cx(
               "pointer-events-none fixed inset-x-0 z-toast flex flex-col items-center gap-2 px-4",
-              position === "bottom" ? "bottom-0 pb-[max(1rem,var(--jm-safe-bottom))]" : "top-0 pt-[max(1rem,var(--jm-safe-top))]",
+              position === "bottom"
+                ? "bottom-0 pb-[max(1rem,var(--jm-safe-bottom))]"
+                : "top-0 pt-[max(1rem,var(--jm-safe-top))]",
             )}
           >
             <AnimatePresence initial={false}>

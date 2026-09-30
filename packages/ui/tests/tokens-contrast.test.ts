@@ -52,13 +52,17 @@ describe.each(Object.entries(themes))("theme %s WCAG AA", (_name, tokens) => {
     expect(ratio(tokens, "--jm-fg-subtle", surface)).toBeGreaterThanOrEqual(4.5);
   });
 
-  it.each(["--jm-brand", "--jm-playing-fg", "--jm-next-fg", "--jm-danger-fg", "--jm-success-fg", "--jm-info-fg"])(
-    "%s text on canvas and surface 2 is at least 4.5:1",
-    (token) => {
-      expect(ratio(tokens, token, "--jm-canvas")).toBeGreaterThanOrEqual(4.5);
-      expect(ratio(tokens, token, "--jm-surface-2")).toBeGreaterThanOrEqual(4.5);
-    },
-  );
+  it.each([
+    "--jm-brand",
+    "--jm-playing-fg",
+    "--jm-next-fg",
+    "--jm-danger-fg",
+    "--jm-success-fg",
+    "--jm-info-fg",
+  ])("%s text on canvas and surface 2 is at least 4.5:1", (token) => {
+    expect(ratio(tokens, token, "--jm-canvas")).toBeGreaterThanOrEqual(4.5);
+    expect(ratio(tokens, token, "--jm-surface-2")).toBeGreaterThanOrEqual(4.5);
+  });
 
   it("status soft badges keep 4.5:1 on surface 1", () => {
     for (const status of ["playing", "next", "danger", "success", "info"]) {
@@ -66,7 +70,9 @@ describe.each(Object.entries(themes))("theme %s WCAG AA", (_name, tokens) => {
         softRatio(tokens, `--jm-${status}-fg`, `--jm-${status}-soft`, "--jm-surface-1"),
       ).toBeGreaterThanOrEqual(4.5);
     }
-    expect(softRatio(tokens, "--jm-brand", "--jm-brand-soft", "--jm-surface-1")).toBeGreaterThanOrEqual(4.5);
+    expect(
+      softRatio(tokens, "--jm-brand", "--jm-brand-soft", "--jm-surface-1"),
+    ).toBeGreaterThanOrEqual(4.5);
   });
 
   it("text on solid signal fills is at least 4.5:1", () => {

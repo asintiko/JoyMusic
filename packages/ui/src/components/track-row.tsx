@@ -71,7 +71,6 @@ export function TrackRow({
           seed={seed ?? `${artist} ${title}`}
           size={dimension.cover}
           radius="sm"
-          
         />
         {playing ? (
           <span className="absolute inset-0 flex items-center justify-center rounded-sm bg-[rgb(6_4_12/0.62)] text-playing">
@@ -90,10 +89,7 @@ export function TrackRow({
           {title}
         </span>
         <span
-          className={cx(
-            "mt-0.5 flex min-w-0 items-center gap-1.5 text-fg-muted",
-            dimension.artist,
-          )}
+          className={cx("mt-0.5 flex min-w-0 items-center gap-1.5 text-fg-muted", dimension.artist)}
         >
           {explicit ? (
             <span

@@ -1,4 +1,14 @@
-import { Check, Clock, History, ListMusic, Plus, Search as SearchIcon, User, PenLine, Sparkles } from "lucide-react";
+import {
+  Check,
+  Clock,
+  History,
+  ListMusic,
+  Plus,
+  Search as SearchIcon,
+  User,
+  PenLine,
+  Sparkles,
+} from "lucide-react";
 import { suggestionSectionIds } from "@joymusic/shared";
 import { suggestionTitles } from "@joymusic/shared";
 import type { ReactNode } from "react";

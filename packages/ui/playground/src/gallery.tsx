@@ -117,7 +117,15 @@ function seedForPattern(pattern: CoverPattern): string {
   return pattern;
 }
 
-const illustrations: EmptyIllustration[] = ["search", "queue", "inbox", "closed", "offline", "qr", "error"];
+const illustrations: EmptyIllustration[] = [
+  "search",
+  "queue",
+  "inbox",
+  "closed",
+  "offline",
+  "qr",
+  "error",
+];
 
 function emptyCopy(id: EmptyIllustration, s: ReturnType<typeof usePlayground>["s"]) {
   switch (id) {
@@ -152,10 +160,36 @@ export function Gallery() {
 
   const commands = useMemo(
     () => [
-      { id: "accept", label: s.djAccept, group: s.djIncoming, icon: <ListMusic aria-hidden="true" />, shortcut: <Kbd>A</Kbd>, onSelect: () => toast.success(s.djAccept) },
-      { id: "decline", label: s.djDecline, group: s.djIncoming, icon: <Trash2 aria-hidden="true" />, shortcut: <Kbd>D</Kbd>, onSelect: () => toast.error(s.djDecline) },
-      { id: "open", label: s.djRequestsOpen, group: s.djQueue, icon: <Disc3 aria-hidden="true" />, onSelect: () => undefined },
-      { id: "settings", label: s.adminNav.branding, group: s.adminGroupAccount, icon: <Settings aria-hidden="true" />, onSelect: () => undefined },
+      {
+        id: "accept",
+        label: s.djAccept,
+        group: s.djIncoming,
+        icon: <ListMusic aria-hidden="true" />,
+        shortcut: <Kbd>A</Kbd>,
+        onSelect: () => toast.success(s.djAccept),
+      },
+      {
+        id: "decline",
+        label: s.djDecline,
+        group: s.djIncoming,
+        icon: <Trash2 aria-hidden="true" />,
+        shortcut: <Kbd>D</Kbd>,
+        onSelect: () => toast.error(s.djDecline),
+      },
+      {
+        id: "open",
+        label: s.djRequestsOpen,
+        group: s.djQueue,
+        icon: <Disc3 aria-hidden="true" />,
+        onSelect: () => undefined,
+      },
+      {
+        id: "settings",
+        label: s.adminNav.branding,
+        group: s.adminGroupAccount,
+        icon: <Settings aria-hidden="true" />,
+        onSelect: () => undefined,
+      },
       ...tracks.slice(0, 4).map((item) => ({
         id: item.id,
         label: `${item.title} — ${item.artist}`,
@@ -174,15 +208,24 @@ export function Gallery() {
           <Logo variant="horizontal" height={40} />
           <h1 className="type-display-md mt-6 max-w-[16ch]">After-dark precision</h1>
           <p className="type-body-lg mt-3 max-w-[56ch] text-fg-muted">
-            @joymusic/ui: tokens, components and composed screens. Theme: <strong className="text-fg">{theme}</strong>, language:{" "}
+            @joymusic/ui: tokens, components and composed screens. Theme:{" "}
+            <strong className="text-fg">{theme}</strong>, language:{" "}
             <strong className="text-fg">{lang}</strong>.
           </p>
         </div>
         <div className="flex gap-2" data-testid="overlay-triggers">
-          <Button variant="secondary" onClick={() => setSheetSide("bottom")} data-testid="open-sheet">
+          <Button
+            variant="secondary"
+            onClick={() => setSheetSide("bottom")}
+            data-testid="open-sheet"
+          >
             Sheet
           </Button>
-          <Button variant="secondary" onClick={() => setSheetSide("right")} data-testid="open-side-sheet">
+          <Button
+            variant="secondary"
+            onClick={() => setSheetSide("right")}
+            data-testid="open-side-sheet"
+          >
             Side sheet
           </Button>
           <Button variant="secondary" onClick={() => setDialogOpen(true)} data-testid="open-dialog">
@@ -192,13 +235,23 @@ export function Gallery() {
             variant="secondary"
             data-testid="open-toast"
             onClick={() => {
-              toast.toast({ title: s.toastQueued, description: s.toastQueuedText, tone: "success", duration: 60000 });
+              toast.toast({
+                title: s.toastQueued,
+                description: s.toastQueuedText,
+                tone: "success",
+                duration: 60000,
+              });
               toast.toast({ title: s.toastDeclined, tone: "danger", duration: 60000 });
             }}
           >
             Toast
           </Button>
-          <Button variant="secondary" onClick={() => palette.setOpen(true)} data-testid="open-palette" rightIcon={<Shortcut keys={["mod", "k"]} />}>
+          <Button
+            variant="secondary"
+            onClick={() => palette.setOpen(true)}
+            data-testid="open-palette"
+            rightIcon={<Shortcut keys={["mod", "k"]} />}
+          >
             Palette
           </Button>
         </div>
@@ -228,14 +281,24 @@ export function Gallery() {
         <div className="mt-6 h-16 rounded-lg bg-brand-gradient shadow-glow-brand" />
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {(["shadow-1", "shadow-2", "shadow-3", "shadow-4"] as const).map((name) => (
-            <div key={name} className={cx("flex h-20 items-center justify-center rounded-lg bg-surface-2 text-[12px] font-bold text-fg-muted", name)}>
+            <div
+              key={name}
+              className={cx(
+                "flex h-20 items-center justify-center rounded-lg bg-surface-2 text-[12px] font-bold text-fg-muted",
+                name,
+              )}
+            >
               {name}
             </div>
           ))}
         </div>
       </Section>
 
-      <Section id="type" title="Typography" note="Unbounded / Manrope / JetBrains Mono, uz + ru + en">
+      <Section
+        id="type"
+        title="Typography"
+        note="Unbounded / Manrope / JetBrains Mono, uz + ru + en"
+      >
         <div className="grid gap-8 lg:grid-cols-2">
           <div className="flex flex-col gap-4">
             <p className="type-display-lg">Oʻzbek tili: goʻzal gʻoya</p>
@@ -246,7 +309,8 @@ export function Gallery() {
             <p className="type-title-lg">Sarlavha: Toʻyxona, Gʻiyos, Oʻrikzor</p>
             <p className="type-title-md">Заголовок: Ёлки, щёлк, Ъ и Ы</p>
             <p className="type-body-lg text-fg-muted">
-              Musiqa tanlang, DJ navbatga qoʻshadi. Выберите музыку, диджей добавит её в очередь. Pick a song and the DJ queues it.
+              Musiqa tanlang, DJ navbatga qoʻshadi. Выберите музыку, диджей добавит её в очередь.
+              Pick a song and the DJ queues it.
             </p>
             <p className="type-body text-fg-muted">Body 15: oʻ gʻ Oʻ Gʻ ʼ ʻ, ё ў қ ҳ ғ, ç é ñ</p>
             <p className="type-mono text-fg">124 BPM · 8A · 03:26 · 22:47:09</p>
@@ -263,10 +327,18 @@ export function Gallery() {
               <Button variant={variant} size="sm">
                 {s.request}
               </Button>
-              <Button variant={variant} size="md" leftIcon={<Play aria-hidden="true" className="size-4" />}>
+              <Button
+                variant={variant}
+                size="md"
+                leftIcon={<Play aria-hidden="true" className="size-4" />}
+              >
                 {s.request}
               </Button>
-              <Button variant={variant} size="lg" rightIcon={<ArrowRight aria-hidden="true" className="size-4" />}>
+              <Button
+                variant={variant}
+                size="lg"
+                rightIcon={<ArrowRight aria-hidden="true" className="size-4" />}
+              >
                 {s.request}
               </Button>
               <Button variant={variant} size="xl">
@@ -283,16 +355,35 @@ export function Gallery() {
           <div className="flex flex-wrap items-center gap-3">
             <span className="type-mono w-20 text-[11px] text-fg-subtle">icon</span>
             {(["ghost", "secondary", "primary", "glass", "danger"] as const).map((variant) => (
-              <IconButton key={variant} variant={variant} label={variant} icon={<Play aria-hidden="true" className="size-[18px]" />} />
+              <IconButton
+                key={variant}
+                variant={variant}
+                label={variant}
+                icon={<Play aria-hidden="true" className="size-[18px]" />}
+              />
             ))}
-            <IconButton label="pressed" pressed icon={<ListMusic aria-hidden="true" className="size-[18px]" />} />
+            <IconButton
+              label="pressed"
+              pressed
+              icon={<ListMusic aria-hidden="true" className="size-[18px]" />}
+            />
             <Tooltip content={s.djSearchAction} shortcut={<Shortcut keys={["mod", "k"]} />}>
-              <IconButton label={s.djSearchAction} variant="secondary" icon={<CommandIcon aria-hidden="true" className="size-[18px]" />} />
+              <IconButton
+                label={s.djSearchAction}
+                variant="secondary"
+                icon={<CommandIcon aria-hidden="true" className="size-[18px]" />}
+              />
             </Tooltip>
-            <Button variant="secondary" leftIcon={<Download aria-hidden="true" className="size-4" />}>
+            <Button
+              variant="secondary"
+              leftIcon={<Download aria-hidden="true" className="size-4" />}
+            >
               macOS
             </Button>
-            <Button variant="secondary" leftIcon={<Download aria-hidden="true" className="size-4" />}>
+            <Button
+              variant="secondary"
+              leftIcon={<Download aria-hidden="true" className="size-4" />}
+            >
               Windows
             </Button>
           </div>
@@ -334,15 +425,22 @@ export function Gallery() {
           </div>
           <div className="flex flex-wrap items-center gap-2">
             {requestStatuses.map((status) => (
-              <StatusPill key={status} status={status} size="lg" label={requestStatusLabels[lang][status]} />
+              <StatusPill
+                key={status}
+                status={status}
+                size="lg"
+                label={requestStatusLabels[lang][status]}
+              />
             ))}
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            {(["neutral", "brand", "playing", "next", "danger", "success", "info"] as const).map((tone) => (
-              <Badge key={tone} tone={tone} dot>
-                {tone}
-              </Badge>
-            ))}
+            {(["neutral", "brand", "playing", "next", "danger", "success", "info"] as const).map(
+              (tone) => (
+                <Badge key={tone} tone={tone} dot>
+                  {tone}
+                </Badge>
+              ),
+            )}
           </div>
           <ChipRow bleed={false}>
             {suggestionSectionIds.map((id, index) => (
@@ -366,26 +464,57 @@ export function Gallery() {
         </div>
       </Section>
 
-      <Section id="covers" title="Covers" note="Generative fallback from a string hash: 8 patterns, deterministic">
+      <Section
+        id="covers"
+        title="Covers"
+        note="Generative fallback from a string hash: 8 patterns, deterministic"
+      >
         <div className="grid grid-cols-4 gap-4 sm:grid-cols-8">
           {coverPatterns.map((pattern) => (
             <div key={pattern} className="flex flex-col gap-2">
-              <Cover seed={seedForPattern(pattern)} alt={pattern} radius="cover" className="w-full" shadow />
+              <Cover
+                seed={seedForPattern(pattern)}
+                alt={pattern}
+                radius="cover"
+                className="w-full"
+                shadow
+              />
               <span className="type-mono text-[10.5px] text-fg-subtle">{pattern}</span>
             </div>
           ))}
         </div>
         <div className="mt-6 flex flex-wrap items-end gap-5">
           <div className="flex flex-col gap-2">
-            <Cover src={images.heroLanding} placeholderSrc={images.heroLandingPlaceholder} priority seed="photo" alt="photo" size={140} radius="cover" shadow />
+            <Cover
+              src={images.heroLanding}
+              placeholderSrc={images.heroLandingPlaceholder}
+              priority
+              seed="photo"
+              alt="photo"
+              size={140}
+              radius="cover"
+              shadow
+            />
             <span className="type-mono text-[10.5px] text-fg-subtle">photo + blur-up</span>
           </div>
           <div className="flex flex-col gap-2">
-            <Cover src="/missing.jpg" seed="Broken link" alt="fallback" size={140} radius="cover" shadow />
+            <Cover
+              src="/missing.jpg"
+              seed="Broken link"
+              alt="fallback"
+              size={140}
+              radius="cover"
+              shadow
+            />
             <span className="type-mono text-[10.5px] text-fg-subtle">load error → generative</span>
           </div>
           {[24, 40, 64, 96].map((size) => (
-            <Cover key={size} seed={`${tracks[size % 10]?.artist ?? ""} ${tracks[size % 10]?.title ?? ""}`} size={size} radius="sm" />
+            <Cover
+              key={size}
+              seed={`${tracks[size % 10]?.artist ?? ""} ${tracks[size % 10]?.title ?? ""}`}
+              size={size}
+              radius="sm"
+            />
           ))}
           <Cover seed="Round" size={64} radius="full" />
         </div>
@@ -405,7 +534,12 @@ export function Gallery() {
           </Card>
           <Card className="flex flex-col gap-4">
             <CardTitle>ProgressBar</CardTitle>
-            <ProgressBar progress={progress} label={s.progress} showTimes durationSec={track.durationSec} />
+            <ProgressBar
+              progress={progress}
+              label={s.progress}
+              showTimes
+              durationSec={track.durationSec}
+            />
             <ProgressBar progress={0.7} label={s.progress} tone="playing" size="lg" />
             <ProgressBar progress={0.3} label={s.progress} tone="neutral" size="xs" />
             <input
@@ -432,7 +566,11 @@ export function Gallery() {
         </div>
       </Section>
 
-      <Section id="now-playing" title="NowPlayingHero" note="Tilt on pointer, marquee title, BPM pulse, dedication chip">
+      <Section
+        id="now-playing"
+        title="NowPlayingHero"
+        note="Tilt on pointer, marquee title, BPM pulse, dedication chip"
+      >
         <div className="grid gap-8 lg:grid-cols-[380px_1fr]">
           <Card variant="raised" padding="lg" className="relative overflow-hidden">
             <NowPlayingHero
@@ -467,9 +605,30 @@ export function Gallery() {
               />
             </Card>
             <div className="grid grid-cols-3 gap-4">
-              <Metric label={s.kpiRequests} value="7 385" delta="+18,4%" trend="up" spark={[3, 5, 4, 7, 6, 9, 8, 12]} />
-              <Metric label={s.kpiDecline} value="4,2%" delta="-1,3%" trend="down" goodWhen="down" spark={[9, 8, 8, 6, 7, 5, 5, 4]} sparkTone="next" />
-              <Metric label={s.kpiGuests} value="3 942" trend="flat" delta="0%" spark={[5, 5, 6, 5, 5, 6, 5, 5]} sparkTone="playing" />
+              <Metric
+                label={s.kpiRequests}
+                value="7 385"
+                delta="+18,4%"
+                trend="up"
+                spark={[3, 5, 4, 7, 6, 9, 8, 12]}
+              />
+              <Metric
+                label={s.kpiDecline}
+                value="4,2%"
+                delta="-1,3%"
+                trend="down"
+                goodWhen="down"
+                spark={[9, 8, 8, 6, 7, 5, 5, 4]}
+                sparkTone="next"
+              />
+              <Metric
+                label={s.kpiGuests}
+                value="3 942"
+                trend="flat"
+                delta="0%"
+                spark={[5, 5, 6, 5, 5, 6, 5, 5]}
+                sparkTone="playing"
+              />
             </div>
           </div>
         </div>
@@ -479,18 +638,62 @@ export function Gallery() {
         <div className="grid gap-6 lg:grid-cols-2">
           <Card padding="sm">
             <div role="list">
-              <TrackRow title={tracks[0]?.title ?? ""} artist={tracks[0]?.artist ?? ""} album={tracks[0]?.album} durationSec={214} state="playing" />
-              <TrackRow title={tracks[1]?.title ?? ""} artist={tracks[1]?.artist ?? ""} album={tracks[1]?.album} durationSec={200} explicit explicitLabel={s.explicit} trailing={<IconButton label={s.request} variant="secondary" icon={<Search aria-hidden="true" className="size-4" />} />} />
-              <TrackRow title={tracks[2]?.title ?? ""} artist={tracks[2]?.artist ?? ""} durationSec={231} index={3} size="sm" />
-              <TrackRow title={tracks[3]?.title ?? ""} artist={tracks[3]?.artist ?? ""} durationSec={203} state="disabled" size="sm" />
+              <TrackRow
+                title={tracks[0]?.title ?? ""}
+                artist={tracks[0]?.artist ?? ""}
+                album={tracks[0]?.album}
+                durationSec={214}
+                state="playing"
+              />
+              <TrackRow
+                title={tracks[1]?.title ?? ""}
+                artist={tracks[1]?.artist ?? ""}
+                album={tracks[1]?.album}
+                durationSec={200}
+                explicit
+                explicitLabel={s.explicit}
+                trailing={
+                  <IconButton
+                    label={s.request}
+                    variant="secondary"
+                    icon={<Search aria-hidden="true" className="size-4" />}
+                  />
+                }
+              />
+              <TrackRow
+                title={tracks[2]?.title ?? ""}
+                artist={tracks[2]?.artist ?? ""}
+                durationSec={231}
+                index={3}
+                size="sm"
+              />
+              <TrackRow
+                title={tracks[3]?.title ?? ""}
+                artist={tracks[3]?.artist ?? ""}
+                durationSec={203}
+                state="disabled"
+                size="sm"
+              />
             </div>
           </Card>
           <Card padding="sm">
             <div role="list" className="flex flex-col gap-1">
-              <QueueItem variant="guest" position={1} mineLabel={s.mine} request={buildRequest(1, "accepted", { mine: true, dedicatedTo: names[0] ?? null })} dedicationText={s.dedicationFor(names[0] ?? "")} />
+              <QueueItem
+                variant="guest"
+                position={1}
+                mineLabel={s.mine}
+                request={buildRequest(1, "accepted", { mine: true, dedicatedTo: names[0] ?? null })}
+                dedicationText={s.dedicationFor(names[0] ?? "")}
+              />
               <QueueItem variant="guest" position={2} request={buildRequest(3, "pending")} />
               <QueueItem variant="guest" position={3} request={buildRequest(4, "declined")} />
-              <QueueItem variant="dj" position={4} highlighted votesLabel={s.votes} request={buildRequest(5, "accepted", { votes: 3, tableLabel: s.tableLabel(4) })} />
+              <QueueItem
+                variant="dj"
+                position={4}
+                highlighted
+                votesLabel={s.votes}
+                request={buildRequest(5, "accepted", { votes: 3, tableLabel: s.tableLabel(4) })}
+              />
             </div>
           </Card>
           <QueueItem
@@ -498,7 +701,12 @@ export function Gallery() {
             ago={s.ago(2)}
             votesLabel={s.votes}
             dedicationText={s.dedicationFor(names[1] ?? "")}
-            request={buildRequest(7, "pending", { votes: 3, tableLabel: s.tableLabel(9), dedicatedTo: names[1] ?? null, note: s.note2 })}
+            request={buildRequest(7, "pending", {
+              votes: 3,
+              tableLabel: s.tableLabel(9),
+              dedicatedTo: names[1] ?? null,
+              note: s.note2,
+            })}
             actions={
               <>
                 <Button size="sm" className="flex-1">
@@ -510,7 +718,12 @@ export function Gallery() {
               </>
             }
           />
-          <QueueItem variant="tv" position={1} request={buildRequest(2, "accepted", { dedicatedTo: names[2] ?? null })} dedicationText={s.dedicationFor(names[2] ?? "")} />
+          <QueueItem
+            variant="tv"
+            position={1}
+            request={buildRequest(2, "accepted", { dedicatedTo: names[2] ?? null })}
+            dedicationText={s.dedicationFor(names[2] ?? "")}
+          />
         </div>
       </Section>
 
@@ -557,7 +770,11 @@ export function Gallery() {
           <Table aria-label={s.venuesTable}>
             <TableHead>
               <TableRow interactive={false}>
-                <TableHeaderCell sortable direction={sort} onSort={() => setSort(sort === "desc" ? "asc" : "desc")}>
+                <TableHeaderCell
+                  sortable
+                  direction={sort}
+                  onSort={() => setSort(sort === "desc" ? "asc" : "desc")}
+                >
                   {s.colVenue}
                 </TableHeaderCell>
                 <TableHeaderCell numeric>{s.colRequests}</TableHeaderCell>
@@ -594,7 +811,9 @@ export function Gallery() {
                   size="sm"
                   title={title}
                   description={description}
-                  action={id === "search" ? <Button size="sm">{s.requestByText}</Button> : undefined}
+                  action={
+                    id === "search" ? <Button size="sm">{s.requestByText}</Button> : undefined
+                  }
                 />
               </Card>
             );
@@ -607,7 +826,10 @@ export function Gallery() {
           <div className="flex items-center justify-center rounded-lg bg-canvas p-10 hairline-strong">
             <Logo variant="horizontal" height={52} />
           </div>
-          <div data-theme="cafe" className="flex items-center justify-center rounded-lg bg-canvas p-10 hairline-strong">
+          <div
+            data-theme="cafe"
+            className="flex items-center justify-center rounded-lg bg-canvas p-10 hairline-strong"
+          >
             <Logo variant="horizontal" height={52} />
           </div>
           <div className="flex items-center justify-center rounded-lg bg-brand-gradient p-10">
@@ -636,9 +858,21 @@ export function Gallery() {
 
       <Section id="imagery" title="Brand imagery" note="Higgsfield-generated, served as WebP">
         <div className="grid gap-4 md:grid-cols-3">
-          <img src={images.heroLanding} alt="" className="aspect-video w-full rounded-lg object-cover" />
-          <img src={images.backdropLounge} alt="" className="aspect-video w-full rounded-lg object-cover" />
-          <img src={images.backdropCafe} alt="" className="aspect-video w-full rounded-lg object-cover" />
+          <img
+            src={images.heroLanding}
+            alt=""
+            className="aspect-video w-full rounded-lg object-cover"
+          />
+          <img
+            src={images.backdropLounge}
+            alt=""
+            className="aspect-video w-full rounded-lg object-cover"
+          />
+          <img
+            src={images.backdropCafe}
+            alt=""
+            className="aspect-video w-full rounded-lg object-cover"
+          />
         </div>
       </Section>
 
@@ -656,7 +890,13 @@ export function Gallery() {
         }
       >
         <div className="flex flex-col gap-4">
-          <TrackRow title={tracks[1]?.title ?? ""} artist={tracks[1]?.artist ?? ""} album={tracks[1]?.album} durationSec={200} size="lg" />
+          <TrackRow
+            title={tracks[1]?.title ?? ""}
+            artist={tracks[1]?.artist ?? ""}
+            album={tracks[1]?.album}
+            durationSec={200}
+            size="lg"
+          />
           <Input label={s.fieldDedication} placeholder={names[0]} />
           <Textarea label={s.fieldNote} placeholder={s.note1} />
         </div>
