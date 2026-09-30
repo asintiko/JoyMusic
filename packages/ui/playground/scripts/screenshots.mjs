@@ -130,7 +130,7 @@ async function main() {
       await settle(page);
       const file = `${job.id}-${job.theme}-${job.suffix}.png`;
       await page.locator("#mockup").screenshot({ path: resolve(outputDirectory, file) });
-      console.log(file);
+      process.stdout.write(`${file}\n`);
       await context.close();
     }
     if (only.length === 0 || only.includes("gallery")) {
@@ -145,7 +145,7 @@ async function main() {
         await settle(page);
         const file = `gallery-${theme}-en.png`;
         await page.screenshot({ path: resolve(outputDirectory, file), fullPage: true });
-        console.log(file);
+        process.stdout.write(`${file}\n`);
         await context.close();
       }
       const overlays = [
@@ -171,7 +171,7 @@ async function main() {
         await page.waitForTimeout(900);
         const file = `overlay-${overlay.name}-${overlay.theme}-${overlay.lang}.png`;
         await page.screenshot({ path: resolve(outputDirectory, file) });
-        console.log(file);
+        process.stdout.write(`${file}\n`);
         await context.close();
       }
     }

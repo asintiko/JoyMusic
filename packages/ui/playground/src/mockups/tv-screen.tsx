@@ -127,7 +127,7 @@ export function TvScreen() {
         <footer className="jm-glass flex h-[96px] shrink-0 items-center rounded-none border-x-0 border-b-0">
           <span className="flex h-full shrink-0 items-center gap-3 bg-brand-gradient-strong px-12 text-[22px] font-extrabold uppercase tracking-[0.14em] text-on-brand">
             <Radio aria-hidden="true" className="size-7" />
-            {s.upNext.split(" ").slice(0, 2).join(" ")}
+            {s.tvUpNext}
           </span>
           <Ticker duration={60} className="min-w-0 flex-1">
             {ticker.map((item, index) =>
