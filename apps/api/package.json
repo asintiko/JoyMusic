@@ -1,0 +1,41 @@
+{
+  "name": "@joymusic/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file-if-exists=.env src/index.ts",
+    "build": "tsup",
+    "start": "node --env-file-if-exists=.env dist/index.js",
+    "test": "vitest run",
+    "test:services:start": "node scripts/test-services.mjs start",
+    "test:services:stop": "node scripts/test-services.mjs stop",
+    "lint": "eslint .",
+    "typecheck": "tsc -p tsconfig.json",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "tsx --env-file-if-exists=.env src/db/migrate-cli.ts",
+    "db:seed": "tsx --env-file-if-exists=.env src/db/seed.ts"
+  },
+  "dependencies": {
+    "@fastify/cors": "^11.3.0",
+    "@fastify/helmet": "^13.1.1",
+    "@fastify/rate-limit": "^11.2.0",
+    "@joymusic/shared": "workspace:*",
+    "argon2": "^0.45.1",
+    "drizzle-orm": "^0.45.3",
+    "fastify": "^5.12.5",
+    "ioredis": "^6.0.0",
+    "jose": "^6.2.12",
+    "postgres": "^3.4.9",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.4",
+    "drizzle-kit": "^0.31.11",
+    "pino-pretty": "^13.1.3",
+    "tsup": "^8.5.1",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.3",
+    "vitest": "^5.0.2"
+  }
+}

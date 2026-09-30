@@ -1,0 +1,163 @@
+{
+  "Unbounded": {
+    "uz-latin-letters": {
+      "total": 52,
+      "missing": []
+    },
+    "uz-latin-apostrophes": {
+      "total": 6,
+      "missing": []
+    },
+    "ru-cyrillic": {
+      "total": 66,
+      "missing": []
+    },
+    "uz-cyrillic-extras": {
+      "total": 8,
+      "missing": [
+        "U+0492 Ғ",
+        "U+0493 ғ",
+        "U+049A Қ",
+        "U+049B қ",
+        "U+04B2 Ҳ",
+        "U+04B3 ҳ"
+      ]
+    },
+    "digits-and-punctuation": {
+      "total": 49,
+      "missing": []
+    },
+    "ui-symbols": {
+      "total": 9,
+      "missing": [
+        "U+2190 ←",
+        "U+2192 →",
+        "U+2713 ✓"
+      ]
+    },
+    "currency": {
+      "total": 3,
+      "missing": []
+    },
+    "modifier-keys": {
+      "total": 6,
+      "missing": [
+        "U+21B5 ↵",
+        "U+21E7 ⇧",
+        "U+2303 ⌃",
+        "U+2318 ⌘",
+        "U+2325 ⌥",
+        "U+23CE ⏎"
+      ]
+    }
+  },
+  "Manrope": {
+    "uz-latin-letters": {
+      "total": 52,
+      "missing": []
+    },
+    "uz-latin-apostrophes": {
+      "total": 6,
+      "missing": [
+        "U+02BB ʻ",
+        "U+02BC ʼ"
+      ]
+    },
+    "ru-cyrillic": {
+      "total": 66,
+      "missing": []
+    },
+    "uz-cyrillic-extras": {
+      "total": 8,
+      "missing": [
+        "U+0492 Ғ",
+        "U+0493 ғ",
+        "U+049A Қ",
+        "U+049B қ",
+        "U+04B2 Ҳ",
+        "U+04B3 ҳ"
+      ]
+    },
+    "digits-and-punctuation": {
+      "total": 49,
+      "missing": []
+    },
+    "ui-symbols": {
+      "total": 9,
+      "missing": [
+        "U+2190 ←",
+        "U+2192 →",
+        "U+2713 ✓"
+      ]
+    },
+    "currency": {
+      "total": 3,
+      "missing": []
+    },
+    "modifier-keys": {
+      "total": 6,
+      "missing": [
+        "U+21B5 ↵",
+        "U+21E7 ⇧",
+        "U+2303 ⌃",
+        "U+2318 ⌘",
+        "U+2325 ⌥",
+        "U+23CE ⏎"
+      ]
+    }
+  },
+  "JetBrains Mono": {
+    "uz-latin-letters": {
+      "total": 52,
+      "missing": []
+    },
+    "uz-latin-apostrophes": {
+      "total": 6,
+      "missing": [
+        "U+02BB ʻ"
+      ]
+    },
+    "ru-cyrillic": {
+      "total": 66,
+      "missing": []
+    },
+    "uz-cyrillic-extras": {
+      "total": 8,
+      "missing": [
+        "U+0492 Ғ",
+        "U+0493 ғ",
+        "U+049A Қ",
+        "U+049B қ",
+        "U+04B2 Ҳ",
+        "U+04B3 ҳ"
+      ]
+    },
+    "digits-and-punctuation": {
+      "total": 49,
+      "missing": []
+    },
+    "ui-symbols": {
+      "total": 9,
+      "missing": [
+        "U+2190 ←",
+        "U+2192 →",
+        "U+2713 ✓"
+      ]
+    },
+    "currency": {
+      "total": 3,
+      "missing": []
+    },
+    "modifier-keys": {
+      "total": 6,
+      "missing": [
+        "U+21B5 ↵",
+        "U+21E7 ⇧",
+        "U+2303 ⌃",
+        "U+2318 ⌘",
+        "U+2325 ⌥",
+        "U+23CE ⏎"
+      ]
+    }
+  }
+}
