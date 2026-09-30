@@ -22,10 +22,38 @@ export function GuestNowPlaying() {
   const progress = nowPlayingStartedOffset / track.durationSec;
 
   const upcoming = [
-    { index: 1, status: "playing" as const, mine: true, dedicatedTo: null, tableLabel: null, votes: 1 },
-    { index: 3, status: "accepted" as const, mine: false, dedicatedTo: null, tableLabel: null, votes: 3 },
-    { index: 4, status: "accepted" as const, mine: false, dedicatedTo: null, tableLabel: null, votes: 1 },
-    { index: 6, status: "pending" as const, mine: false, dedicatedTo: null, tableLabel: null, votes: 1 },
+    {
+      index: 1,
+      status: "playing" as const,
+      mine: true,
+      dedicatedTo: null,
+      tableLabel: null,
+      votes: 1,
+    },
+    {
+      index: 3,
+      status: "accepted" as const,
+      mine: false,
+      dedicatedTo: null,
+      tableLabel: null,
+      votes: 3,
+    },
+    {
+      index: 4,
+      status: "accepted" as const,
+      mine: false,
+      dedicatedTo: null,
+      tableLabel: null,
+      votes: 1,
+    },
+    {
+      index: 6,
+      status: "pending" as const,
+      mine: false,
+      dedicatedTo: null,
+      tableLabel: null,
+      votes: 1,
+    },
   ];
 
   return (
@@ -66,10 +94,14 @@ export function GuestNowPlaying() {
           <h3 className="type-eyebrow px-2 pb-2 text-fg-subtle">{s.upNext}</h3>
           <div role="list" className="flex flex-col gap-0.5">
             {upcoming.map((entry, position) => {
-              const track = buildRequest(entry.index, entry.status === "playing" ? "accepted" : entry.status, {
-                votes: entry.votes,
-                mine: entry.mine,
-              });
+              const track = buildRequest(
+                entry.index,
+                entry.status === "playing" ? "accepted" : entry.status,
+                {
+                  votes: entry.votes,
+                  mine: entry.mine,
+                },
+              );
               return (
                 <QueueItem
                   key={entry.index}
@@ -108,4 +140,3 @@ export function GuestNowPlaying() {
     </Frame>
   );
 }
-

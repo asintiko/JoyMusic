@@ -91,7 +91,7 @@ export function CommandPalette({
 
   useEffect(() => {
     const node = listRef.current?.querySelector<HTMLElement>(`[data-index="${active}"]`);
-    node?.scrollIntoView({ block: "nearest" });
+    node?.scrollIntoView?.({ block: "nearest" });
   }, [active]);
 
   const run = (item: CommandItem | undefined) => {
@@ -129,7 +129,9 @@ export function CommandPalette({
                   transition={reduced ? { duration: 0 } : motionSprings.snappy}
                 >
                   <RadixDialog.Title className="sr-only">{title}</RadixDialog.Title>
-                  <RadixDialog.Description className="sr-only">{placeholder}</RadixDialog.Description>
+                  <RadixDialog.Description className="sr-only">
+                    {placeholder}
+                  </RadixDialog.Description>
                   <div className="flex items-center gap-3 border-b border-line px-4">
                     <Search aria-hidden="true" className="size-[18px] shrink-0 text-fg-subtle" />
                     <input
@@ -182,7 +184,9 @@ export function CommandPalette({
                       grouped.map((group) => (
                         <div key={group.name} role="presentation" className="mb-1 last:mb-0">
                           {group.name ? (
-                            <p className="type-eyebrow px-3 pb-1.5 pt-3 text-fg-subtle">{group.name}</p>
+                            <p className="type-eyebrow px-3 pb-1.5 pt-3 text-fg-subtle">
+                              {group.name}
+                            </p>
                           ) : null}
                           {group.entries.map(({ item, index }) => (
                             <div
@@ -195,9 +199,7 @@ export function CommandPalette({
                               onClick={() => run(item)}
                               className={cx(
                                 "flex h-11 cursor-pointer items-center gap-3 rounded-md px-3 text-[14px] font-semibold transition-colors duration-75",
-                                index === active
-                                  ? "bg-brand-soft text-fg"
-                                  : "text-fg-muted",
+                                index === active ? "bg-brand-soft text-fg" : "text-fg-muted",
                               )}
                             >
                               {item.icon ? (
@@ -217,7 +219,9 @@ export function CommandPalette({
                                 </span>
                               ) : null}
                               {item.shortcut ? (
-                                <span className="inline-flex shrink-0 items-center gap-1">{item.shortcut}</span>
+                                <span className="inline-flex shrink-0 items-center gap-1">
+                                  {item.shortcut}
+                                </span>
                               ) : null}
                             </div>
                           ))}

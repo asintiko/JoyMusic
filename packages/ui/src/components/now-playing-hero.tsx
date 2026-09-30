@@ -140,10 +140,7 @@ export function NowPlayingHero({
         onPointerLeave={resetTilt}
       >
         <div className={pulsing ? "jm-beat" : undefined} style={beatStyle}>
-          <motion.div
-            className="relative"
-            style={tiltEnabled ? { rotateX, rotateY } : undefined}
-          >
+          <motion.div className="relative" style={tiltEnabled ? { rotateX, rotateY } : undefined}>
             <Cover
               src={artworkUrl}
               seed={coverSeed}
@@ -185,7 +182,15 @@ export function NowPlayingHero({
             !split && "justify-center",
           )}
         >
-          <Equalizer paused={paused} bpm={bpm} height={dims.eq} bars={size === "tv" ? 5 : 4} barWidth={size === "tv" ? 6 : 3} gap={size === "tv" ? 5 : 3} color="var(--jm-playing)" />
+          <Equalizer
+            paused={paused}
+            bpm={bpm}
+            height={dims.eq}
+            bars={size === "tv" ? 5 : 4}
+            barWidth={size === "tv" ? 6 : 3}
+            gap={size === "tv" ? 5 : 3}
+            color="var(--jm-playing)"
+          />
           <span>{nowPlayingLabel}</span>
           {bpm ? (
             <span
@@ -217,7 +222,9 @@ export function NowPlayingHero({
           <span
             className={cx(
               "inline-flex max-w-full items-center gap-2 rounded-pill bg-brand-soft font-bold text-brand shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--jm-brand)_30%,transparent)]",
-              size === "tv" ? "h-14 px-6 text-[26px] [&_svg]:size-6" : "h-8 px-3.5 text-[13px] [&_svg]:size-4",
+              size === "tv"
+                ? "h-14 px-6 text-[26px] [&_svg]:size-6"
+                : "h-8 px-3.5 text-[13px] [&_svg]:size-4",
             )}
           >
             <Gift aria-hidden="true" className="shrink-0" />

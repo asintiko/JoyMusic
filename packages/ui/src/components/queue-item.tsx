@@ -33,7 +33,9 @@ function DedicationChip({ text, large }: { text: string; large?: boolean }) {
     <span
       className={cx(
         "inline-flex max-w-full items-center gap-1.5 self-start rounded-pill bg-brand-soft font-bold text-brand",
-        large ? "h-9 px-4 text-[17px] [&_svg]:size-[18px]" : "h-6 px-2.5 text-[12px] [&_svg]:size-3.5",
+        large
+          ? "h-9 px-4 text-[17px] [&_svg]:size-[18px]"
+          : "h-6 px-2.5 text-[12px] [&_svg]:size-3.5",
       )}
     >
       <Gift aria-hidden="true" className="shrink-0" />
@@ -98,7 +100,9 @@ export function QueueItem({
           <p className="truncate text-[30px] font-extrabold leading-tight tracking-[-0.02em] text-fg">
             {request.title}
           </p>
-          <p className="mt-0.5 truncate text-[21px] font-semibold text-fg-muted">{request.artist}</p>
+          <p className="mt-0.5 truncate text-[21px] font-semibold text-fg-muted">
+            {request.artist}
+          </p>
           {dedication ? (
             <p className="mt-2 flex items-center gap-2 truncate text-[20px] font-bold text-brand">
               <Gift aria-hidden="true" className="size-5 shrink-0" />
@@ -139,7 +143,10 @@ export function QueueItem({
             {dedication ? <DedicationChip text={dedication} /> : null}
             {request.note ? (
               <p className="flex items-start gap-1.5 text-[12.5px] italic leading-snug text-fg-muted">
-                <MessageSquareQuote aria-hidden="true" className="mt-0.5 size-3.5 shrink-0 text-fg-subtle" />
+                <MessageSquareQuote
+                  aria-hidden="true"
+                  className="mt-0.5 size-3.5 shrink-0 text-fg-subtle"
+                />
                 <span className="line-clamp-2">{request.note}</span>
               </p>
             ) : null}
@@ -161,10 +168,14 @@ export function QueueItem({
         )}
       >
         {handle ? <span className="shrink-0 text-fg-subtle">{handle}</span> : null}
-        <span className="type-mono w-5 shrink-0 text-center text-[12px] text-fg-subtle">{position}</span>
+        <span className="type-mono w-5 shrink-0 text-center text-[12px] text-fg-subtle">
+          {position}
+        </span>
         <Cover src={request.artworkUrl} seed={seed} size={44} radius="sm" showMonogram={false} />
         <div className="min-w-0 flex-1">
-          <p className="truncate text-[14px] font-bold leading-tight tracking-[-0.01em]">{request.title}</p>
+          <p className="truncate text-[14px] font-bold leading-tight tracking-[-0.01em]">
+            {request.title}
+          </p>
           <div className="mt-0.5 flex min-w-0 items-center gap-2 text-[12px] text-fg-muted">
             <span className="truncate">{request.artist}</span>
             {request.tableLabel ? <TableChip label={request.tableLabel} /> : null}
@@ -202,12 +213,19 @@ export function QueueItem({
       )}
     >
       {request.mine ? (
-        <span aria-hidden="true" className="absolute inset-y-2 left-0 w-0.5 rounded-pill bg-brand-gradient" />
+        <span
+          aria-hidden="true"
+          className="absolute inset-y-2 left-0 w-0.5 rounded-pill bg-brand-gradient"
+        />
       ) : null}
-      <span className="type-mono w-5 shrink-0 text-center text-[12px] text-fg-subtle">{position}</span>
+      <span className="type-mono w-5 shrink-0 text-center text-[12px] text-fg-subtle">
+        {position}
+      </span>
       <Cover src={request.artworkUrl} seed={seed} size={48} radius="sm" showMonogram={false} />
       <div className="min-w-0 flex-1">
-        <p className="truncate text-[14.5px] font-bold leading-tight tracking-[-0.01em]">{request.title}</p>
+        <p className="truncate text-[14.5px] font-bold leading-tight tracking-[-0.01em]">
+          {request.title}
+        </p>
         <p className="mt-0.5 truncate text-[12.5px] text-fg-muted">{request.artist}</p>
         {dedication ? (
           <p className="mt-1 flex items-center gap-1 truncate text-[11.5px] font-semibold text-brand">
@@ -218,7 +236,9 @@ export function QueueItem({
       </div>
       <div className="flex shrink-0 flex-col items-end gap-1.5">
         {request.mine && mineLabel ? (
-          <span className="text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-brand">{mineLabel}</span>
+          <span className="text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-brand">
+            {mineLabel}
+          </span>
         ) : null}
         <StatusPill status={request.status} label={statusLabel} size="sm" />
       </div>

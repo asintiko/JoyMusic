@@ -29,7 +29,13 @@ import {
   TrackRow,
   cx,
 } from "../../../src";
-import { buildRequest, dedicationNames, nowPlayingStartedOffset, nowPlayingTrack, tracks } from "../data";
+import {
+  buildRequest,
+  dedicationNames,
+  nowPlayingStartedOffset,
+  nowPlayingTrack,
+  tracks,
+} from "../data";
 import { usePlayground } from "../context";
 import { Frame } from "./kit";
 
@@ -48,12 +54,17 @@ function Panel({
 }) {
   return (
     <section
-      className={cx("flex min-h-0 flex-col overflow-hidden rounded-xl bg-surface-1 hairline", className)}
+      className={cx(
+        "flex min-h-0 flex-col overflow-hidden rounded-xl bg-surface-1 hairline",
+        className,
+      )}
     >
       <header className="flex h-12 shrink-0 items-center gap-2.5 border-b border-line px-4">
         <h2 className="type-eyebrow text-fg">{title}</h2>
         {count !== undefined ? (
-          <span className="type-mono rounded-pill bg-surface-3 px-2 py-0.5 text-[11px] text-fg-muted">{count}</span>
+          <span className="type-mono rounded-pill bg-surface-3 px-2 py-0.5 text-[11px] text-fg-muted">
+            {count}
+          </span>
         ) : null}
         <span className="ml-auto flex items-center gap-2">{action}</span>
       </header>
@@ -72,15 +83,28 @@ export function DjConsole() {
   const track = nowPlayingTrack;
 
   const incoming = [
-    buildRequest(1, "pending", { votes: 4, tableLabel: s.tableLabel(7), dedicatedTo: names[0] ?? null, note: s.note2 }),
+    buildRequest(1, "pending", {
+      votes: 4,
+      tableLabel: s.tableLabel(7),
+      dedicatedTo: names[0] ?? null,
+      note: s.note2,
+    }),
     buildRequest(3, "pending", { votes: 1, tableLabel: s.tableLabel(3), note: s.note1 }),
     buildRequest(5, "pending", { votes: 2, tableLabel: s.tableLabel(12) }),
-    buildRequest(7, "pending", { votes: 1, tableLabel: s.tableLabel(5), dedicatedTo: names[2] ?? null }),
+    buildRequest(7, "pending", {
+      votes: 1,
+      tableLabel: s.tableLabel(5),
+      dedicatedTo: names[2] ?? null,
+    }),
   ];
   const agos = [1, 2, 4, 7];
   const queue = [
     buildRequest(6, "accepted", { votes: 3, tableLabel: s.tableLabel(2) }),
-    buildRequest(2, "accepted", { votes: 1, tableLabel: s.tableLabel(9), dedicatedTo: names[1] ?? null }),
+    buildRequest(2, "accepted", {
+      votes: 1,
+      tableLabel: s.tableLabel(9),
+      dedicatedTo: names[1] ?? null,
+    }),
     buildRequest(9, "accepted", { votes: 2, tableLabel: s.tableLabel(4) }),
     buildRequest(4, "accepted", { votes: 1, tableLabel: s.tableLabel(7) }),
     buildRequest(8, "accepted", { votes: 1, tableLabel: s.tableLabel(1) }),
@@ -137,7 +161,10 @@ export function DjConsole() {
               </Tabs>
             }
           >
-            <div role="list" className="scrollbar-none flex min-h-0 flex-1 flex-col gap-2.5 overflow-y-auto p-3">
+            <div
+              role="list"
+              className="scrollbar-none flex min-h-0 flex-1 flex-col gap-2.5 overflow-y-auto p-3"
+            >
               {incoming.map((request, index) => (
                 <QueueItem
                   key={`${request.title}-${index}`}
@@ -146,10 +173,16 @@ export function DjConsole() {
                   highlighted={index === 0}
                   ago={s.ago(agos[index] ?? 1)}
                   votesLabel={s.votes}
-                  dedicationText={request.dedicatedTo ? `${s.dedicationFor(request.dedicatedTo)}` : undefined}
+                  dedicationText={
+                    request.dedicatedTo ? `${s.dedicationFor(request.dedicatedTo)}` : undefined
+                  }
                   actions={
                     <>
-                      <Button size="sm" leftIcon={<Check aria-hidden="true" className="size-4" />} className="flex-1">
+                      <Button
+                        size="sm"
+                        leftIcon={<Check aria-hidden="true" className="size-4" />}
+                        className="flex-1"
+                      >
                         {s.djAccept}
                       </Button>
                       <Button size="sm" variant="secondary">
@@ -192,7 +225,10 @@ export function DjConsole() {
               </span>
             }
           >
-            <div role="list" className="scrollbar-none flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto p-2">
+            <div
+              role="list"
+              className="scrollbar-none flex min-h-0 flex-1 flex-col gap-0.5 overflow-y-auto p-2"
+            >
               {queue.map((request, index) => (
                 <QueueItem
                   key={`${request.title}-${index}`}
@@ -201,7 +237,9 @@ export function DjConsole() {
                   position={index + 1}
                   highlighted={index === 0}
                   votesLabel={s.votes}
-                  dedicationText={request.dedicatedTo ? s.dedicationFor(request.dedicatedTo) : undefined}
+                  dedicationText={
+                    request.dedicatedTo ? s.dedicationFor(request.dedicatedTo) : undefined
+                  }
                   handle={<GripVertical aria-label={s.djReorder} className="size-4 cursor-grab" />}
                   actions={
                     <>

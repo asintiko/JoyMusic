@@ -145,7 +145,9 @@ export function Logo({
           </linearGradient>
         </defs>
       ) : null}
-      {shape.showMark ? <path fill={markFill} d={`${logoMarkPaths.body}${logoMarkPaths.module}`} /> : null}
+      {shape.showMark ? (
+        <path fill={markFill} d={`${logoMarkPaths.body}${logoMarkPaths.module}`} />
+      ) : null}
       {shape.showWordmark ? (
         shape.wordmarkTransform ? (
           <g transform={shape.wordmarkTransform}>{wordmark}</g>

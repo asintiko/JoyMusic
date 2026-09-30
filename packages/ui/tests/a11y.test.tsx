@@ -68,7 +68,12 @@ describe("axe smoke", () => {
     expect(
       await violationsOf(
         <div role="list">
-          <TrackRow title="Levitating" artist="Dua Lipa" durationSec={203} onSelect={() => undefined} />
+          <TrackRow
+            title="Levitating"
+            artist="Dua Lipa"
+            durationSec={203}
+            onSelect={() => undefined}
+          />
           <QueueItem
             position={1}
             request={{

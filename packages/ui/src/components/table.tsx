@@ -10,7 +10,9 @@ export function Table({
   ...rest
 }: ComponentProps<"table"> & { containerClassName?: string }) {
   return (
-    <div className={cx("w-full overflow-x-auto rounded-lg bg-surface-1 hairline", containerClassName)}>
+    <div
+      className={cx("w-full overflow-x-auto rounded-lg bg-surface-1 hairline", containerClassName)}
+    >
       <table
         className={cx("w-full border-collapse text-left font-sans text-[13px] text-fg", className)}
         {...rest}
@@ -66,7 +68,8 @@ export function TableHeaderCell({
   ...rest
 }: TableHeaderCellProps) {
   const ariaSort = direction === "asc" ? "ascending" : direction === "desc" ? "descending" : "none";
-  const SortIcon = direction === "asc" ? ArrowUp : direction === "desc" ? ArrowDown : ChevronsUpDown;
+  const SortIcon =
+    direction === "asc" ? ArrowUp : direction === "desc" ? ArrowDown : ChevronsUpDown;
   return (
     <th
       scope="col"

@@ -80,13 +80,7 @@ export interface TabsTriggerProps extends ComponentProps<typeof RadixTabs.Trigge
   count?: number;
 }
 
-export function TabsTrigger({
-  value,
-  className,
-  children,
-  count,
-  ...rest
-}: TabsTriggerProps) {
+export function TabsTrigger({ value, className, children, count, ...rest }: TabsTriggerProps) {
   const { value: active, variant, groupId } = useTabsContext();
   const reduced = usePrefersReducedMotion();
   const selected = active === value;

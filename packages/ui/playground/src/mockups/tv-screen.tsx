@@ -1,12 +1,12 @@
 import { Gift, Radio } from "lucide-react";
+import { AmbientBackground, Logo, NowPlayingHero, QueueItem, Ticker } from "../../../src";
 import {
-  AmbientBackground,
-  Logo,
-  NowPlayingHero,
-  QueueItem,
-  Ticker,
-} from "../../../src";
-import { buildRequest, dedicationNames, nowPlayingStartedOffset, nowPlayingTrack, tracks } from "../data";
+  buildRequest,
+  dedicationNames,
+  nowPlayingStartedOffset,
+  nowPlayingTrack,
+  tracks,
+} from "../data";
 import { usePlayground } from "../context";
 import { backdropFor } from "../images";
 import { Frame, QrPlaceholder } from "./kit";
@@ -34,7 +34,11 @@ export function TvScreen() {
         alt=""
         className="absolute inset-0 size-full object-cover opacity-45"
       />
-      <AmbientBackground seed={seed} intensity={0.9} className="!bg-transparent mix-blend-screen opacity-80" />
+      <AmbientBackground
+        seed={seed}
+        intensity={0.9}
+        className="!bg-transparent mix-blend-screen opacity-80"
+      />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,transparent_0%,var(--jm-canvas)_95%)] opacity-90" />
 
       <div className="relative z-10 flex h-full flex-col">
@@ -84,7 +88,9 @@ export function TvScreen() {
                     request={request}
                     variant="tv"
                     position={index + 1}
-                    dedicationText={request.dedicatedTo ? s.dedicationFor(request.dedicatedTo) : undefined}
+                    dedicationText={
+                      request.dedicatedTo ? s.dedicationFor(request.dedicatedTo) : undefined
+                    }
                   />
                 ))}
               </div>
@@ -126,7 +132,10 @@ export function TvScreen() {
           <Ticker duration={60} className="min-w-0 flex-1">
             {ticker.map((item, index) =>
               item ? (
-                <span key={item.id} className="flex items-center gap-4 pl-14 text-[26px] font-bold text-fg">
+                <span
+                  key={item.id}
+                  className="flex items-center gap-4 pl-14 text-[26px] font-bold text-fg"
+                >
                   <span className="type-mono text-[20px] text-fg-subtle">{index + 3}</span>
                   {item.title}
                   <span className="font-medium text-fg-muted">{item.artist}</span>
