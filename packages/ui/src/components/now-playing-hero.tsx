@@ -36,18 +36,18 @@ export interface NowPlayingHeroProps {
 
 const scale = {
   phone: {
-    cover: 316,
+    cover: 272,
     radius: "cover" as const,
-    title: "text-[27px] leading-[1.1]",
+    title: "text-[25px] leading-[1.15]",
     artist: "text-[17px]",
     eyebrow: "text-[11px]",
-    gap: "gap-5",
+    gap: "gap-4",
     eq: 18,
   },
   desk: {
     cover: 232,
     radius: "md" as const,
-    title: "text-[24px] leading-[1.12]",
+    title: "text-[21px] leading-[1.18]",
     artist: "text-[15px]",
     eyebrow: "text-[11px]",
     gap: "gap-4",
@@ -56,7 +56,7 @@ const scale = {
   tv: {
     cover: 500,
     radius: "cover" as const,
-    title: "text-[68px] leading-[1.04]",
+    title: "text-[64px] leading-[1.1]",
     artist: "text-[34px]",
     eyebrow: "text-[18px]",
     gap: "gap-8",
@@ -203,7 +203,7 @@ export function NowPlayingHero({
         <Marquee
           as="h2"
           className={cx(
-            "w-full font-extrabold tracking-[-0.03em] text-fg",
+            "w-full font-display font-semibold tracking-[-0.03em] text-fg",
             dims.title,
             !split && "text-center",
           )}

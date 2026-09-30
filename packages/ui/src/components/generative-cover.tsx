@@ -255,7 +255,7 @@ const patternComponents = {
 export function GenerativeCover({
   seed,
   monogramText,
-  showMonogram = true,
+  showMonogram = false,
   className,
 }: GenerativeCoverProps) {
   const uid = useId().replace(/:/g, "");
