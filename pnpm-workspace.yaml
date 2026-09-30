@@ -1,0 +1,12 @@
+packages:
+  - apps/*
+  - packages/*
+  - tools/*
+
+onlyBuiltDependencies:
+  - argon2
+  - electron
+  - electron-winstaller
+  - esbuild
+  - sharp
+  - unrs-resolver
