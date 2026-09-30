@@ -31,7 +31,7 @@ export interface Deps {
 export type DepsOverrides = Partial<Omit<Deps, "config" | "close">>;
 
 export function createDeps(config: Config, overrides: DepsOverrides = {}): Deps {
-  const database = overrides.db ? null : createDatabase(config.databaseUrl);
+  const database = overrides.db ? null : createDatabase(config.databaseUrl, { maxConnections: config.databasePoolMax });
   const db = overrides.db ?? database?.db;
   if (!db) throw new Error("Database is not available");
   const redis = overrides.redis === undefined && config.redisUrl ? createRedis(config.redisUrl) : (overrides.redis ?? null);

@@ -28,6 +28,7 @@ const envSchema = z.object({
   HOST: z.string().min(1).default("0.0.0.0"),
   PORT: z.coerce.number().int().min(0).max(65535).default(4000),
   DATABASE_URL: z.string().min(1),
+  DATABASE_POOL_MAX: z.coerce.number().int().min(1).max(100).default(10),
   REDIS_URL: optionalString,
   JWT_SECRET: z.string().min(32),
   PUBLIC_WEB_URL: z.url(),
@@ -50,6 +51,7 @@ export interface Config {
   host: string;
   port: number;
   databaseUrl: string;
+  databasePoolMax: number;
   redisUrl: string | undefined;
   jwtSecret: string;
   publicWebUrl: string;
@@ -85,6 +87,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     host: values.HOST,
     port: values.PORT,
     databaseUrl: values.DATABASE_URL,
+    databasePoolMax: values.DATABASE_POOL_MAX,
     redisUrl: values.REDIS_URL,
     jwtSecret: values.JWT_SECRET,
     publicWebUrl: values.PUBLIC_WEB_URL.replace(/\/+$/, ""),
