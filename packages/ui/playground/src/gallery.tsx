@@ -377,7 +377,7 @@ export function Gallery() {
         </div>
         <div className="mt-6 flex flex-wrap items-end gap-5">
           <div className="flex flex-col gap-2">
-            <Cover src={images.heroLanding} placeholderSrc={images.heroLandingPlaceholder} seed="photo" alt="photo" size={140} radius="cover" shadow />
+            <Cover src={images.heroLanding} placeholderSrc={images.heroLandingPlaceholder} priority seed="photo" alt="photo" size={140} radius="cover" shadow />
             <span className="type-mono text-[10.5px] text-fg-subtle">photo + blur-up</span>
           </div>
           <div className="flex flex-col gap-2">
@@ -588,7 +588,7 @@ export function Gallery() {
           {illustrations.map((id) => {
             const [title, description] = emptyCopy(id, s) as [string, string];
             return (
-              <Card key={id} padding="none" className="flex items-center justify-center">
+              <Card key={id} padding="none" className="flex items-start justify-center">
                 <EmptyState
                   illustration={id}
                   size="sm"
@@ -613,10 +613,10 @@ export function Gallery() {
           <div className="flex items-center justify-center rounded-lg bg-brand-gradient p-10">
             <Logo variant="horizontal" height={52} tone="white" />
           </div>
-          <div className="flex items-center justify-center gap-10 rounded-lg bg-surface-1 p-10 hairline">
-            <Logo variant="stacked" height={96} />
-            <Logo variant="mark" height={72} />
-            <Logo variant="wordmark" height={26} />
+          <div className="flex flex-wrap items-center justify-center gap-8 rounded-lg bg-surface-1 p-8 hairline">
+            <Logo variant="stacked" height={84} />
+            <Logo variant="mark" height={56} />
+            <Logo variant="wordmark" height={20} />
           </div>
           <div className="flex items-end justify-center gap-6 rounded-lg bg-surface-1 p-10 hairline">
             {(["mark", "wordmark", "horizontal", "stacked"] as const).map((variant) => (

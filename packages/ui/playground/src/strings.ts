@@ -51,6 +51,7 @@ export interface Strings {
   djHotkeys: string;
   djSearchAction: string;
   djReorder: string;
+  djDrop: string;
   hwLink: string;
   hwSync: string;
   hwLatency: string;
@@ -180,6 +181,7 @@ const uz: Strings = {
   djHotkeys: "Tezkor tugmalar",
   djSearchAction: "Buyruqlar",
   djReorder: "Tartibni oʻzgartirish",
+  djDrop: "Buyurtmani shu yerga sudrab olib keling",
   hwLink: "Pro DJ Link ulangan",
   hwSync: "Rekordbox bilan sinxron",
   hwLatency: "Kechikish",
@@ -309,6 +311,7 @@ const ru: Strings = {
   djHotkeys: "Горячие клавиши",
   djSearchAction: "Команды",
   djReorder: "Перетащить",
+  djDrop: "Перетащите заказ сюда, чтобы поставить в очередь",
   hwLink: "Pro DJ Link подключён",
   hwSync: "Синхронизация с Rekordbox",
   hwLatency: "Задержка",
@@ -438,6 +441,7 @@ const en: Strings = {
   djHotkeys: "Hotkeys",
   djSearchAction: "Commands",
   djReorder: "Drag to reorder",
+  djDrop: "Drag a request here to queue it",
   hwLink: "Pro DJ Link connected",
   hwSync: "Rekordbox sync",
   hwLatency: "Latency",

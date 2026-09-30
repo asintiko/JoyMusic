@@ -131,9 +131,8 @@ function Qr({ gradient }: DrawProps) {
     </g>
   );
   const dots = [
-    [84, 24], [96, 24], [108, 30], [120, 24], [90, 36], [102, 42], [114, 36], [126, 42],
-    [24, 84], [36, 96], [30, 108], [48, 84], [60, 96], [54, 108], [84, 84], [96, 96],
-    [108, 84], [120, 96], [90, 108], [114, 108], [126, 84],
+    [68, 30], [68, 42], [80, 24], [80, 36], [64, 62], [76, 68], [88, 60], [100, 68],
+    [112, 62], [124, 68], [64, 88], [76, 100], [88, 90], [100, 102], [112, 92], [124, 100],
   ];
   return (
     <>
@@ -143,7 +142,7 @@ function Qr({ gradient }: DrawProps) {
       {dots.map(([x, y]) => (
         <rect key={`${x}-${y}`} x={x} y={y} width={8} height={8} rx={2.4} fill="var(--jm-fg)" fillOpacity={0.35} />
       ))}
-      <rect x={112} y={64} width={26} height={26} rx={8} fill="none" stroke={lineStrong} strokeDasharray="3 3" />
+      <rect x={116} y={78} width={22} height={22} rx={8} fill="none" stroke={lineStrong} strokeDasharray="3 3" />
     </>
   );
 }

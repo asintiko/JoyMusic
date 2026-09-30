@@ -211,7 +211,7 @@ function ToastCard({ item, position, reduced, dismissLabel, duration, onDismiss 
       onPointerLeave={start}
       onFocusCapture={pause}
       onBlurCapture={start}
-      className="jm-glass pointer-events-auto flex w-full max-w-[420px] touch-pan-y items-start gap-3 rounded-lg p-3 pr-2 text-fg shadow-3"
+      className="pointer-events-auto flex w-full max-w-[420px] bg-surface-3 hairline-strong touch-pan-y items-start gap-3 rounded-lg p-3 pr-2 text-fg shadow-3"
     >
       <span
         className={cx(

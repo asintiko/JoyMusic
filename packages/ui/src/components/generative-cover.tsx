@@ -196,7 +196,6 @@ function Arcs({ spec, random }: PatternContext) {
             d={`M${x} ${y + size} A${size} ${size} 0 0 1 ${x + size} ${y} L${x + size} ${y + size} Z`}
             fill={fill}
           />
-          <circle cx={x + size * 0.28} cy={y + size * 0.28} r={size * 0.11} fill="#fff" fillOpacity={0.85} />
         </g>,
       );
     }

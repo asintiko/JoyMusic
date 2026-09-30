@@ -71,7 +71,7 @@ export interface TickerProps {
 export function Ticker({ children, duration = 48, className }: TickerProps) {
   const style = { "--jm-ticker-duration": `${duration}s` } as CSSProperties;
   return (
-    <div className={cx("overflow-hidden", className)}>
+    <div className={cx("jm-fade-x overflow-hidden", className)}>
       <div className="jm-ticker-track" style={style}>
         <div className="flex shrink-0 items-center">{children}</div>
         <div className="flex shrink-0 items-center" aria-hidden="true">
