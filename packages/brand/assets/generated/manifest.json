@@ -1,0 +1,161 @@
+{
+  "project": "Joy Music",
+  "credit_limit": 60,
+  "balance_before_project": 767.51,
+  "balance_after_project": 752.89,
+  "total_spent": 14.62,
+  "remaining_of_limit": 45.38,
+  "images": [
+    {
+      "file": "originals/logo-mark-a-v1.svg",
+      "status": "superseded first pass",
+      "model": "recraft_v4_1",
+      "params": "--aspect_ratio 1:1 --model_type vector --resolution 1k --background_color #0A0812 --colors [\"#7A5CFF\",\"#FF4FD8\"]",
+      "prompt": "Minimal flat vector-style logo mark for a music request app called Joy Music. A single bold geometric shape that reads as a capital J built from vertical sound equalizer bars of different heights, gradient from ultraviolet #7A5CFF to magenta #FF4FD8, centered on a solid near-black #0A0812 background, generous empty space, no other text, no drop shadow, crisp edges, works at 16px and 512px.",
+      "cost_credits": 2.5,
+      "balance_before": 767.51,
+      "balance_after": 765.01
+    },
+    {
+      "file": "originals/logo-mark-b.svg",
+      "status": "final",
+      "model": "recraft_v4_1",
+      "params": "--aspect_ratio 1:1 --model_type vector --resolution 1k --background_color #0A0812 --colors [\"#7A5CFF\",\"#FF4FD8\"]",
+      "prompt": "Minimal flat vector-style logo mark for a music request app called Joy Music. A single bold geometric shape: a vinyl record disc seen from above with concentric grooves, with a map location pin spike rising out of its center hole, gradient from ultraviolet #7A5CFF to magenta #FF4FD8, centered on a solid near-black #0A0812 background, generous empty space, no text, no letters, no drop shadow, crisp edges, works at 16px and 512px.",
+      "cost_credits": 2.5,
+      "balance_before": 765.01,
+      "balance_after": 762.51
+    },
+    {
+      "file": "originals/logo-mark-c-v1.svg",
+      "status": "superseded first pass",
+      "model": "recraft_v4_1",
+      "params": "--aspect_ratio 1:1 --model_type vector --resolution 1k --background_color #0A0812 --colors [\"#7A5CFF\",\"#FF4FD8\"]",
+      "prompt": "Minimal flat vector-style logo mark for a music request app called Joy Music. A single bold geometric shape: a grid of square dots, abstract and not scannable, that on the right side morphs into a flowing sound wave, gradient from ultraviolet #7A5CFF to magenta #FF4FD8, centered on a solid near-black #0A0812 background, generous empty space, no text, no letters, no drop shadow, crisp edges, works at 16px and 512px.",
+      "cost_credits": 2.5,
+      "balance_before": 762.51,
+      "balance_after": 760.01
+    },
+    {
+      "file": "originals/logo-mark-a.svg",
+      "status": "final",
+      "model": "recraft_v4_1",
+      "params": "--aspect_ratio 1:1 --model_type vector --resolution 1k --background_color #0A0812 --colors [\"#7A5CFF\",\"#FF4FD8\"]",
+      "prompt": "Minimal flat vector-style logo mark for a music request app called Joy Music. A bold geometric monogram of the capital letter J, drawn as a tall vertical stem of four adjacent rounded equalizer bars with a hook at the bottom curving to the left made of two shorter bars, the overall silhouette clearly reads as the letter J, gradient from ultraviolet #7A5CFF at the top to magenta #FF4FD8 at the bottom, centered on a solid near-black #0A0812 background, large mark filling about sixty percent of the canvas, no other text, no drop shadow, crisp edges, works at 16px and 512px.",
+      "cost_credits": 2.5,
+      "balance_before": 760.01,
+      "balance_after": 757.51
+    },
+    {
+      "file": "originals/logo-mark-c.svg",
+      "status": "final",
+      "model": "recraft_v4_1",
+      "params": "--aspect_ratio 1:1 --model_type vector --resolution 1k --background_color #0A0812 --colors [\"#7A5CFF\",\"#FF4FD8\"]",
+      "prompt": "Minimal flat vector-style logo mark for a music request app called Joy Music. A compact square emblem made of a tidy 7 by 7 grid of rounded square cells, abstract and not scannable, where the left columns are uniform square cells and the right columns progressively turn into vertical bars of varying heights forming a sound wave equalizer, gradient from ultraviolet #7A5CFF on the left to magenta #FF4FD8 on the right, centered on a solid near-black #0A0812 background, mark filling about sixty percent of the canvas, no text, no letters, no drop shadow, crisp edges, works at 16px and 512px.",
+      "cost_credits": 2.5,
+      "balance_before": 757.51,
+      "balance_after": 755.01
+    },
+    {
+      "file": "originals/hero-landing.png",
+      "status": "final",
+      "model": "gpt_image_2_5",
+      "params": "--aspect_ratio 16:9 --resolution 2k",
+      "prompt": "Cinematic wide shot of an empty premium nightclub dance floor just before the crowd arrives, deep ink-black interior with a warm violet tint, sweeping ultraviolet and magenta light beams through fine haze, glossy black floor with soft reflections, a DJ booth silhouette far in the background, subtle geometric light patterns inspired by Central Asian ikat projected on the back wall, shallow depth of field, no people in focus, no text, no logos, moody premium editorial photography.",
+      "cost_credits": 0.5,
+      "balance_before": 755.01,
+      "balance_after": 754.51
+    },
+    {
+      "file": "originals/hero-landing-soul.png",
+      "status": "alternate",
+      "model": "soul_cinematic",
+      "params": "--aspect_ratio 16:9 --quality 2k",
+      "prompt": "Cinematic wide shot of an empty premium nightclub dance floor just before the crowd arrives, deep ink-black interior with a warm violet tint, sweeping ultraviolet and magenta light beams through fine haze, glossy black floor with soft reflections, a DJ booth silhouette far in the background, subtle geometric light patterns inspired by Central Asian ikat projected on the back wall, shallow depth of field, no people in focus, no text, no logos, moody premium editorial photography.",
+      "cost_credits": 0.12,
+      "balance_before": 754.51,
+      "balance_after": 754.39
+    },
+    {
+      "file": "originals/hero-phone-table.png",
+      "status": "final",
+      "model": "gpt_image_2_5",
+      "params": "--aspect_ratio 4:5 --resolution 2k",
+      "prompt": "Close-up of a hand holding a smartphone above a dark cocktail bar table, the screen glowing with a blurred abstract violet and magenta music interface, light spilling onto the glass and fingers, background bokeh of club lights, no readable text, no QR code, no brand marks.",
+      "cost_credits": 0.5,
+      "balance_before": 754.39,
+      "balance_after": 753.89
+    },
+    {
+      "file": "originals/backdrop-lounge.png",
+      "status": "final",
+      "model": "gpt_image_2_5",
+      "params": "--aspect_ratio 16:9 --resolution 2k",
+      "prompt": "Cinematic wide shot of an empty upscale lounge bar interior at night, warm gold light on deep black, plush velvet banquettes and polished brass fixtures, low amber pendant lamps, a subtle geometric light pattern inspired by Central Asian ikat on the back wall, glossy dark surfaces with soft reflections, shallow depth of field, no people, no text, no logos, moody premium editorial photography.",
+      "cost_credits": 0.5,
+      "balance_before": 753.89,
+      "balance_after": 753.39
+    },
+    {
+      "file": "originals/backdrop-cafe.png",
+      "status": "final",
+      "model": "gpt_image_2_5",
+      "params": "--aspect_ratio 16:9 --resolution 2k",
+      "prompt": "Cinematic wide shot of an empty cozy specialty cafe interior in soft warm morning light, espresso brown tones, cream walls and pale wood, a marble counter with a brass espresso machine without any brand marks, gentle window glow, a subtle geometric ikat-inspired tile pattern, light airy theme, shallow depth of field, no people, no text, no logos, premium editorial photography.",
+      "cost_credits": 0.5,
+      "balance_before": 753.39,
+      "balance_after": 752.89
+    }
+  ],
+  "web": [
+    {
+      "file": "web/backdrop-cafe-1280.webp",
+      "bytes": 101818
+    },
+    {
+      "file": "web/backdrop-cafe-2560.webp",
+      "bytes": 232998
+    },
+    {
+      "file": "web/backdrop-cafe-placeholder.webp",
+      "bytes": 322
+    },
+    {
+      "file": "web/backdrop-lounge-1280.webp",
+      "bytes": 103118
+    },
+    {
+      "file": "web/backdrop-lounge-2560.webp",
+      "bytes": 254702
+    },
+    {
+      "file": "web/backdrop-lounge-placeholder.webp",
+      "bytes": 270
+    },
+    {
+      "file": "web/hero-landing-1280.webp",
+      "bytes": 61522
+    },
+    {
+      "file": "web/hero-landing-2560.webp",
+      "bytes": 159734
+    },
+    {
+      "file": "web/hero-landing-placeholder.webp",
+      "bytes": 286
+    },
+    {
+      "file": "web/hero-phone-table-1440.webp",
+      "bytes": 138260
+    },
+    {
+      "file": "web/hero-phone-table-720.webp",
+      "bytes": 54356
+    },
+    {
+      "file": "web/hero-phone-table-placeholder.webp",
+      "bytes": 744
+    }
+  ],
+  "processing_script": "packages/brand/scripts/process-generated.mjs"
+}
