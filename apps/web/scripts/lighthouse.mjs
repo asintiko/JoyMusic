@@ -79,6 +79,8 @@ try {
   browser.kill();
 }
 
+if (process.env.SKIP_PWA) process.exit(0);
+
 const pwaBrowser = await chromium.launch();
 const context = await pwaBrowser.newContext({
   viewport: { width: 390, height: 844 },

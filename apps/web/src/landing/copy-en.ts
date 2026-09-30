@@ -172,7 +172,8 @@ export const copyEn: LandingCopy = {
     mac: "Download for Mac",
     windows: "Download for Windows",
     soon: "Coming soon",
-    soonNote: "The first public build is not out yet. Get started in the admin panel and we will let you know.",
+    soonNote:
+      "The first public build is not out yet. Get started in the admin panel and we will let you know.",
     readyNote: "Mac (Apple silicon and Intel) and Windows 10 or later.",
   },
   themes: {
@@ -182,7 +183,11 @@ export const copyEn: LandingCopy = {
     switchLabel: "Venue theme",
     items: {
       club: { name: "Club", text: "Neon on a black-violet stage.", venue: "Joy Demo Club" },
-      lounge: { name: "Lounge", text: "Black and gold, calm and precise.", venue: "Joy Demo Lounge" },
+      lounge: {
+        name: "Lounge",
+        text: "Black and gold, calm and precise.",
+        venue: "Joy Demo Lounge",
+      },
       cafe: { name: "Café", text: "Soft cream with a terracotta accent.", venue: "Joy Demo Café" },
     },
     previewLabel: "Guest screen preview",

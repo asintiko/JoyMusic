@@ -42,7 +42,9 @@ export function demoReducer(state: DemoState, action: DemoAction): DemoState {
     case "toggleDedication":
       return state.step === "compose" ? { ...state, dedication: !state.dedication } : state;
     case "send":
-      return state.step === "compose" && state.trackId !== null ? { ...state, step: "sent" } : state;
+      return state.step === "compose" && state.trackId !== null
+        ? { ...state, step: "sent" }
+        : state;
     case "advance":
       if (state.step === "sent") return { ...state, step: "accepted" };
       if (state.step === "accepted") return { ...state, step: "playing" };

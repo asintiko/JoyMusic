@@ -7,7 +7,16 @@ export const copyUz: LandingCopy = {
     description:
       "Mehmonlar QR-kodni skanerlab, DJdan qoʻshiq buyurtma qiladi. Ilova va roʻyxatdan oʻtish shart emas. DJ uchun pult, admin-panel va televizor sahnasi: Oʻzbekistondagi bar, klub va kafelar uchun.",
     ogAlt: "Joy Music: skanerlang, tanlang, raqsga tushing",
-    keywords: ["qoʻshiq buyurtma", "QR-kod", "DJ", "bar", "klub", "kafe", "Oʻzbekiston", "Toshkent"],
+    keywords: [
+      "qoʻshiq buyurtma",
+      "QR-kod",
+      "DJ",
+      "bar",
+      "klub",
+      "kafe",
+      "Oʻzbekiston",
+      "Toshkent",
+    ],
   },
   skip: "Asosiy qismga oʻtish",
   brandLabel: "Joy Music, bosh sahifa",
@@ -69,7 +78,8 @@ export const copyUz: LandingCopy = {
     qrCaption: "Demo muassasaning mehmon sahifasini ochadi",
     urlLabel: "Demo manzil",
     phoneLabel: "Mehmon telefoni simulyatsiyasi",
-    disclaimer: "Telefon oʻylab topilgan qoʻshiqlar bilan simulyatsiya. U haqiqiy muassasaga ulanmagan.",
+    disclaimer:
+      "Telefon oʻylab topilgan qoʻshiqlar bilan simulyatsiya. U haqiqiy muassasaga ulanmagan.",
     copy: {
       venue: "Joy Demo Club",
       searchPlaceholder: "Qoʻshiq yoki ijrochi qidiring",
@@ -124,7 +134,8 @@ export const copyUz: LandingCopy = {
         text: "Soatlar boʻyicha buyurtmalar, eng koʻp buyurtma qilingan qoʻshiqlar, noyob mehmonlar va QR skanerlar. Bitta muassasa yoki barchasi boʻyicha.",
       },
     ],
-    adminAlt: "Joy Music admin-panel: soatlar boʻyicha buyurtmalar va eng koʻp buyurtma qilingan qoʻshiqlar",
+    adminAlt:
+      "Joy Music admin-panel: soatlar boʻyicha buyurtmalar va eng koʻp buyurtma qilingan qoʻshiqlar",
     tvAlt: "Joy Music televizor sahnasi: joriy qoʻshiq, navbat, bagʻishlovlar va QR-kod",
     adminCaption: "Admin-panel",
     tvCaption: "Televizor sahnasi",
@@ -172,7 +183,8 @@ export const copyUz: LandingCopy = {
     mac: "Mac uchun yuklab olish",
     windows: "Windows uchun yuklab olish",
     soon: "Tez orada",
-    soonNote: "Birinchi ommaviy versiya hali chiqmagan. Admin-panelda boshlang, chiqqanda xabar beramiz.",
+    soonNote:
+      "Birinchi ommaviy versiya hali chiqmagan. Admin-panelda boshlang, chiqqanda xabar beramiz.",
     readyNote: "Mac (Apple silicon va Intel) hamda Windows 10 yoki yangiroq.",
   },
   themes: {
@@ -182,7 +194,11 @@ export const copyUz: LandingCopy = {
     switchLabel: "Muassasa mavzusi",
     items: {
       club: { name: "Club", text: "Qora-binafsha sahnada neon.", venue: "Joy Demo Club" },
-      lounge: { name: "Lounge", text: "Qora va oltin, xotirjam va aniq.", venue: "Joy Demo Lounge" },
+      lounge: {
+        name: "Lounge",
+        text: "Qora va oltin, xotirjam va aniq.",
+        venue: "Joy Demo Lounge",
+      },
       cafe: { name: "Café", text: "Yumshoq krem va terrakota urgʻu.", venue: "Joy Demo Café" },
     },
     previewLabel: "Mehmon ekrani",
