@@ -256,7 +256,7 @@ function Ikat({ spec, random, ids }: PatternContext) {
   );
 }
 
-const patternComponents = {
+const patternRenderers = {
   orbs: Orbs,
   rings: Rings,
   bars: Bars,
@@ -283,7 +283,7 @@ export function GenerativeCover({
     accent: `jm-cv-c-${uid}`,
     blur: `jm-cv-blur-${uid}`,
   };
-  const Pattern = patternComponents[spec.pattern];
+  const pattern = patternRenderers[spec.pattern]({ spec, random, ids });
   const glowFor = (id: string, color: string) => (
     <radialGradient id={`${id}-radial`}>
       <stop offset="0" stopColor={color} stopOpacity="0.95" />
@@ -320,7 +320,7 @@ export function GenerativeCover({
         </filter>
       </defs>
       <rect width="100" height="100" fill={`url(#${ids.background})`} />
-      <Pattern spec={spec} random={random} ids={ids} />
+      {pattern}
       {showMonogram && spec.monogram ? (
         <text
           x="7"

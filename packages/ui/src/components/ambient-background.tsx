@@ -63,7 +63,7 @@ export function AmbientBackground({
         <img
           src={src}
           alt=""
-          className="absolute inset-[-10%] size-[120%] max-w-none scale-125 object-cover opacity-30 blur-3xl saturate-150"
+          className="jm-ambient-image absolute inset-[-10%] size-[120%] max-w-none scale-125 object-cover opacity-30"
         />
       ) : null}
       <span className="absolute inset-0 bg-[var(--jm-ambient-dim)]" />

@@ -229,6 +229,10 @@
   transition: background-color var(--jm-dur-ambient) var(--jm-ease-in-out);
 }
 
+.jm-ambient-image {
+  filter: blur(var(--jm-blur-backdrop)) saturate(1.5);
+}
+
 .jm-ambient-blob[data-blob="a"] {
   animation: jm-drift-a 34s ease-in-out infinite;
 }

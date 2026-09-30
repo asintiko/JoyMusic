@@ -259,6 +259,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 800;
+  font-kerning: none;
 }
 
 @utility type-caption {

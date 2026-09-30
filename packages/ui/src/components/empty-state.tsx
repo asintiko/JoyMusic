@@ -298,7 +298,7 @@ export function EmptyIllustrationArt({
       aria-hidden="true"
       focusable="false"
       data-illustration={name}
-      className={cx("h-auto w-full", className)}
+      className={cx("mx-auto h-auto w-full", className)}
     >
       <defs>
         <linearGradient id={gradient} x1="0" y1="0" x2="1" y2="1">
@@ -317,9 +317,9 @@ export function EmptyIllustrationArt({
 }
 
 const sizeClasses = {
-  sm: { art: "w-28", gap: "gap-3", pad: "px-4 py-6" },
-  md: { art: "w-40", gap: "gap-4", pad: "px-6 py-10" },
-  lg: { art: "w-56", gap: "gap-5", pad: "px-8 py-16" },
+  sm: { art: "max-w-[7rem]", gap: "gap-3", pad: "px-4 py-6" },
+  md: { art: "max-w-[10rem]", gap: "gap-4", pad: "px-6 py-10" },
+  lg: { art: "max-w-[14rem]", gap: "gap-5", pad: "px-8 py-16" },
 } as const;
 
 export function EmptyState({

@@ -11,6 +11,7 @@ import {
 } from "react";
 import type { ReactNode } from "react";
 import { createPortal } from "react-dom";
+import { useMounted } from "../hooks/use-mounted";
 import { usePrefersReducedMotion } from "../hooks/use-media-query";
 import { cx } from "../lib/cx";
 import { motionSprings } from "../lib/motion";
@@ -81,6 +82,7 @@ export interface ToasterProps {
   position?: "top" | "bottom";
   dismissLabel?: string;
   defaultDuration?: number;
+  container?: HTMLElement | null;
 }
 
 let counter = 0;
@@ -90,7 +92,9 @@ export function Toaster({
   position = "bottom",
   dismissLabel = "Dismiss",
   defaultDuration = 4200,
+  container,
 }: ToasterProps) {
+  const mounted = useMounted();
   const [toasts, dispatch] = useReducer(toastReducer, []);
   const reduced = usePrefersReducedMotion();
 
@@ -118,35 +122,34 @@ export function Toaster({
     [toast, dismiss],
   );
 
-  const viewport =
-    typeof document === "undefined"
-      ? null
-      : createPortal(
-          <div
-            data-testid="toast-viewport"
-            className={cx(
-              "pointer-events-none fixed inset-x-0 z-toast flex flex-col items-center gap-2 px-4",
-              position === "bottom"
-                ? "bottom-0 pb-[max(1rem,var(--jm-safe-bottom))]"
-                : "top-0 pt-[max(1rem,var(--jm-safe-top))]",
-            )}
-          >
-            <AnimatePresence initial={false}>
-              {toasts.map((item) => (
-                <ToastCard
-                  key={item.id}
-                  item={item}
-                  position={position}
-                  reduced={reduced}
-                  dismissLabel={dismissLabel}
-                  duration={item.duration ?? defaultDuration}
-                  onDismiss={() => dismiss(item.id)}
-                />
-              ))}
-            </AnimatePresence>
-          </div>,
-          document.body,
-        );
+  const viewport = !mounted
+    ? null
+    : createPortal(
+        <div
+          data-testid="toast-viewport"
+          className={cx(
+            "pointer-events-none fixed inset-x-0 z-toast flex flex-col items-center gap-2 px-4",
+            position === "bottom"
+              ? "bottom-0 pb-[max(1rem,var(--jm-safe-bottom))]"
+              : "top-0 pt-[max(1rem,var(--jm-safe-top))]",
+          )}
+        >
+          <AnimatePresence initial={false}>
+            {toasts.map((item) => (
+              <ToastCard
+                key={item.id}
+                item={item}
+                position={position}
+                reduced={reduced}
+                dismissLabel={dismissLabel}
+                duration={item.duration ?? defaultDuration}
+                onDismiss={() => dismiss(item.id)}
+              />
+            ))}
+          </AnimatePresence>
+        </div>,
+        container ?? document.body,
+      );
 
   return (
     <ToastContext.Provider value={api}>
