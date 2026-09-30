@@ -11,7 +11,8 @@
   "scripts": {
     "lint": "eslint .",
     "typecheck": "tsc -p tsconfig.json",
-    "test": "vitest run"
+    "test": "vitest run",
+    "fonts:embed": "node scripts/embed-fonts.mjs"
   },
   "dependencies": {
     "@fontsource/manrope": "^5.3.0",
