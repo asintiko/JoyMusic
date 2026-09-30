@@ -8,5 +8,5 @@ export default defineConfig({
   outDir: "dist",
   clean: true,
   sourcemap: true,
-  noExternal: ["@joymusic/shared"],
+  noExternal: ["@joymusic/shared", "@joymusic/catalog"],
 });

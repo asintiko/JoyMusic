@@ -9,10 +9,20 @@ import {
 } from "./infra/counter-store";
 import { createMemoryPubSub, createRedisPubSub, type PubSub } from "./infra/pubsub";
 import { createRedis } from "./infra/redis";
+import {
+  createMemorySequenceStore,
+  createRedisSequenceStore,
+  type SequenceStore,
+} from "./infra/sequence";
+import {
+  createCatalog,
+  createRedisCache as createCatalogRedisCache,
+  type Catalog,
+} from "@joymusic/catalog";
 import { createGoogleVerifier, type GoogleVerifier } from "./modules/auth/google";
 import { createPasswordHasher, type PasswordHasher } from "./modules/auth/password";
 import { createTokenService, type TokenService } from "./modules/auth/tokens";
-import { noopVenuePublisher, type VenuePublisher } from "./realtime/publisher";
+import { createVenuePublisher, type VenuePublisher } from "./realtime/publisher";
 
 export interface Deps {
   config: Config;
@@ -21,6 +31,8 @@ export interface Deps {
   cache: Cache;
   pubsub: PubSub;
   counters: CounterStore;
+  sequences: SequenceStore;
+  catalog: Catalog;
   publisher: VenuePublisher;
   passwords: PasswordHasher;
   tokens: TokenService;
@@ -41,6 +53,8 @@ export function createDeps(config: Config, overrides: DepsOverrides = {}): Deps 
       ? createRedis(config.redisUrl)
       : (overrides.redis ?? null);
   const pubsub = overrides.pubsub ?? (redis ? createRedisPubSub(redis) : createMemoryPubSub());
+  const sequences =
+    overrides.sequences ?? (redis ? createRedisSequenceStore(redis) : createMemorySequenceStore());
   return {
     config,
     db,
@@ -49,7 +63,10 @@ export function createDeps(config: Config, overrides: DepsOverrides = {}): Deps 
     pubsub,
     counters:
       overrides.counters ?? (redis ? createRedisCounterStore(redis) : createMemoryCounterStore()),
-    publisher: overrides.publisher ?? noopVenuePublisher,
+    sequences,
+    catalog:
+      overrides.catalog ?? createCatalog(redis ? { cache: createCatalogRedisCache(redis) } : {}),
+    publisher: overrides.publisher ?? createVenuePublisher({ pubsub, sequences }),
     passwords: overrides.passwords ?? createPasswordHasher(config.isTest ? "fast" : "standard"),
     tokens: overrides.tokens ?? createTokenService(config.jwtSecret),
     google: overrides.google ?? createGoogleVerifier({ clientId: config.googleClientId }),
