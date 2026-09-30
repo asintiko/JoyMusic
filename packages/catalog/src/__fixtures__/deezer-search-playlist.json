@@ -1,0 +1,110 @@
+{
+  "data": [
+    {
+      "id": 7786390862,
+      "title": "Uzbek hits",
+      "public": true,
+      "nb_tracks": 14,
+      "link": "https://www.deezer.com/playlist/7786390862",
+      "picture": "https://api.deezer.com/playlist/7786390862/image",
+      "picture_small": "https://cdn-images.dzcdn.net/images/cover/0d219b1a61d3414325e622833f64795c-29c16c6e90d5722c5ea47087db622073-769ecbaec7906dbc0c517abb8fa11459-cfd82ee348d16e7eec0299e0be4abd9b/56x56-000000-80-0-0.jpg",
+      "picture_medium": "https://cdn-images.dzcdn.net/images/cover/0d219b1a61d3414325e622833f64795c-29c16c6e90d5722c5ea47087db622073-769ecbaec7906dbc0c517abb8fa11459-cfd82ee348d16e7eec0299e0be4abd9b/250x250-000000-80-0-0.jpg",
+      "picture_big": "https://cdn-images.dzcdn.net/images/cover/0d219b1a61d3414325e622833f64795c-29c16c6e90d5722c5ea47087db622073-769ecbaec7906dbc0c517abb8fa11459-cfd82ee348d16e7eec0299e0be4abd9b/500x500-000000-80-0-0.jpg",
+      "picture_xl": "https://cdn-images.dzcdn.net/images/cover/0d219b1a61d3414325e622833f64795c-29c16c6e90d5722c5ea47087db622073-769ecbaec7906dbc0c517abb8fa11459-cfd82ee348d16e7eec0299e0be4abd9b/1000x1000-000000-80-0-0.jpg",
+      "checksum": "17c83fe09f981d7504453bc8d7692ae3",
+      "tracklist": "https://api.deezer.com/playlist/7786390862/tracks",
+      "creation_date": "2020-06-17 14:38:24",
+      "add_date": "2020-11-26 21:55:32",
+      "mod_date": "2026-05-22 02:26:23",
+      "md5_image": "0d219b1a61d3414325e622833f64795c-29c16c6e90d5722c5ea47087db622073-769ecbaec7906dbc0c517abb8fa11459-cfd82ee348d16e7eec0299e0be4abd9b",
+      "picture_type": "cover",
+      "user": {
+        "id": 3712180302,
+        "name": "IslamK",
+        "tracklist": "https://api.deezer.com/user/3712180302/flow",
+        "type": "user"
+      },
+      "type": "playlist"
+    },
+    {
+      "id": 4679356324,
+      "title": "Uzbek Hits",
+      "public": true,
+      "nb_tracks": 55,
+      "link": "https://www.deezer.com/playlist/4679356324",
+      "picture": "https://api.deezer.com/playlist/4679356324/image",
+      "picture_small": "https://cdn-images.dzcdn.net/images/playlist/f0fda563104ad932f8f924965e7573a5/56x56-000000-80-0-0.jpg",
+      "picture_medium": "https://cdn-images.dzcdn.net/images/playlist/f0fda563104ad932f8f924965e7573a5/250x250-000000-80-0-0.jpg",
+      "picture_big": "https://cdn-images.dzcdn.net/images/playlist/f0fda563104ad932f8f924965e7573a5/500x500-000000-80-0-0.jpg",
+      "picture_xl": "https://cdn-images.dzcdn.net/images/playlist/f0fda563104ad932f8f924965e7573a5/1000x1000-000000-80-0-0.jpg",
+      "checksum": "884741008db017d89db3bf93536363dc",
+      "tracklist": "https://api.deezer.com/playlist/4679356324/tracks",
+      "creation_date": "2018-07-18 04:15:12",
+      "add_date": "2019-01-15 17:23:07",
+      "mod_date": "2019-01-15 17:23:07",
+      "md5_image": "f0fda563104ad932f8f924965e7573a5",
+      "picture_type": "playlist",
+      "user": {
+        "id": 1609126922,
+        "name": "Anonymous",
+        "tracklist": "https://api.deezer.com/user/1609126922/flow",
+        "type": "user"
+      },
+      "type": "playlist"
+    },
+    {
+      "id": 6936560464,
+      "title": "Uzbek Hits, Vol. 1 (MOOVAL)",
+      "public": true,
+      "nb_tracks": 48,
+      "link": "https://www.deezer.com/playlist/6936560464",
+      "picture": "https://api.deezer.com/playlist/6936560464/image",
+      "picture_small": "https://cdn-images.dzcdn.net/images/cover/a9fbebda6d8846dd96dc3f6639c3fbc4-dd9df11e70908ba27c0bab74afd31cb0-343493040fc5e8bad8cf359578579242-02758cf5b79ee773d4e96d6abdcf06f8/56x56-000000-80-0-0.jpg",
+      "picture_medium": "https://cdn-images.dzcdn.net/images/cover/a9fbebda6d8846dd96dc3f6639c3fbc4-dd9df11e70908ba27c0bab74afd31cb0-343493040fc5e8bad8cf359578579242-02758cf5b79ee773d4e96d6abdcf06f8/250x250-000000-80-0-0.jpg",
+      "picture_big": "https://cdn-images.dzcdn.net/images/cover/a9fbebda6d8846dd96dc3f6639c3fbc4-dd9df11e70908ba27c0bab74afd31cb0-343493040fc5e8bad8cf359578579242-02758cf5b79ee773d4e96d6abdcf06f8/500x500-000000-80-0-0.jpg",
+      "picture_xl": "https://cdn-images.dzcdn.net/images/cover/a9fbebda6d8846dd96dc3f6639c3fbc4-dd9df11e70908ba27c0bab74afd31cb0-343493040fc5e8bad8cf359578579242-02758cf5b79ee773d4e96d6abdcf06f8/1000x1000-000000-80-0-0.jpg",
+      "checksum": "27e3f55705869ea4f721bb52bf1d6ad6",
+      "tracklist": "https://api.deezer.com/playlist/6936560464/tracks",
+      "creation_date": "2019-12-09 01:42:51",
+      "add_date": "2019-12-09 01:42:51",
+      "mod_date": "2019-12-09 01:42:51",
+      "md5_image": "a9fbebda6d8846dd96dc3f6639c3fbc4-dd9df11e70908ba27c0bab74afd31cb0-343493040fc5e8bad8cf359578579242-02758cf5b79ee773d4e96d6abdcf06f8",
+      "picture_type": "cover",
+      "user": {
+        "id": 1470639562,
+        "name": "Anonymous",
+        "tracklist": "https://api.deezer.com/user/1470639562/flow",
+        "type": "user"
+      },
+      "type": "playlist"
+    },
+    {
+      "id": 7724949422,
+      "title": "Uzbek Hits, Vol. 1",
+      "public": true,
+      "nb_tracks": 55,
+      "link": "https://www.deezer.com/playlist/7724949422",
+      "picture": "https://api.deezer.com/playlist/7724949422/image",
+      "picture_small": "https://cdn-images.dzcdn.net/images/cover/a9fbebda6d8846dd96dc3f6639c3fbc4-dd9df11e70908ba27c0bab74afd31cb0-343493040fc5e8bad8cf359578579242-1ea2419a384fe297502340bd94a16457/56x56-000000-80-0-0.jpg",
+      "picture_medium": "https://cdn-images.dzcdn.net/images/cover/a9fbebda6d8846dd96dc3f6639c3fbc4-dd9df11e70908ba27c0bab74afd31cb0-343493040fc5e8bad8cf359578579242-1ea2419a384fe297502340bd94a16457/250x250-000000-80-0-0.jpg",
+      "picture_big": "https://cdn-images.dzcdn.net/images/cover/a9fbebda6d8846dd96dc3f6639c3fbc4-dd9df11e70908ba27c0bab74afd31cb0-343493040fc5e8bad8cf359578579242-1ea2419a384fe297502340bd94a16457/500x500-000000-80-0-0.jpg",
+      "picture_xl": "https://cdn-images.dzcdn.net/images/cover/a9fbebda6d8846dd96dc3f6639c3fbc4-dd9df11e70908ba27c0bab74afd31cb0-343493040fc5e8bad8cf359578579242-1ea2419a384fe297502340bd94a16457/1000x1000-000000-80-0-0.jpg",
+      "checksum": "b2395d7a38b7ea5f3a4e8e922c4afe93",
+      "tracklist": "https://api.deezer.com/playlist/7724949422/tracks",
+      "creation_date": "2020-06-02 17:14:46",
+      "add_date": "2020-06-02 17:14:46",
+      "mod_date": "2020-06-02 17:16:40",
+      "md5_image": "a9fbebda6d8846dd96dc3f6639c3fbc4-dd9df11e70908ba27c0bab74afd31cb0-343493040fc5e8bad8cf359578579242-1ea2419a384fe297502340bd94a16457",
+      "picture_type": "cover",
+      "user": {
+        "id": 2356094244,
+        "name": "Anonymous",
+        "tracklist": "https://api.deezer.com/user/2356094244/flow",
+        "type": "user"
+      },
+      "type": "playlist"
+    }
+  ],
+  "total": 9,
+  "next": "https://api.deezer.com/search/playlist?q=uzbek%20hits&limit=4&index=4"
+}
