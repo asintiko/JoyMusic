@@ -7,6 +7,7 @@ import {
   QueueItem,
   SearchInput,
 } from "../../../src";
+import { requestStatusLabels } from "@joymusic/shared";
 import { buildRequest, dedicationNames, nowPlayingStartedOffset, nowPlayingTrack } from "../data";
 import { usePlayground } from "../context";
 import { images } from "../images";
@@ -75,6 +76,7 @@ export function GuestNowPlaying() {
                   request={track}
                   position={position + 1}
                   mineLabel={s.mine}
+                  statusLabel={requestStatusLabels[lang][track.status]}
                   variant="guest"
                 />
               );
@@ -82,7 +84,7 @@ export function GuestNowPlaying() {
           </div>
         </section>
 
-        <div className="jm-glass absolute inset-x-0 bottom-0 z-20 rounded-t-2xl px-4 pb-8 pt-3">
+        <div className="absolute inset-x-0 bottom-0 z-20 rounded-t-2xl bg-[color-mix(in_oklab,var(--jm-canvas)_86%,transparent)] px-4 pb-7 pt-3 shadow-[0_-1px_0_var(--jm-line),0_-24px_40px_-8px_var(--jm-canvas)] backdrop-blur-xl">
           <div className="flex items-center gap-2">
             <SearchInput
               value=""
@@ -90,14 +92,14 @@ export function GuestNowPlaying() {
               placeholder={s.searchPlaceholder}
               size="lg"
               aria-label={s.searchPlaceholder}
-              wrapperClassName="flex-1"
+              wrapperClassName="flex-1 !h-12"
             />
             <IconButton
               label={s.requestByText}
               icon={<Keyboard aria-hidden="true" className="size-5" />}
               variant="primary"
               size="lg"
-              className="!size-[52px] !rounded-full"
+              className="!size-12 !rounded-full"
             />
           </div>
         </div>

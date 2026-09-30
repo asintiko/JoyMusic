@@ -222,7 +222,7 @@ describe("realtime hub", () => {
     };
     const finalDj = replay(dj);
     expect(finalDj.session).toBeNull();
-    expect(finalDj.nowPlaying?.title).toBe("Levitating");
+    expect(finalDj.nowPlaying).toBeNull();
     expect(finalDj.venue.settings.showArtwork).toBe(false);
     expect(replay(tv).venue.settings.showArtwork).toBe(false);
   });

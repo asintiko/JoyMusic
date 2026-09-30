@@ -37,7 +37,7 @@ export function Cover({
   size,
   radius = "md",
   placeholderSrc,
-  showMonogram = true,
+  showMonogram = false,
   priority = false,
   shadow = false,
   className,

@@ -71,7 +71,7 @@ export function TrackRow({
           seed={seed ?? `${artist} ${title}`}
           size={dimension.cover}
           radius="sm"
-          showMonogram={dimension.cover >= 52}
+          
         />
         {playing ? (
           <span className="absolute inset-0 flex items-center justify-center rounded-sm bg-[rgb(6_4_12/0.62)] text-playing">

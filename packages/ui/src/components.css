@@ -214,6 +214,9 @@
 
 .jm-marquee-item {
   flex: none;
+}
+
+.jm-marquee[data-overflow="true"] .jm-marquee-item {
   padding-inline-end: var(--jm-marquee-gap, 3rem);
 }
 
