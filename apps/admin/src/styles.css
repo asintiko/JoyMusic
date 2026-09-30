@@ -1,0 +1,88 @@
+@import "@joymusic/ui/styles.css";
+@source "./";
+
+:root,
+[data-theme="club"] {
+  --chart-1: #7d6bf0;
+  --chart-2: #c98500;
+  --chart-3: #199e70;
+  --chart-grid: rgb(255 255 255 / 0.06);
+  --chart-grid-strong: rgb(255 255 255 / 0.16);
+  --chart-axis: #9088b0;
+}
+
+@keyframes jm-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.jm-menu[data-state="open"] {
+  animation: jm-menu-in 120ms var(--jm-ease-out, ease-out);
+}
+
+@keyframes jm-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.jm-rise {
+  animation: jm-rise 420ms var(--jm-ease-out, ease-out) both;
+}
+
+.jm-rise-2 {
+  animation-delay: 70ms;
+}
+
+.jm-rise-3 {
+  animation-delay: 140ms;
+}
+
+@keyframes jm-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.jm-float {
+  animation: jm-float 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jm-rise,
+  .jm-float,
+  .jm-menu[data-state="open"] {
+    animation: none;
+  }
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+.jm-empty-sm svg[data-illustration] {
+  width: 7rem;
+}
+
+.jm-empty-md svg[data-illustration] {
+  width: 10rem;
+}
+
+.jm-empty-lg svg[data-illustration] {
+  width: 13rem;
+}
