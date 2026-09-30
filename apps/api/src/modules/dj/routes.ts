@@ -1,5 +1,5 @@
 import type { FastifyPluginAsync } from "fastify";
-import { and, asc, eq, inArray, isNull } from "drizzle-orm";
+import { and, asc, inArray, isNull } from "drizzle-orm";
 import { routes } from "@joymusic/shared";
 import { venues } from "../../db/schema";
 import { registerRoute } from "../../http/register-route";

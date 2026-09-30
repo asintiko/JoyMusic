@@ -285,7 +285,9 @@ export const requestVotes = pgTable(
     deviceId: text("device_id").notNull(),
     createdAt: createdAt(),
   },
-  (table) => [uniqueIndex("request_votes_request_device_unique").on(table.requestId, table.deviceId)],
+  (table) => [
+    uniqueIndex("request_votes_request_device_unique").on(table.requestId, table.deviceId),
+  ],
 );
 
 export const guestDevices = pgTable(
@@ -344,7 +346,9 @@ export const bannedWords = pgTable(
     matchKey: text("match_key").notNull(),
     createdAt: createdAt(),
   },
-  (table) => [uniqueIndex("banned_words_org_match_key_unique").on(table.organizationId, table.matchKey)],
+  (table) => [
+    uniqueIndex("banned_words_org_match_key_unique").on(table.organizationId, table.matchKey),
+  ],
 );
 
 export const auditLog = pgTable(

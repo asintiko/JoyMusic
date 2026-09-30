@@ -182,8 +182,8 @@
   background: var(--jm-eq-color, currentColor);
   transform-origin: 50% 100%;
   transform: scaleY(var(--jm-eq-rest, 0.4));
-  animation: jm-eq var(--jm-eq-duration, 900ms) var(--jm-ease-in-out) var(--jm-eq-delay, 0ms) infinite
-    alternate;
+  animation: jm-eq var(--jm-eq-duration, 900ms) var(--jm-ease-in-out) var(--jm-eq-delay, 0ms)
+    infinite alternate;
   will-change: transform;
 }
 
@@ -273,8 +273,20 @@
 }
 
 .jm-chip-row[data-fade="true"] {
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 var(--jm-space-4), #000 calc(100% - var(--jm-space-8)), transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000 var(--jm-space-4), #000 calc(100% - var(--jm-space-8)), transparent 100%);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 var(--jm-space-4),
+    #000 calc(100% - var(--jm-space-8)),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 var(--jm-space-4),
+    #000 calc(100% - var(--jm-space-8)),
+    transparent 100%
+  );
 }
 
 .jm-progress-fill {

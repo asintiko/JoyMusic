@@ -52,25 +52,14 @@
     },
     "arrows-and-check": {
       "total": 5,
-      "missing": [
-        "U+2190 ←",
-        "U+2192 →",
-        "U+2713 ✓"
-      ],
+      "missing": ["U+2190 ←", "U+2192 →", "U+2713 ✓"],
       "servedBy": {
         "unbounded": 2
       }
     },
     "modifier-keys": {
       "total": 6,
-      "missing": [
-        "U+21B5 ↵",
-        "U+21E7 ⇧",
-        "U+2303 ⌃",
-        "U+2318 ⌘",
-        "U+2325 ⌥",
-        "U+23CE ⏎"
-      ],
+      "missing": ["U+21B5 ↵", "U+21E7 ⇧", "U+2303 ⌃", "U+2318 ⌘", "U+2325 ⌥", "U+23CE ⏎"],
       "servedBy": {}
     }
   },
@@ -128,25 +117,14 @@
     },
     "arrows-and-check": {
       "total": 5,
-      "missing": [
-        "U+2190 ←",
-        "U+2192 →",
-        "U+2713 ✓"
-      ],
+      "missing": ["U+2190 ←", "U+2192 →", "U+2713 ✓"],
       "servedBy": {
         "manrope": 2
       }
     },
     "modifier-keys": {
       "total": 6,
-      "missing": [
-        "U+21B5 ↵",
-        "U+21E7 ⇧",
-        "U+2303 ⌃",
-        "U+2318 ⌘",
-        "U+2325 ⌥",
-        "U+23CE ⏎"
-      ],
+      "missing": ["U+21B5 ↵", "U+21E7 ⇧", "U+2303 ⌃", "U+2318 ⌘", "U+2325 ⌥", "U+23CE ⏎"],
       "servedBy": {}
     }
   },
@@ -204,25 +182,14 @@
     },
     "arrows-and-check": {
       "total": 5,
-      "missing": [
-        "U+2190 ←",
-        "U+2192 →",
-        "U+2713 ✓"
-      ],
+      "missing": ["U+2190 ←", "U+2192 →", "U+2713 ✓"],
       "servedBy": {
         "jetbrains-mono": 2
       }
     },
     "modifier-keys": {
       "total": 6,
-      "missing": [
-        "U+21B5 ↵",
-        "U+21E7 ⇧",
-        "U+2303 ⌃",
-        "U+2318 ⌘",
-        "U+2325 ⌥",
-        "U+23CE ⏎"
-      ],
+      "missing": ["U+21B5 ↵", "U+21E7 ⇧", "U+2303 ⌃", "U+2318 ⌘", "U+2325 ⌥", "U+23CE ⏎"],
       "servedBy": {}
     }
   }

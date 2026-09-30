@@ -7,7 +7,9 @@ const optionalString = z.preprocess(emptyToUndefined, z.string().trim().optional
 
 const flag = z.preprocess(
   (value) =>
-    typeof value === "string" ? ["1", "true", "yes", "on"].includes(value.trim().toLowerCase()) : value,
+    typeof value === "string"
+      ? ["1", "true", "yes", "on"].includes(value.trim().toLowerCase())
+      : value,
   z.boolean(),
 );
 

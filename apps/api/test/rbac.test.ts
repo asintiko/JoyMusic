@@ -94,7 +94,12 @@ const cases: AccessCase[] = [
     scope: "resource",
     input: (f) => ({ params: { venueId: f.venueId }, query: {} }),
   },
-  { label: "analytics", route: "adminAnalytics", scope: "collection", input: () => ({ query: {} }) },
+  {
+    label: "analytics",
+    route: "adminAnalytics",
+    scope: "collection",
+    input: () => ({ query: {} }),
+  },
   {
     label: "analytics for venue",
     route: "adminAnalytics",

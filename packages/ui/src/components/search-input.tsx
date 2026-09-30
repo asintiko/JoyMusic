@@ -4,8 +4,10 @@ import type { ComponentProps, ReactNode } from "react";
 import { cx } from "../lib/cx";
 import { Spinner } from "./spinner";
 
-export interface SearchInputProps
-  extends Omit<ComponentProps<"input">, "size" | "value" | "onChange" | "type" | "defaultValue"> {
+export interface SearchInputProps extends Omit<
+  ComponentProps<"input">,
+  "size" | "value" | "onChange" | "type" | "defaultValue"
+> {
   value: string;
   onValueChange: (value: string) => void;
   onClear?: () => void;
@@ -54,7 +56,10 @@ export function SearchInput({
         wrapperClassName,
       )}
     >
-      <Search aria-hidden="true" className={cx("shrink-0 text-fg-subtle", size === "lg" ? "size-5" : "size-4")} />
+      <Search
+        aria-hidden="true"
+        className={cx("shrink-0 text-fg-subtle", size === "lg" ? "size-5" : "size-4")}
+      />
       <input
         ref={inputRef}
         type="search"
@@ -81,8 +86,12 @@ export function SearchInput({
         )}
         {...rest}
       />
-      {loading ? <Spinner size={size === "lg" ? 20 : 16} label={loadingLabel} className="text-fg-subtle" /> : null}
-      {shortcut && !hasValue ? <span className="hidden shrink-0 sm:inline-flex">{shortcut}</span> : null}
+      {loading ? (
+        <Spinner size={size === "lg" ? 20 : 16} label={loadingLabel} className="text-fg-subtle" />
+      ) : null}
+      {shortcut && !hasValue ? (
+        <span className="hidden shrink-0 sm:inline-flex">{shortcut}</span>
+      ) : null}
       {hasValue ? (
         <button
           type="button"

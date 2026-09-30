@@ -77,7 +77,8 @@ export function createTokenService(secret: string): TokenService {
     async verifyGuestToken(token) {
       const payload = await verify(token, guestAudience);
       const venueId = payload.venueId;
-      if (!payload.sub || typeof venueId !== "string") throw unauthorized("Invalid or expired token");
+      if (!payload.sub || typeof venueId !== "string")
+        throw unauthorized("Invalid or expired token");
       return { deviceId: payload.sub, venueId };
     },
   };

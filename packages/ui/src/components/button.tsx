@@ -17,8 +17,7 @@ export interface ButtonProps extends ComponentProps<"button"> {
 export const buttonVariantClasses: Record<ButtonVariant, string> = {
   primary:
     "bg-brand-gradient-strong text-on-brand shadow-[inset_0_1px_0_rgb(255_255_255/0.22),var(--jm-shadow-2)] hover:shadow-[inset_0_1px_0_rgb(255_255_255/0.28),var(--jm-glow-brand)] hover:brightness-[1.08]",
-  secondary:
-    "bg-surface-3 text-fg hairline-strong hover:bg-surface-4 shadow-[var(--jm-shadow-1)]",
+  secondary: "bg-surface-3 text-fg hairline-strong hover:bg-surface-4 shadow-[var(--jm-shadow-1)]",
   ghost: "bg-transparent text-fg-muted hover:bg-surface-2 hover:text-fg",
   danger:
     "bg-danger text-on-danger shadow-[inset_0_1px_0_rgb(255_255_255/0.2),var(--jm-shadow-1)] hover:brightness-110",
@@ -67,7 +66,12 @@ export function Button({
           <Spinner size={spinnerSize} />
         </span>
       ) : null}
-      <span className={cx("inline-flex items-center justify-center gap-[inherit]", loading && "invisible")}>
+      <span
+        className={cx(
+          "inline-flex items-center justify-center gap-[inherit]",
+          loading && "invisible",
+        )}
+      >
         {leftIcon ? <span className="-ml-0.5 inline-flex shrink-0">{leftIcon}</span> : null}
         {children}
         {rightIcon ? <span className="-mr-0.5 inline-flex shrink-0">{rightIcon}</span> : null}

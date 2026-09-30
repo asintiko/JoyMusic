@@ -7,7 +7,14 @@ export interface SkeletonProps extends Omit<ComponentProps<"div">, "children"> {
   height?: number | string;
 }
 
-export function Skeleton({ shape = "rect", width, height, className, style, ...rest }: SkeletonProps) {
+export function Skeleton({
+  shape = "rect",
+  width,
+  height,
+  className,
+  style,
+  ...rest
+}: SkeletonProps) {
   return (
     <div
       aria-hidden="true"

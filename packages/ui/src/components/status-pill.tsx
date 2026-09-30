@@ -58,7 +58,14 @@ const sizeClasses = {
   lg: "h-8 gap-2 px-3.5 text-[13px] [&_svg]:size-4",
 } as const;
 
-export function StatusPill({ status, label, size = "md", hideIcon, className, ...rest }: StatusPillProps) {
+export function StatusPill({
+  status,
+  label,
+  size = "md",
+  hideIcon,
+  className,
+  ...rest
+}: StatusPillProps) {
   const style = statusStyles[status];
   return (
     <span

@@ -57,7 +57,9 @@ export function Chip({
       {icon ? <span className="inline-flex shrink-0">{icon}</span> : null}
       {children}
       {count !== undefined ? (
-        <span className={cx("type-mono text-[11px]", active ? "opacity-70" : "text-fg-subtle")}>{count}</span>
+        <span className={cx("type-mono text-[11px]", active ? "opacity-70" : "text-fg-subtle")}>
+          {count}
+        </span>
       ) : null}
     </button>
   );

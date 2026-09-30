@@ -196,7 +196,9 @@ export async function loadAnalytics(
     })),
     byTable: [...tables.entries()]
       .map(([label, value]) => ({ label, ...value }))
-      .sort((a, b) => b.requests - a.requests || b.scans - a.scans || a.label.localeCompare(b.label)),
+      .sort(
+        (a, b) => b.requests - a.requests || b.scans - a.scans || a.label.localeCompare(b.label),
+      ),
   };
 }
 
@@ -205,7 +207,9 @@ export const adminAnalyticsRoutes: FastifyPluginAsync = async (app) => {
 
   registerAdminRoute(app, routes.adminAnalytics, async ({ query, org, user }) => {
     const to = query.to ? new Date(query.to) : new Date();
-    const from = query.from ? new Date(query.from) : new Date(to.getTime() - defaultWindowDays * dayMs);
+    const from = query.from
+      ? new Date(query.from)
+      : new Date(to.getTime() - defaultWindowDays * dayMs);
     if (from.getTime() > to.getTime()) throw badRequest("`from` must not be after `to`");
     let organizationId = org.organizationId;
     if (query.venueId) {

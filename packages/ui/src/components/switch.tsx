@@ -2,8 +2,10 @@ import { useId, useState } from "react";
 import type { ComponentProps, ReactNode } from "react";
 import { cx } from "../lib/cx";
 
-export interface SwitchProps
-  extends Omit<ComponentProps<"button">, "onChange" | "role" | "aria-checked" | "children" | "value"> {
+export interface SwitchProps extends Omit<
+  ComponentProps<"button">,
+  "onChange" | "role" | "aria-checked" | "children" | "value"
+> {
   checked?: boolean;
   defaultChecked?: boolean;
   onCheckedChange?: (checked: boolean) => void;

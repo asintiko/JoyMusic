@@ -158,7 +158,11 @@ describe("moderation", () => {
       const admin = await addMember(context, actor, "admin");
       const venue = await createVenue(context, actor);
       const token = { token: admin.accessToken };
-      await api().ok("adminVenueUpdate", { ...token, params: { venueId: venue.id }, body: { name: "Audited" } });
+      await api().ok("adminVenueUpdate", {
+        ...token,
+        params: { venueId: venue.id },
+        body: { name: "Audited" },
+      });
       const qr = await api().ok("adminQrCreate", {
         ...token,
         params: { venueId: venue.id },
@@ -219,7 +223,10 @@ describe("moderation", () => {
       for (let index = 0; index < 4; index += 1) {
         await createVenue(context, actor, { name: `Venue ${index}` });
       }
-      const limited = await api().ok("adminAudit", { token: actor.accessToken, query: { limit: 3 } });
+      const limited = await api().ok("adminAudit", {
+        token: actor.accessToken,
+        query: { limit: 3 },
+      });
       expect(limited.entries).toHaveLength(3);
       const times = limited.entries.map((entry) => Date.parse(entry.createdAt));
       expect([...times].sort((a, b) => b - a)).toEqual(times);

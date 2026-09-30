@@ -41,6 +41,8 @@ export function installErrorHandling(app: FastifyInstance): void {
   app.setNotFoundHandler((request, reply) =>
     reply
       .code(404)
-      .send(errorBody("not_found", `Route ${request.method} ${request.url.split("?")[0]} not found`)),
+      .send(
+        errorBody("not_found", `Route ${request.method} ${request.url.split("?")[0]} not found`),
+      ),
   );
 }

@@ -43,4 +43,6 @@ for (const [name, options] of Object.entries(icons)) {
   writeFileSync(join(logoDirectory, name), `${buildAppIconSvg(options)}\n`);
 }
 
-process.stdout.write(`logo: wrote ${Object.keys(files).length + Object.keys(icons).length} svg files\n`);
+process.stdout.write(
+  `logo: wrote ${Object.keys(files).length + Object.keys(icons).length} svg files\n`,
+);

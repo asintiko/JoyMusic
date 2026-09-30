@@ -31,10 +31,15 @@ export interface Deps {
 export type DepsOverrides = Partial<Omit<Deps, "config" | "close">>;
 
 export function createDeps(config: Config, overrides: DepsOverrides = {}): Deps {
-  const database = overrides.db ? null : createDatabase(config.databaseUrl, { maxConnections: config.databasePoolMax });
+  const database = overrides.db
+    ? null
+    : createDatabase(config.databaseUrl, { maxConnections: config.databasePoolMax });
   const db = overrides.db ?? database?.db;
   if (!db) throw new Error("Database is not available");
-  const redis = overrides.redis === undefined && config.redisUrl ? createRedis(config.redisUrl) : (overrides.redis ?? null);
+  const redis =
+    overrides.redis === undefined && config.redisUrl
+      ? createRedis(config.redisUrl)
+      : (overrides.redis ?? null);
   const pubsub = overrides.pubsub ?? (redis ? createRedisPubSub(redis) : createMemoryPubSub());
   return {
     config,
@@ -42,13 +47,12 @@ export function createDeps(config: Config, overrides: DepsOverrides = {}): Deps 
     redis,
     cache: overrides.cache ?? (redis ? createRedisCache(redis) : createMemoryCache()),
     pubsub,
-    counters: overrides.counters ?? (redis ? createRedisCounterStore(redis) : createMemoryCounterStore()),
+    counters:
+      overrides.counters ?? (redis ? createRedisCounterStore(redis) : createMemoryCounterStore()),
     publisher: overrides.publisher ?? noopVenuePublisher,
-    passwords:
-      overrides.passwords ?? createPasswordHasher(config.isTest ? "fast" : "standard"),
+    passwords: overrides.passwords ?? createPasswordHasher(config.isTest ? "fast" : "standard"),
     tokens: overrides.tokens ?? createTokenService(config.jwtSecret),
-    google:
-      overrides.google ?? createGoogleVerifier({ clientId: config.googleClientId }),
+    google: overrides.google ?? createGoogleVerifier({ clientId: config.googleClientId }),
     async close() {
       await pubsub.close();
       if (redis && overrides.redis === undefined) redis.disconnect();

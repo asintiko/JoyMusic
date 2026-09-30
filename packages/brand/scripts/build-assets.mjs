@@ -99,9 +99,15 @@ async function macosIconPng() {
 }
 
 function embed(svg, x, y, width) {
-  const viewBox = svg.match(/viewBox="([^"]+)"/)[1].split(/\s+/).map(Number);
+  const viewBox = svg
+    .match(/viewBox="([^"]+)"/)[1]
+    .split(/\s+/)
+    .map(Number);
   const height = (width * viewBox[3]) / viewBox[2];
-  const inner = svg.replace(/<svg [^>]*>/, `<svg x="${x}" y="${y}" width="${width}" height="${height}" viewBox="${viewBox.join(" ")}">`);
+  const inner = svg.replace(
+    /<svg [^>]*>/,
+    `<svg x="${x}" y="${y}" width="${width}" height="${height}" viewBox="${viewBox.join(" ")}">`,
+  );
   return { markup: inner, height };
 }
 
@@ -123,7 +129,8 @@ function joyCode({ x, y, size, id }) {
     (c < finderSpan + 1 && r > grid - finderSpan - 2);
   const centerStart = 9;
   const centerEnd = grid - 10;
-  const inCenter = (c, r) => c >= centerStart && c <= centerEnd && r >= centerStart && r <= centerEnd;
+  const inCenter = (c, r) =>
+    c >= centerStart && c <= centerEnd && r >= centerStart && r <= centerEnd;
   let modules = "";
   for (let r = 0; r < grid; r++) {
     for (let c = 0; c < grid; c++) {
@@ -182,7 +189,12 @@ function glowBackground(width, height, variant) {
 function ogImageSvg() {
   const width = 1200;
   const height = 630;
-  const lockup = embed(buildLogoSvg({ variant: "lockup-horizontal", tone: "default", idPrefix: "og" }), 84, 200, 500);
+  const lockup = embed(
+    buildLogoSvg({ variant: "lockup-horizontal", tone: "default", idPrefix: "og" }),
+    84,
+    200,
+    500,
+  );
   const code = joyCode({ x: 722, y: 115, size: 400, id: "og-code" });
   return (
     `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">` +
@@ -197,7 +209,12 @@ function ogImageSvg() {
 
 function squareSocialSvg() {
   const size = 1080;
-  const lockup = embed(buildLogoSvg({ variant: "lockup-stacked", tone: "default", idPrefix: "sq" }), 290, 250, 500);
+  const lockup = embed(
+    buildLogoSvg({ variant: "lockup-stacked", tone: "default", idPrefix: "sq" }),
+    290,
+    250,
+    500,
+  );
   return (
     `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">` +
     glowBackground(size, size, "square") +
@@ -229,11 +246,14 @@ const icnsSpecs = [
   ["ic14", 512],
 ];
 const macSource = await macosIconPng();
-const macRender = (size) => sharp(macSource).resize(size, size).png({ compressionLevel: 9 }).toBuffer();
+const macRender = (size) =>
+  sharp(macSource).resize(size, size).png({ compressionLevel: 9 }).toBuffer();
 write(
   "icons/icon.icns",
   icnsFromPngs(
-    await Promise.all(icnsSpecs.map(async ([type, size]) => ({ type, png: await macRender(size) }))),
+    await Promise.all(
+      icnsSpecs.map(async ([type, size]) => ({ type, png: await macRender(size) })),
+    ),
   ),
 );
 
@@ -254,7 +274,10 @@ const squareSvg = squareSocialSvg();
 writeFileSync(join(assets, "social", "social-square.svg"), `${squareSvg}\n`);
 write("social/social-square.png", await rasterize(squareSvg, 1080, 1080));
 
-write("logo/mark-512.png", await rasterize(buildLogoSvg({ variant: "mark", tone: "gradient" }), 512));
+write(
+  "logo/mark-512.png",
+  await rasterize(buildLogoSvg({ variant: "mark", tone: "gradient" }), 512),
+);
 write(
   "logo/lockup-horizontal-1600.png",
   await rasterize(buildLogoSvg({ variant: "lockup-horizontal", tone: "default" }), 1600, 320),

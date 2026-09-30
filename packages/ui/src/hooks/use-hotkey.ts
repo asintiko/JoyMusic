@@ -15,10 +15,20 @@ function isEditable(target: EventTarget | null): boolean {
   return tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT";
 }
 
-export function useHotkey(key: string, handler: (event: KeyboardEvent) => void, options: HotkeyOptions = {}): void {
+export function useHotkey(
+  key: string,
+  handler: (event: KeyboardEvent) => void,
+  options: HotkeyOptions = {},
+): void {
   const handlerRef = useRef(handler);
   handlerRef.current = handler;
-  const { mod = false, shift = false, alt = false, allowInInputs = false, enabled = true } = options;
+  const {
+    mod = false,
+    shift = false,
+    alt = false,
+    allowInInputs = false,
+    enabled = true,
+  } = options;
 
   useEffect(() => {
     if (!enabled) return undefined;

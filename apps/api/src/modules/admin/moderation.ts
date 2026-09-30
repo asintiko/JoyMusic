@@ -1,5 +1,5 @@
 import type { FastifyPluginAsync } from "fastify";
-import { and, asc, eq } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 import { routes, type BannedWord } from "@joymusic/shared";
 import { bannedWords, guestDevices } from "../../db/schema";
 import { badRequest, conflict, isUniqueViolation, notFound } from "../../errors";
@@ -100,4 +100,3 @@ export const adminModerationRoutes: FastifyPluginAsync = async (app) => {
     return { ok: true as const };
   });
 };
-

@@ -43,7 +43,10 @@ export function buildLoggerOptions(
   };
 }
 
-export async function buildApp(deps: Deps, options: BuildAppOptions = {}): Promise<FastifyInstance> {
+export async function buildApp(
+  deps: Deps,
+  options: BuildAppOptions = {},
+): Promise<FastifyInstance> {
   const { config } = deps;
   const app = Fastify({
     logger: buildLoggerOptions(config, options.logStream),

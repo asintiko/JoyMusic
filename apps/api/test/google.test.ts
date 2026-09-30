@@ -40,7 +40,10 @@ describe("google sign-in", () => {
     signingKey = pair.privateKey;
     const publicJwk: JWK = { ...(await exportJWK(pair.publicKey)), kid: "test-key", alg: "RS256" };
     verifier = createGoogleVerifier({ clientId, keys: createLocalJWKSet({ keys: [publicJwk] }) });
-    context = await createTestContext({ deps: { google: verifier }, env: { GOOGLE_CLIENT_ID: clientId } });
+    context = await createTestContext({
+      deps: { google: verifier },
+      env: { GOOGLE_CLIENT_ID: clientId },
+    });
     unconfigured = await createTestContext();
   });
   afterAll(async () => {
@@ -51,7 +54,9 @@ describe("google sign-in", () => {
   const api = () => apiOf(context);
 
   it("answers forbidden when Google sign-in is not configured", async () => {
-    const response = await apiOf(unconfigured).call("authGoogle", { body: { idToken: "anything" } });
+    const response = await apiOf(unconfigured).call("authGoogle", {
+      body: { idToken: "anything" },
+    });
     expect(response.status).toBe(403);
     expect(errorCode(response)).toBe("forbidden");
     expect((response.body as { error: { message: string } }).error.message).toBe(
@@ -60,10 +65,17 @@ describe("google sign-in", () => {
   });
 
   describe("id token verification", () => {
-    const profile = { sub: "sub-1", email: "Person@Example.com", email_verified: true, name: "Person" };
+    const profile = {
+      sub: "sub-1",
+      email: "Person@Example.com",
+      email_verified: true,
+      name: "Person",
+    };
 
     it("accepts a valid token and normalizes the profile", async () => {
-      const result = await verifier.verify(await idToken({ ...profile, picture: "https://x.test/a.png" }));
+      const result = await verifier.verify(
+        await idToken({ ...profile, picture: "https://x.test/a.png" }),
+      );
       expect(result).toEqual({
         sub: "sub-1",
         email: "person@example.com",
@@ -119,7 +131,12 @@ describe("google sign-in", () => {
   describe("endpoint", () => {
     it("creates an account with its own organization and recognizes it afterwards", async () => {
       const email = `${uniq("g")}@example.com`;
-      const token = await idToken({ sub: uniq("sub"), email, email_verified: true, name: "Gina Google" });
+      const token = await idToken({
+        sub: uniq("sub"),
+        email,
+        email_verified: true,
+        name: "Gina Google",
+      });
       const first = await api().ok("authGoogle", { body: { idToken: token } });
       expect(first.me.user.email).toBe(email);
       expect(first.me.memberships).toEqual([
@@ -128,7 +145,10 @@ describe("google sign-in", () => {
       const second = await api().ok("authGoogle", { body: { idToken: token } });
       expect(second.me.user.id).toBe(first.me.user.id);
       expect(second.me.memberships).toHaveLength(1);
-      const [row] = await context.deps.db.select().from(users).where(eq(users.id, first.me.user.id));
+      const [row] = await context.deps.db
+        .select()
+        .from(users)
+        .where(eq(users.id, first.me.user.id));
       expect(row?.passwordHash).toBeNull();
     });
 
@@ -148,8 +168,16 @@ describe("google sign-in", () => {
     it("joins the inviting organization instead of creating a new one", async () => {
       const owner = await registerOwner(context);
       const email = `${uniq("invitee")}@example.com`;
-      await api().ok("adminMemberInvite", { token: owner.accessToken, body: { email, role: "admin" } });
-      const token = await idToken({ sub: uniq("sub"), email, email_verified: true, name: "Invitee" });
+      await api().ok("adminMemberInvite", {
+        token: owner.accessToken,
+        body: { email, role: "admin" },
+      });
+      const token = await idToken({
+        sub: uniq("sub"),
+        email,
+        email_verified: true,
+        name: "Invitee",
+      });
       const result = await api().ok("authGoogle", { body: { idToken: token } });
       expect(result.me.memberships).toEqual([
         expect.objectContaining({ organizationId: owner.organizationId, role: "admin" }),
