@@ -27,6 +27,11 @@ const chipIcons: Record<(typeof suggestionSectionIds)[number], ReactNode> = {
   birthday: null,
 };
 
+const orderedSections = [
+  "uz_hits",
+  ...suggestionSectionIds.filter((id) => id !== "uz_hits"),
+] as const;
+
 export function GuestSearch() {
   const { lang, s } = usePlayground();
   const query = lang === "ru" ? "Шахзода" : "Shahzoda";
@@ -35,7 +40,6 @@ export function GuestSearch() {
     { track: tracks[6], state: "idle" as const },
     { track: tracks[2], state: "idle" as const },
     { track: tracks[9], state: "idle" as const },
-    { track: tracks[4], state: "idle" as const },
   ];
   const nav = [
     { id: "search", label: s.navSearch, icon: SearchIcon, active: true },
@@ -61,8 +65,8 @@ export function GuestSearch() {
             />
           </div>
           <ChipRow className="mt-3" aria-label={s.recent}>
-            {suggestionSectionIds.map((id, index) => (
-              <Chip key={id} selected={index === 2} tone="brand" icon={chipIcons[id]} size="md">
+            {orderedSections.map((id, index) => (
+              <Chip key={id} selected={index === 0} tone="brand" icon={chipIcons[id]} size="md">
                 {suggestionTitles[lang][id]}
               </Chip>
             ))}

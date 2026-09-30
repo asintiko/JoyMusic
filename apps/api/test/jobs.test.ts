@@ -1,6 +1,7 @@
 import { afterEach, afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { eq } from "drizzle-orm";
 import { djSessions, requests } from "../src/db/schema";
+import { newId } from "../src/lib/ids";
 import { createJobScheduler } from "../src/modules/jobs/scheduler";
 import {
   createJobTasks,
@@ -95,7 +96,7 @@ describe("background jobs", () => {
       new Date(Date.now() - 20 * hour),
     );
     await context.deps.db.insert(requests).values({
-      id: "req_busy_recent",
+      id: newId("req"),
       sessionId: busySession,
       venueId: busy.venue.id,
       title: "Recent",

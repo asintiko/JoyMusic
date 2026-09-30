@@ -203,7 +203,7 @@ export function NowPlayingHero({
         <Marquee
           as="h2"
           className={cx(
-            "w-full font-display font-semibold tracking-[-0.03em] text-fg",
+            "w-full font-display font-semibold tracking-[-0.015em] text-fg",
             dims.title,
             !split && "text-center",
           )}

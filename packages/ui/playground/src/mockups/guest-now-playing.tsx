@@ -84,7 +84,7 @@ export function GuestNowPlaying() {
           </div>
         </section>
 
-        <div className="absolute inset-x-0 bottom-0 z-20 rounded-t-2xl bg-[color-mix(in_oklab,var(--jm-canvas)_86%,transparent)] px-4 pb-7 pt-3 shadow-[0_-1px_0_var(--jm-line),0_-24px_40px_-8px_var(--jm-canvas)] backdrop-blur-xl">
+        <div className="absolute inset-x-0 bottom-0 z-20 rounded-t-2xl bg-[color-mix(in_oklab,var(--jm-canvas)_93%,transparent)] px-4 pb-7 pt-3 shadow-[0_-1px_0_var(--jm-line),0_-24px_40px_-8px_var(--jm-canvas)] backdrop-blur-xl">
           <div className="flex items-center gap-2">
             <SearchInput
               value=""
