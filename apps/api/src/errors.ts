@@ -76,3 +76,30 @@ export function isUniqueViolation(error: unknown, constraint?: string): boolean 
       shape.code === "23505" && (constraint === undefined || shape.constraint_name === constraint),
   );
 }
+
+export const requestsClosed = () =>
+  new AppError("requests_closed", 403, "Requests are closed at this venue right now");
+
+export const noActiveSession = () =>
+  new AppError("no_active_session", 409, "The DJ has not started a session yet");
+
+export const freeTextDisabled = () =>
+  new AppError("free_text_disabled", 403, "Free text requests are disabled at this venue");
+
+export const notesDisabled = () =>
+  new AppError("notes_disabled", 403, "Notes and dedications are disabled at this venue");
+
+export const contentBlocked = (field: string) =>
+  new AppError("content_blocked", 422, "The text contains words that are not allowed", {
+    details: { field },
+  });
+
+export const requestLimitReached = (
+  limit: number,
+  windowMinutes: number,
+  retryAfterSeconds: number,
+) =>
+  new AppError("request_limit_reached", 429, "Request limit reached, try again later", {
+    details: { limit, windowMinutes, retryAfterSeconds },
+    headers: { "retry-after": String(retryAfterSeconds) },
+  });

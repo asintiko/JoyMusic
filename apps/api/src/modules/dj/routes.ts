@@ -4,9 +4,16 @@ import { routes } from "@joymusic/shared";
 import { venues } from "../../db/schema";
 import { registerRoute } from "../../http/register-route";
 import { activeSessionIds } from "../venues/service";
+import { djNowPlayingRoutes } from "./nowplaying";
+import { djQueueRoutes } from "./queue";
+import { djSessionRoutes } from "./sessions";
 
 export const djRoutes: FastifyPluginAsync = async (app) => {
   const { db } = app.deps;
+
+  await app.register(djSessionRoutes);
+  await app.register(djQueueRoutes);
+  await app.register(djNowPlayingRoutes);
 
   registerRoute(app, routes.djVenues, async ({ user }) => {
     const organizationIds = [...new Set(user.memberships.map((entry) => entry.organizationId))];

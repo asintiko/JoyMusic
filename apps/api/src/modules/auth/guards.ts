@@ -66,6 +66,21 @@ async function authenticateUser(deps: Deps, request: FastifyRequest): Promise<Au
   return user;
 }
 
+export async function optionalGuest(
+  deps: Deps,
+  request: FastifyRequest,
+): Promise<GuestContext | null> {
+  const header = request.headers.authorization;
+  const match = typeof header === "string" ? /^Bearer\s+(\S+)$/i.exec(header) : null;
+  if (!match?.[1]) return null;
+  try {
+    const claims = await deps.tokens.verifyGuestToken(match[1]);
+    return { deviceId: claims.deviceId, venueId: claims.venueId };
+  } catch {
+    return null;
+  }
+}
+
 export const requireUser: preHandlerAsyncHookHandler = async (request) => {
   request.user = await authenticateUser(request.server.deps, request);
 };

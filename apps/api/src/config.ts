@@ -44,6 +44,16 @@ const envSchema = z.object({
   RATE_LIMIT_NAMESPACE: z.string().min(1).default("api"),
   LOGIN_MAX_FAILURES: z.coerce.number().int().positive().default(5),
   LOGIN_LOCKOUT_MINUTES: z.coerce.number().int().positive().default(15),
+  RATE_LIMIT_SEARCH_MAX: z.coerce.number().int().positive().default(60),
+  RATE_LIMIT_REQUEST_MAX: z.coerce.number().int().positive().default(30),
+  WS_MAX_CONNECTIONS_PER_IP: z.coerce.number().int().positive().default(40),
+  WS_MAX_MESSAGE_BYTES: z.coerce.number().int().min(64).max(65536).default(2048),
+  WS_HEARTBEAT_SECONDS: z.coerce.number().int().positive().default(30),
+  WS_MAX_BUFFERED_BYTES: z.coerce.number().int().positive().default(1_048_576),
+  JOBS_ENABLED: flag.optional(),
+  JOBS_INTERVAL_SECONDS: z.coerce.number().int().positive().default(60),
+  REQUEST_EXPIRY_MINUTES: z.coerce.number().int().positive().default(45),
+  SESSION_IDLE_HOURS: z.coerce.number().int().positive().default(18),
 });
 
 export interface Config {
@@ -65,7 +75,21 @@ export interface Config {
   rateLimit: {
     globalMax: number;
     authMax: number;
+    searchMax: number;
+    requestMax: number;
     namespace: string;
+  };
+  realtime: {
+    maxConnectionsPerIp: number;
+    maxMessageBytes: number;
+    heartbeatMs: number;
+    maxBufferedBytes: number;
+  };
+  jobs: {
+    enabled: boolean;
+    intervalMs: number;
+    requestExpiryMs: number;
+    sessionIdleMs: number;
   };
   login: {
     maxFailures: number;
@@ -101,7 +125,21 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     rateLimit: {
       globalMax: values.RATE_LIMIT_MAX,
       authMax: values.RATE_LIMIT_AUTH_MAX,
+      searchMax: values.RATE_LIMIT_SEARCH_MAX,
+      requestMax: values.RATE_LIMIT_REQUEST_MAX,
       namespace: values.RATE_LIMIT_NAMESPACE,
+    },
+    realtime: {
+      maxConnectionsPerIp: values.WS_MAX_CONNECTIONS_PER_IP,
+      maxMessageBytes: values.WS_MAX_MESSAGE_BYTES,
+      heartbeatMs: values.WS_HEARTBEAT_SECONDS * 1000,
+      maxBufferedBytes: values.WS_MAX_BUFFERED_BYTES,
+    },
+    jobs: {
+      enabled: values.JOBS_ENABLED ?? values.NODE_ENV !== "test",
+      intervalMs: values.JOBS_INTERVAL_SECONDS * 1000,
+      requestExpiryMs: values.REQUEST_EXPIRY_MINUTES * 60_000,
+      sessionIdleMs: values.SESSION_IDLE_HOURS * 3_600_000,
     },
     login: {
       maxFailures: values.LOGIN_MAX_FAILURES,

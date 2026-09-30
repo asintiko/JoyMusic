@@ -42,6 +42,7 @@ export type RouteHandler<R extends RouteDefinition, C = RouteContext<R>> = (
 export interface RouteRateLimit {
   max: number;
   timeWindow: string | number;
+  keyGenerator?: (request: FastifyRequest) => string | Promise<string>;
 }
 
 export interface RegisterRouteOptions {
