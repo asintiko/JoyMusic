@@ -39,6 +39,7 @@ export * from "./hooks/use-artwork-palette";
 export * from "./hooks/use-command-palette";
 export * from "./hooks/use-hotkey";
 export * from "./hooks/use-media-query";
+export * from "./hooks/use-mounted";
 export * from "./hooks/use-track-progress";
 export * from "./lib/contrast";
 export * from "./lib/cover-art";

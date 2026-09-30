@@ -262,6 +262,7 @@
   --jm-blur-lg: 32px;
   --jm-blur-xl: 64px;
   --jm-blur-ambient: 90px;
+  --jm-blur-backdrop: 64px;
 
   --jm-dur-instant: 80ms;
   --jm-dur-fast: 140ms;

@@ -2,6 +2,7 @@ import * as RadixDialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import type { ReactNode } from "react";
+import { useMounted } from "../hooks/use-mounted";
 import { usePrefersReducedMotion } from "../hooks/use-media-query";
 import { cx } from "../lib/cx";
 import { motionSprings } from "../lib/motion";
@@ -19,6 +20,7 @@ export interface DialogProps {
   closeLabel?: string;
   hideTitle?: boolean;
   className?: string;
+  container?: HTMLElement | null;
 }
 
 const sizeClasses: Record<DialogSize, string> = {
@@ -38,13 +40,15 @@ export function Dialog({
   closeLabel = "Close",
   hideTitle = false,
   className,
+  container,
 }: DialogProps) {
   const reduced = usePrefersReducedMotion();
+  const mounted = useMounted();
   return (
     <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
       <AnimatePresence>
-        {open ? (
-          <RadixDialog.Portal forceMount>
+        {open && mounted ? (
+          <RadixDialog.Portal forceMount container={container}>
             <RadixDialog.Overlay asChild forceMount>
               <motion.div
                 className="fixed inset-0 z-modal bg-scrim backdrop-blur-[6px]"

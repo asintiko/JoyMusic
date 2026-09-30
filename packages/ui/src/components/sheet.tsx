@@ -3,6 +3,7 @@ import { X } from "lucide-react";
 import { AnimatePresence, motion, useDragControls } from "motion/react";
 import type { PanInfo } from "motion/react";
 import type { PointerEvent as ReactPointerEvent, ReactNode } from "react";
+import { useMounted } from "../hooks/use-mounted";
 import { usePrefersReducedMotion } from "../hooks/use-media-query";
 import { cx } from "../lib/cx";
 import { motionSprings } from "../lib/motion";
@@ -22,6 +23,7 @@ export interface SheetProps {
   dismissDistance?: number;
   dismissVelocity?: number;
   className?: string;
+  container?: HTMLElement | null;
 }
 
 export function shouldDismissSheet(
@@ -46,8 +48,10 @@ export function Sheet({
   dismissDistance = 120,
   dismissVelocity = 520,
   className,
+  container,
 }: SheetProps) {
   const reduced = usePrefersReducedMotion();
+  const mounted = useMounted();
   const isBottom = side === "bottom";
   const controls = useDragControls();
   const startDrag = (event: ReactPointerEvent) => controls.start(event);
@@ -66,8 +70,8 @@ export function Sheet({
   return (
     <RadixDialog.Root open={open} onOpenChange={onOpenChange}>
       <AnimatePresence>
-        {open ? (
-          <RadixDialog.Portal forceMount>
+        {open && mounted ? (
+          <RadixDialog.Portal forceMount container={container}>
             <RadixDialog.Overlay asChild forceMount>
               <motion.div
                 data-testid="sheet-overlay"

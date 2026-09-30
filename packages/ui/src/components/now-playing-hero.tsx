@@ -177,7 +177,7 @@ export function NowPlayingHero({
       >
         <div
           className={cx(
-            "flex flex-wrap items-center gap-x-3 gap-y-2 font-extrabold uppercase tracking-[0.14em] text-playing-fg",
+            "flex flex-wrap items-center gap-x-3 gap-y-2 font-extrabold uppercase [font-kerning:none] tracking-[0.14em] text-playing-fg",
             dims.eyebrow,
             !split && "justify-center",
           )}
