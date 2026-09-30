@@ -2,12 +2,16 @@
 
 import { Download, Share, WifiOff, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import type { RealtimeStatus } from "@joymusic/shared";
 import { Button, IconButton } from "@joymusic/ui";
+import type { ExternalValue } from "@/lib/external-value";
+import { useConnectivity } from "./use-venue-feed";
 import { useI18n } from "@/components/i18n";
 import { browserStorage } from "@/lib/storage";
 
-export function OfflineBanner({ online }: { online: boolean }) {
+export function OfflineBanner({ status }: { status: ExternalValue<RealtimeStatus> }) {
   const { t } = useI18n();
+  const online = useConnectivity(status);
   const [restored, setRestored] = useState(false);
   const wasOffline = useRef(false);
 

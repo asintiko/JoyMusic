@@ -1,18 +1,21 @@
 "use client";
 
+import { memo } from "react";
 import { NowPlayingHero, useTrackProgress } from "@joymusic/ui";
 import type { NowPlaying } from "@joymusic/shared";
 import { useI18n } from "@/components/i18n";
+import { useExternalValue, type ExternalValue } from "@/lib/external-value";
 
 export interface NowPlayingSectionProps {
   nowPlaying: NowPlaying;
   artwork: string | null;
-  offsetMs: number;
+  offset: ExternalValue<number>;
   mine: boolean;
 }
 
-export function NowPlayingSection({ nowPlaying, artwork, offsetMs, mine }: NowPlayingSectionProps) {
+function NowPlayingSectionView({ nowPlaying, artwork, offset, mine }: NowPlayingSectionProps) {
   const { t } = useI18n();
+  const offsetMs = useExternalValue(offset);
   const progress = useTrackProgress({
     startedAt: nowPlaying.startedAt,
     durationSec: nowPlaying.durationSec,
@@ -22,7 +25,7 @@ export function NowPlayingSection({ nowPlaying, artwork, offsetMs, mine }: NowPl
 
   return (
     <div
-      className="jm-rise flex flex-col items-center gap-3"
+      className="jm-rise hero-art flex flex-col items-center gap-3"
       key={`${nowPlaying.startedAt}-${nowPlaying.title}`}
     >
       {mine ? (
@@ -52,3 +55,5 @@ export function NowPlayingSection({ nowPlaying, artwork, offsetMs, mine }: NowPl
     </div>
   );
 }
+
+export const NowPlayingSection = memo(NowPlayingSectionView);

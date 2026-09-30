@@ -6,7 +6,6 @@ const repositoryRoot = fileURLToPath(new URL("../..", import.meta.url));
 const config: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR ?? ".next",
   reactStrictMode: true,
-  experimental: { inlineCss: true },
   agentRules: false,
   poweredByHeader: false,
   transpilePackages: ["@joymusic/ui", "@joymusic/shared", "@joymusic/qr", "@joymusic/brand"],

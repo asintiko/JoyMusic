@@ -14,6 +14,7 @@ import {
 } from "@joymusic/ui";
 import { I18nProvider, useI18n } from "@/components/i18n";
 import { artworkSrc } from "@/lib/art";
+import { useExternalValue, type ExternalValue } from "@/lib/external-value";
 import { useConnectivity, useVenueFeed } from "@/guest/use-venue-feed";
 import { stageScale, tvDedications, tvMode, tvTicker, type TvMode } from "./tv-model";
 
@@ -102,6 +103,7 @@ function TvStage({ slug, initial, theme, qrSvg, displayUrl, backdrop }: TvScreen
         seed={nowPlaying ? `${nowPlaying.artist} ${nowPlaying.title}` : `venue ${slug}`}
         src={artwork}
         intensity={mode === "playing" ? 0.9 : 0.75}
+        grain={false}
         className="!bg-transparent opacity-80 mix-blend-screen"
       />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_40%,transparent_0%,var(--jm-canvas)_95%)] opacity-90" />
@@ -156,7 +158,7 @@ function TvStage({ slug, initial, theme, qrSvg, displayUrl, backdrop }: TvScreen
             <PlayingLayout
               venue={venue}
               artwork={artwork}
-              offsetMs={feed.offsetMs}
+              offset={feed.offset}
               qrSvg={qrSvg}
               displayUrl={displayUrl}
             />
@@ -233,17 +235,18 @@ function QrCard({
 function PlayingLayout({
   venue,
   artwork,
-  offsetMs,
+  offset,
   qrSvg,
   displayUrl,
 }: {
   venue: VenueState;
   artwork: string | null;
-  offsetMs: number;
+  offset: ExternalValue<number>;
   qrSvg: string;
   displayUrl: string;
 }) {
   const { t } = useI18n();
+  const offsetMs = useExternalValue(offset);
   const nowPlaying = venue.nowPlaying;
   const progress = useTrackProgress({
     startedAt: nowPlaying?.startedAt,

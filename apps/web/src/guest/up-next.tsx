@@ -1,7 +1,7 @@
 "use client";
 
 import { Check, Gift, ThumbsUp } from "lucide-react";
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import type { RequestItem } from "@joymusic/shared";
 import { EmptyState, cx } from "@joymusic/ui";
 import { useI18n } from "@/components/i18n";
@@ -102,8 +102,13 @@ const Row = memo(RowView);
 
 function UpNextView({ queue, pending, canVote, onVote, votingId, className }: UpNextProps) {
   const { t } = useI18n();
-  const shownQueue = queue.slice(0, 6);
-  const shownPending = pending.slice(0, 5);
+  const [expanded, setExpanded] = useState(false);
+  useEffect(() => {
+    const timer = window.setTimeout(() => setExpanded(true), 2000);
+    return () => window.clearTimeout(timer);
+  }, []);
+  const shownQueue = queue.slice(0, expanded ? 6 : 3);
+  const shownPending = pending.slice(0, expanded ? 5 : 0);
   const empty = shownQueue.length === 0 && shownPending.length === 0;
 
   if (empty) {

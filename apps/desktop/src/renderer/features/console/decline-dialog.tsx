@@ -61,6 +61,7 @@ export function DeclineDialog({ request, onCancel, onConfirm }: DeclineDialogPro
           maxLength={200}
           rows={2}
           data-testid="decline-reason"
+          autoFocus
           onChange={(event) => setReason(event.target.value)}
           onKeyDown={(event) => {
             if (event.key === "Enter" && !event.shiftKey && request) {

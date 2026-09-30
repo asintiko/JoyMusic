@@ -1,29 +1,35 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
+import { MapPin, Users } from "lucide-react";
 import type { Locale, RequestItem, Track, VenueState } from "@joymusic/shared";
 import { AmbientBackground, EmptyState, Logo, Skeleton, cx } from "@joymusic/ui";
-import { MapPin, Users } from "lucide-react";
 import { I18nProvider, useI18n } from "@/components/i18n";
 import { LangSwitch } from "@/components/lang-switch";
 import { Toaster, useToast } from "@/components/toaster";
 import { artworkSrc } from "@/lib/art";
 import { haptic } from "@/lib/haptics";
+import { useStableCallback } from "@/lib/stable";
 import { browserStorage } from "@/lib/storage";
 import { createGuestApi, createLazyApi } from "./api";
 import { InstallHint, OfflineBanner } from "./banners";
-import { ArtworkGlow } from "./artwork-glow";
 import { Dock } from "./dock";
 import { activeMineCount } from "./live-state";
-import { loadSuggestions } from "./suggestions-cache";
-import { NowPlayingSection } from "./now-playing-section";
 import { failureCopy, mapRequestError } from "./request-errors";
 import type { RequestOutcome, RequestPayload, RequestTarget } from "./request-sheet";
-import { createGuestSessionStore, type GuestSession } from "./session-store";
-import { UpNext } from "./up-next";
-import { useConnectivity, useVenueFeed } from "./use-venue-feed";
+import { createGuestSessionStore, type GuestSessionStore } from "./session-store";
+import { loadSuggestions } from "./suggestions-cache";
 import { useMineNotifications } from "./use-mine-notifications";
+import { useVenueFeed } from "./use-venue-feed";
 
 const loadSearchOverlay = () => import("./search-overlay").then((module) => module.SearchOverlay);
 
@@ -38,6 +44,14 @@ const MyRequestsSheet = dynamic(
   () => import("./my-requests-sheet").then((module) => module.MyRequestsSheet),
   { ssr: false },
 );
+
+const NowPlayingSection = dynamic(() =>
+  import("./now-playing-section").then((module) => module.NowPlayingSection),
+);
+const UpNext = dynamic(() => import("./up-next").then((module) => module.UpNext));
+
+const startDelayMs = 700;
+const heroPreviewSize = 250;
 
 export interface GuestAppProps {
   slug: string;
@@ -76,13 +90,13 @@ function useOverlayHistory(open: boolean, setOpen: (open: boolean) => void) {
   }, [setOpen]);
 }
 
-function GuestScreen({ slug, initial }: { slug: string; initial: VenueState | null }) {
-  const { t, locale } = useI18n();
-  const toast = useToast();
+function useGuestStore(slug: string): GuestSessionStore {
+  const { locale } = useI18n();
   const localeRef = useRef(locale);
-  localeRef.current = locale;
-
-  const store = useMemo(() => {
+  useEffect(() => {
+    localeRef.current = locale;
+  });
+  return useMemo(() => {
     const created = createGuestSessionStore({
       slug,
       api: createLazyApi(),
@@ -95,10 +109,67 @@ function GuestScreen({ slug, initial }: { slug: string; initial: VenueState | nu
     }
     return created;
   }, [slug]);
-  const api = useMemo(() => createGuestApi(store), [store]);
-  const feed = useVenueFeed({ slug, role: "guest", initial, api, store });
+}
 
-  const [session, setSession] = useState<GuestSession | null>(null);
+const TableLabel = memo(function TableLabel({ store }: { store: GuestSessionStore }) {
+  const label = useSyncExternalStore(
+    (listener) => store.subscribe(listener),
+    () => store.current()?.tableLabel ?? null,
+    () => null,
+  );
+  if (!label) return null;
+  return (
+    <span
+      data-testid="table-label"
+      className="inline-flex items-center gap-1 rounded-pill bg-surface-3 px-2 py-0.5 text-[11px] font-bold text-fg"
+    >
+      <Users aria-hidden="true" className="size-3" />
+      {label}
+    </span>
+  );
+});
+
+const Header = memo(function Header({
+  name,
+  city,
+  store,
+}: {
+  name: string | null;
+  city: string | null;
+  store: GuestSessionStore;
+}) {
+  const { t } = useI18n();
+  return (
+    <header className="flex items-center justify-between gap-3 px-5 pb-1 pt-4">
+      <div className="flex min-w-0 items-center gap-2.5">
+        <Logo variant="mark" height={30} decorative />
+        <div className="min-w-0 leading-tight">
+          <h1 className="truncate text-[15px] font-extrabold tracking-[-0.01em]">
+            {name ?? t.venueLoading}
+          </h1>
+          <p className="flex items-center gap-1.5 truncate text-[12px] font-medium text-fg-muted">
+            {city ? (
+              <span className="inline-flex items-center gap-1">
+                <MapPin aria-hidden="true" className="size-3" />
+                {city}
+              </span>
+            ) : null}
+            <TableLabel store={store} />
+          </p>
+        </div>
+      </div>
+      <LangSwitch />
+    </header>
+  );
+});
+
+function GuestScreen({ slug, initial }: { slug: string; initial: VenueState | null }) {
+  const { t } = useI18n();
+  const toast = useToast();
+  const store = useGuestStore(slug);
+  const api = useMemo(() => createGuestApi(store), [store]);
+  const feed = useVenueFeed({ slug, role: "guest", initial, api, store, startDelayMs });
+
   const [searchOpen, setSearchOpen] = useState(false);
   const [mineOpen, setMineOpen] = useState(false);
   const [requestOpen, setRequestOpen] = useState(false);
@@ -106,34 +177,32 @@ function GuestScreen({ slug, initial }: { slug: string; initial: VenueState | nu
   const [votingId, setVotingId] = useState<string | null>(null);
   const [engaged, setEngaged] = useState(false);
   const [sheetsLoaded, setSheetsLoaded] = useState({ request: false, mine: false });
-  const online = useConnectivity(feed.status);
-
-  useEffect(() => {
-    setSession(store.current());
-    return store.subscribe(setSession);
-  }, [store]);
+  const [ambientReady, setAmbientReady] = useState(false);
 
   useEffect(() => {
     const url = new URL(window.location.href);
-    void store
-      .ensure()
-      .catch(() => undefined)
-      .then(() => {
-        if (!url.searchParams.has("t")) return;
-        url.searchParams.delete("t");
-        window.history.replaceState(window.history.state, "", url);
-      });
+    const timer = window.setTimeout(() => {
+      void store
+        .ensure()
+        .catch(() => undefined)
+        .then(() => {
+          if (!url.searchParams.has("t")) return;
+          url.searchParams.delete("t");
+          window.history.replaceState(window.history.state, "", url);
+        });
+    }, startDelayMs);
+    return () => window.clearTimeout(timer);
   }, [store]);
 
   useEffect(() => {
-    const idle =
-      window.requestIdleCallback ?? ((callback: () => void) => window.setTimeout(callback, 1200));
-    const handle = idle(() => {
+    const ambient = window.setTimeout(() => setAmbientReady(true), 1600);
+    const prefetch = window.setTimeout(() => {
       void loadSearchOverlay();
       void loadSuggestions(api, slug).catch(() => undefined);
-    });
+    }, 2600);
     return () => {
-      if (window.cancelIdleCallback) window.cancelIdleCallback(handle);
+      window.clearTimeout(ambient);
+      window.clearTimeout(prefetch);
     };
   }, [api, slug]);
 
@@ -148,13 +217,9 @@ function GuestScreen({ slug, initial }: { slug: string; initial: VenueState | nu
 
   const artwork = useMemo(() => {
     if (!nowPlaying || !settings?.showArtwork) return null;
-    return artworkSrc(nowPlaying.artworkUrl ?? nowPlaying.track?.artworkUrl ?? null, 500);
-  }, [nowPlaying, settings?.showArtwork]);
-
-  const glowArtwork = useMemo(() => {
-    if (!nowPlaying || !settings?.showArtwork) return null;
-    return artworkSrc(nowPlaying.artworkUrl ?? nowPlaying.track?.artworkUrl ?? null, 120);
-  }, [nowPlaying, settings?.showArtwork]);
+    const source = nowPlaying.artworkUrl ?? nowPlaying.track?.artworkUrl ?? null;
+    return artworkSrc(source, ambientReady ? 500 : heroPreviewSize);
+  }, [nowPlaying, settings?.showArtwork, ambientReady]);
 
   const openMine = useCallback(() => {
     setSheetsLoaded((previous) => (previous.mine ? previous : { ...previous, mine: true }));
@@ -179,7 +244,7 @@ function GuestScreen({ slug, initial }: { slug: string; initial: VenueState | nu
     [openRequest],
   );
 
-  const submitRequest = useCallback(
+  const submitRequest = useStableCallback(
     async (payload: RequestPayload): Promise<RequestOutcome> => {
       const result = await api.call("requestCreate", {
         params: { slug },
@@ -194,86 +259,56 @@ function GuestScreen({ slug, initial }: { slug: string; initial: VenueState | nu
       feed.trackMine(result.request);
       return result;
     },
-    [api, slug, store, feed],
   );
 
-  const onRequestSuccess = useCallback(
-    (outcome: RequestOutcome) => {
-      setRequestOpen(false);
+  const onRequestSuccess = useStableCallback((outcome: RequestOutcome) => {
+    setRequestOpen(false);
+    setEngaged(true);
+    toast.toast({
+      title: outcome.merged ? t.voteAddedTitle : t.requestSentTitle,
+      description: outcome.merged ? t.voteAddedText : t.requestSentText,
+      tone: "success",
+      action: { label: t.viewMine, onClick: openMine },
+    });
+  });
+
+  const vote = useStableCallback(async (request: RequestItem) => {
+    setVotingId(request.id);
+    try {
+      const updated = await api.call("requestVote", { params: { id: request.id } });
+      feed.trackMine(updated);
+      haptic("success");
       setEngaged(true);
-      toast.toast({
-        title: outcome.merged ? t.voteAddedTitle : t.requestSentTitle,
-        description: outcome.merged ? t.voteAddedText : t.requestSentText,
-        tone: "success",
-        action: { label: t.viewMine, onClick: openMine },
-      });
-    },
-    [toast, t, openMine],
-  );
+      toast.toast({ title: t.voteAddedTitle, description: request.title, tone: "success" });
+    } catch (error) {
+      haptic("warning");
+      const copy = failureCopy(mapRequestError(error), t);
+      toast.toast({ title: copy.title, description: copy.text, tone: "danger", duration: 6000 });
+    } finally {
+      setVotingId(null);
+    }
+  });
 
-  const vote = useCallback(
-    async (request: RequestItem) => {
-      setVotingId(request.id);
-      try {
-        const updated = await api.call("requestVote", { params: { id: request.id } });
-        feed.trackMine(updated);
-        haptic("success");
-        setEngaged(true);
-        toast.toast({ title: t.voteAddedTitle, description: request.title, tone: "success" });
-      } catch (error) {
-        haptic("warning");
-        const copy = failureCopy(mapRequestError(error), t);
-        toast.toast({ title: copy.title, description: copy.text, tone: "danger", duration: 6000 });
-      } finally {
-        setVotingId(null);
-      }
-    },
-    [api, feed, toast, t],
-  );
+  const openSearch = useCallback(() => setSearchOpen(true), []);
+  const preloadSearch = useCallback(() => void loadSearchOverlay(), []);
+  const openText = useCallback(() => openTextRequest(), [openTextRequest]);
 
   const queueOrder = useMemo(() => (venue?.queue ?? []).map((item) => item.id), [venue?.queue]);
   const dockMode = !venue || !hasSession ? "waiting" : requestsOpen ? "open" : "closed";
-  const overlayActive = searchOpen;
+  const activeCount = useMemo(() => activeMineCount(feed.mine), [feed.mine]);
 
   return (
     <>
-      <div className="guest-shell relative isolate" inert={overlayActive}>
+      <div className="guest-shell relative isolate" inert={searchOpen}>
         <AmbientBackground
           fixed
-          src={artwork}
+          src={ambientReady ? artwork : null}
           seed={nowPlaying ? `${nowPlaying.artist} ${nowPlaying.title}` : `venue ${slug}`}
           intensity={nowPlaying ? 1 : 0.7}
+          grain={false}
         />
-        <ArtworkGlow src={glowArtwork} />
         <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-[520px] flex-col pt-safe md:max-w-[860px]">
-          <header className="flex items-center justify-between gap-3 px-5 pb-1 pt-4">
-            <div className="flex min-w-0 items-center gap-2.5">
-              <Logo variant="mark" height={30} decorative />
-              <div className="min-w-0 leading-tight">
-                <h1 className="truncate text-[15px] font-extrabold tracking-[-0.01em]">
-                  {venue?.venue.name ?? t.venueLoading}
-                </h1>
-                <p className="flex items-center gap-1.5 truncate text-[12px] font-medium text-fg-muted">
-                  {venue?.venue.city ? (
-                    <span className="inline-flex items-center gap-1">
-                      <MapPin aria-hidden="true" className="size-3" />
-                      {venue.venue.city}
-                    </span>
-                  ) : null}
-                  {session?.tableLabel ? (
-                    <span
-                      data-testid="table-label"
-                      className="inline-flex items-center gap-1 rounded-pill bg-surface-3 px-2 py-0.5 text-[11px] font-bold text-fg"
-                    >
-                      <Users aria-hidden="true" className="size-3" />
-                      {session.tableLabel}
-                    </span>
-                  ) : null}
-                </p>
-              </div>
-            </div>
-            <LangSwitch />
-          </header>
+          <Header name={venue?.venue.name ?? null} city={venue?.venue.city ?? null} store={store} />
 
           <main className="flex flex-1 flex-col px-4 pb-[calc(var(--jm-safe-bottom)+150px)] pt-4 md:grid md:grid-cols-[minmax(0,320px)_minmax(0,1fr)] md:content-center md:items-center md:gap-8 md:px-8 md:pt-8">
             <section
@@ -297,7 +332,7 @@ function GuestScreen({ slug, initial }: { slug: string; initial: VenueState | nu
                 <NowPlayingSection
                   nowPlaying={nowPlaying}
                   artwork={artwork}
-                  offsetMs={feed.offsetMs}
+                  offset={feed.offset}
                   mine={Boolean(nowPlaying.requestId && feed.mine[nowPlaying.requestId])}
                 />
               ) : (
@@ -315,7 +350,7 @@ function GuestScreen({ slug, initial }: { slug: string; initial: VenueState | nu
                 queue={venue.queue}
                 pending={venue.pending}
                 canVote={canRequest}
-                onVote={(request) => void vote(request)}
+                onVote={vote}
                 votingId={votingId}
                 className="mt-6 md:mt-0"
               />
@@ -325,11 +360,11 @@ function GuestScreen({ slug, initial }: { slug: string; initial: VenueState | nu
 
         <Dock
           mode={dockMode}
-          activeCount={activeMineCount(feed.mine)}
+          activeCount={activeCount}
           allowFreeText={Boolean(settings?.allowFreeText)}
-          onSearch={() => setSearchOpen(true)}
-          onSearchIntent={() => void loadSearchOverlay()}
-          onText={() => openTextRequest()}
+          onSearch={openSearch}
+          onSearchIntent={preloadSearch}
+          onText={openText}
           onMine={openMine}
         />
         <InstallHint engaged={engaged} />
@@ -367,7 +402,7 @@ function GuestScreen({ slug, initial }: { slug: string; initial: VenueState | nu
           queueOrder={queueOrder}
         />
       ) : null}
-      <OfflineBanner online={online} />
+      <OfflineBanner status={feed.status} />
     </>
   );
 }
