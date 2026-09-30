@@ -182,7 +182,11 @@ export const copyRu: LandingCopy = {
     switchLabel: "Тема заведения",
     items: {
       club: { name: "Club", text: "Неон на чёрно-фиолетовой сцене.", venue: "Joy Demo Club" },
-      lounge: { name: "Lounge", text: "Чёрный и золото, спокойно и точно.", venue: "Joy Demo Lounge" },
+      lounge: {
+        name: "Lounge",
+        text: "Чёрный и золото, спокойно и точно.",
+        venue: "Joy Demo Lounge",
+      },
       cafe: { name: "Café", text: "Мягкий крем с терракотовым акцентом.", venue: "Joy Demo Café" },
     },
     previewLabel: "Гостевой экран",

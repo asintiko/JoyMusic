@@ -59,7 +59,9 @@ export function landingMetadata(locale: Locale, origin: string): Metadata {
       description: copy.meta.description,
       url,
       locale: openGraphLocale[locale],
-      alternateLocale: localeList.filter((item) => item !== locale).map((item) => openGraphLocale[item]),
+      alternateLocale: localeList
+        .filter((item) => item !== locale)
+        .map((item) => openGraphLocale[item]),
       images: [image],
     },
     twitter: {

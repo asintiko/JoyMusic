@@ -6,7 +6,7 @@ Next.js 16 (App Router, React 19, Tailwind 4) в монорепозитории.
 | -------------------------------- | -------------------------------------------------------------------------- |
 | `/v/[slug]`                      | гостевой PWA: цель QR-кода, экран «сейчас играет», поиск и заказ трека     |
 | `/tv/[slug]`                     | экран для телевизора 16:9 в зале, без взаимодействия                       |
-| `/`                              | заглушка. Лендинг соберёт отдельная задача, эта страница ей не мешает      |
+| `/`, `/ru`, `/en`                | лендинг (`docs/LANDING.md`), статические страницы                          |
 | `/art?u=`                        | прокси обложек (только `dzcdn.net`, `mzstatic.com`, `deezer.com`, до 3 МБ) |
 | `/v/[slug]/manifest.webmanifest` | манифест PWA конкретного заведения                                         |
 
@@ -51,7 +51,7 @@ API_URL=http://localhost:4000 node apps/web/scripts/demo-state.mjs
 ```
 apps/web/src
   app/
-    (site)/            корневой layout и заглушка главной
+    (landing)/         лендинг: [locale] layout и page, demo-qr.svg (`docs/LANDING.md`)
     (guest)/v/[slug]/  layout (тема, язык, viewport), page, not-found, manifest.webmanifest
     (tv)/tv/[slug]/    layout и page (QR рисуется на сервере)
     art/route.ts       прокси обложек

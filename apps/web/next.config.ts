@@ -13,6 +13,12 @@ const config: NextConfig = {
   serverExternalPackages: ["@resvg/resvg-js", "opentype.js"],
   turbopack: { root: repositoryRoot },
   outputFileTracingRoot: repositoryRoot,
+  async redirects() {
+    return [{ source: "/uz", destination: "/", permanent: true }];
+  },
+  async rewrites() {
+    return { beforeFiles: [{ source: "/", destination: "/uz" }], afterFiles: [], fallback: [] };
+  },
   async headers() {
     return [
       {
@@ -20,6 +26,12 @@ const config: NextConfig = {
         headers: [
           { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
           { key: "Service-Worker-Allowed", value: "/" },
+        ],
+      },
+      {
+        source: "/landing/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=86400" },
         ],
       },
       {

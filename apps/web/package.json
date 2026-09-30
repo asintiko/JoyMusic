@@ -12,7 +12,10 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "screenshots": "node scripts/screenshots.mjs",
-    "lighthouse": "node scripts/lighthouse.mjs"
+    "lighthouse": "node scripts/lighthouse.mjs",
+    "test:e2e:landing": "playwright test -c playwright.landing.config.ts",
+    "screenshots:landing": "node scripts/landing-screenshots.mjs",
+    "lighthouse:landing": "SKIP_PWA=1 node scripts/lighthouse.mjs http://localhost:3000/"
   },
   "dependencies": {
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
@@ -42,6 +45,7 @@
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.1",
     "jsdom": "^30.1.1",
+    "jsqr": "^1.4.0",
     "lighthouse": "^13.5.0",
     "typescript": "~6.0.3",
     "vitest": "^5.0.2"
