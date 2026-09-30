@@ -1,4 +1,4 @@
-import { execFileSync, spawnSync } from "node:child_process";
+import { spawnSync } from "node:child_process";
 import {
   chmodSync,
   existsSync,
@@ -334,5 +334,3 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   }
 }
 
-export { execFileSync };
-EOF
