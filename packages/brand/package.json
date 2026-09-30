@@ -1,0 +1,23 @@
+{
+  "name": "@joymusic/brand",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./assets/*": "./assets/*"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc -p tsconfig.json",
+    "build:logo": "node scripts/build-logo.mjs",
+    "build:assets": "node scripts/build-logo.mjs && node scripts/build-assets.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "png2icons": "^2.0.1",
+    "sharp": "^0.35.5",
+    "typescript": "~6.0.3"
+  }
+}
