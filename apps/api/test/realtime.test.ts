@@ -365,6 +365,41 @@ describe("realtime hub", () => {
     }
   });
 
+  it("works with in-memory pub/sub and sequences when redis is not configured", async () => {
+    const memory = await newContext({
+      deps: { publisher: undefined as never },
+      env: { REDIS_URL: "" },
+    });
+    try {
+      expect(memory.deps.redis).toBeNull();
+      await memory.app.listen({ host: "127.0.0.1", port: 0 });
+      const address = memory.app.server.address();
+      if (!address || typeof address === "string") throw new Error("server is not listening");
+      const fixture = await createFixture(memory);
+      const saved = baseUrl;
+      baseUrl = `ws://127.0.0.1:${address.port}`;
+      const tv = await connect(fixture, { role: "tv" });
+      baseUrl = saved;
+      await tv.waitFor(isType("state.snapshot"));
+      const guest = await fixture.guest();
+      await fixture.api.ok("requestCreate", {
+        token: guest.token,
+        params: { slug: fixture.venue.slug },
+        body: { trackId: "deezer:101" },
+      });
+      await fixture.api.ok("requestCreate", {
+        token: guest.token,
+        params: { slug: fixture.venue.slug },
+        body: { trackId: "deezer:102" },
+      });
+      await tv.waitFor((message) => message.seq === 3);
+      const seqs = tv.events().map((event) => event.seq);
+      expect(seqs).toEqual([1, 2, 3]);
+    } finally {
+      await memory.close();
+    }
+  });
+
   it.skipIf(!process.env.REDIS_URL)(
     "delivers events across app instances through redis pub/sub",
     async () => {

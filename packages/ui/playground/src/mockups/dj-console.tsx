@@ -86,6 +86,8 @@ export function DjConsole() {
     buildRequest(8, "accepted", { votes: 1, tableLabel: s.tableLabel(1) }),
     buildRequest(0, "accepted", { votes: 1, tableLabel: s.tableLabel(6) }),
     buildRequest(3, "accepted", { votes: 2, tableLabel: s.tableLabel(11) }),
+    buildRequest(5, "accepted", { votes: 1, tableLabel: s.tableLabel(8) }),
+    buildRequest(9, "accepted", { votes: 1, tableLabel: s.tableLabel(10) }),
   ];
 
   return (
@@ -217,11 +219,14 @@ export function DjConsole() {
                   }
                 />
               ))}
+              <div className="mx-1 mt-2 flex h-16 shrink-0 items-center justify-center rounded-lg border border-dashed border-line-strong text-[12.5px] font-semibold text-fg-subtle">
+                {s.djDrop}
+              </div>
             </div>
           </Panel>
 
           <div className="flex min-h-0 flex-col gap-3">
-            <Panel title={s.djNow} className="shrink-0">
+            <section className="shrink-0 overflow-hidden rounded-xl bg-surface-1 hairline">
               <div className="p-5 pb-4">
                 <NowPlayingHero
                   title={track.title}
@@ -238,7 +243,7 @@ export function DjConsole() {
                   tilt={false}
                 />
               </div>
-            </Panel>
+            </section>
             <Panel title={s.djRecentlyPlayed} className="flex-1">
               <div role="list" className="scrollbar-none min-h-0 flex-1 overflow-y-auto p-2">
                 {[tracks[8], tracks[5], tracks[7]].map((item) =>

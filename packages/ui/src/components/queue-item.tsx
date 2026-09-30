@@ -32,7 +32,7 @@ function DedicationChip({ text, large }: { text: string; large?: boolean }) {
   return (
     <span
       className={cx(
-        "inline-flex max-w-full items-center gap-1.5 rounded-pill bg-brand-soft font-bold text-brand",
+        "inline-flex max-w-full items-center gap-1.5 self-start rounded-pill bg-brand-soft font-bold text-brand",
         large ? "h-9 px-4 text-[17px] [&_svg]:size-[18px]" : "h-6 px-2.5 text-[12px] [&_svg]:size-3.5",
       )}
     >
@@ -93,14 +93,19 @@ export function QueueItem({
         <span className="type-mono-lg w-14 shrink-0 text-center text-[34px] text-fg-subtle">
           {position ?? 0}
         </span>
-        <Cover src={request.artworkUrl} seed={seed} size={88} radius="md" />
+        <Cover src={request.artworkUrl} seed={seed} size={96} radius="md" />
         <div className="min-w-0 flex-1">
           <p className="truncate text-[30px] font-extrabold leading-tight tracking-[-0.02em] text-fg">
             {request.title}
           </p>
-          <p className="mt-1 truncate text-[21px] font-semibold text-fg-muted">{request.artist}</p>
+          <p className="mt-0.5 truncate text-[21px] font-semibold text-fg-muted">{request.artist}</p>
+          {dedication ? (
+            <p className="mt-2 flex items-center gap-2 truncate text-[20px] font-bold text-brand">
+              <Gift aria-hidden="true" className="size-5 shrink-0" />
+              <span className="truncate">{dedication}</span>
+            </p>
+          ) : null}
         </div>
-        {dedication ? <DedicationChip text={dedication} large /> : null}
       </div>
     );
   }

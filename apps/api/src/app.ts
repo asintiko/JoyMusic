@@ -54,6 +54,22 @@ export async function buildApp(
     requestIdHeader: "x-request-id",
   });
 
+  app.addContentTypeParser("application/json", { parseAs: "string" }, (_request, body, done) => {
+    const text = typeof body === "string" ? body : body.toString("utf8");
+    if (text.trim() === "") {
+      done(null, undefined);
+      return;
+    }
+    try {
+      done(null, JSON.parse(text));
+    } catch {
+      done(
+        Object.assign(new Error("Request body is not valid JSON"), { statusCode: 400 }),
+        undefined,
+      );
+    }
+  });
+
   app.decorate("deps", deps);
   app.decorateRequest("user", null);
   app.decorateRequest("guest", null);

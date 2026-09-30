@@ -22,6 +22,7 @@ import type { ReactNode } from "react";
 import {
   Avatar,
   Badge,
+  Kbd,
   Button,
   Logo,
   Metric,
@@ -128,7 +129,7 @@ export function AdminDashboard() {
                 className="focus-ring inline-flex h-9 w-[260px] items-center gap-2.5 rounded-md bg-surface-2 px-3 text-[13px] font-medium text-fg-subtle hairline hover:bg-surface-3"
               >
                 <Search aria-hidden="true" className="size-4" />
-                <span className="flex-1 text-left">{s.cmdPlaceholder.replace("…", "")}</span>
+                <span className="flex-1 truncate whitespace-nowrap text-left">{s.cmdPlaceholder.replace("…", "")}</span>
                 <Shortcut keys={["mod", "k"]} />
               </button>
               <Tabs defaultValue="d7" variant="segmented">
@@ -159,8 +160,8 @@ export function AdminDashboard() {
               <Metric label={s.kpiDecline} value="4,2%" delta="-1,3%" trend="down" goodWhen="down" icon={<Ban aria-hidden="true" />} spark={spark.decline} sparkTone="next" />
             </div>
 
-            <div className="grid grid-cols-[minmax(0,1fr)_400px] gap-4">
-              <section className="flex flex-col rounded-lg bg-surface-1 p-4 hairline">
+            <div className="grid h-[262px] shrink-0 grid-cols-[minmax(0,1fr)_400px] gap-4">
+              <section className="flex min-h-0 flex-col rounded-lg bg-surface-1 p-4 hairline">
                 <header className="flex items-start justify-between">
                   <div>
                     <h2 className="type-title-sm">{s.chartHours}</h2>
@@ -170,17 +171,17 @@ export function AdminDashboard() {
                     <span className="type-mono">{peak}</span>
                   </Badge>
                 </header>
-                <div className="mt-3 flex h-[132px] items-end gap-1.5" role="img" aria-label={s.chartHours}>
+                <div className="mt-3 flex min-h-[120px] flex-1 items-stretch gap-1.5" role="img" aria-label={s.chartHours}>
                   {adminHours.map((value, hour) => (
-                    <div key={hour} className="group/bar flex flex-1 flex-col items-center gap-1.5">
+                    <div key={hour} className="group/bar flex flex-1 flex-col items-center justify-end gap-1.5">
                       <div
                         className={cx(
                           "w-full rounded-t-[5px] transition-[filter]",
                           hour === peakIndex ? "bg-brand-gradient" : "bg-[color-mix(in_oklab,var(--jm-brand)_32%,var(--jm-surface-3))]",
                         )}
-                        style={{ height: `${Math.max(3, (value / peak) * 108)}px` }}
+                        style={{ height: `${Math.max(2, (value / peak) * 84)}%` }}
                       />
-                      <span className="type-mono text-[9px] text-fg-disabled">
+                      <span className="type-mono h-3 text-[9.5px] text-fg-subtle">
                         {hour % 3 === 0 ? String(hour).padStart(2, "0") : ""}
                       </span>
                     </div>
@@ -211,7 +212,7 @@ export function AdminDashboard() {
             </div>
 
             <section className="flex min-h-0 flex-1 flex-col">
-              <Table aria-label={s.venuesTable} containerClassName="min-h-0 flex-1">
+              <Table aria-label={s.venuesTable} containerClassName="min-h-0">
                 <TableHead>
                   <TableRow interactive={false}>
                     <TableHeaderCell sortable direction="desc">
@@ -228,7 +229,7 @@ export function AdminDashboard() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {adminVenues.slice(0, 5).map((venue, index) => (
+                  {adminVenues.map((venue, index) => (
                     <TableRow key={venue.name} selected={index === 0}>
                       <TableCell className="font-bold">
                         <span className="flex items-center gap-2.5">
@@ -258,6 +259,13 @@ export function AdminDashboard() {
                   ))}
                 </TableBody>
               </Table>
+              <div className="flex h-10 shrink-0 items-center justify-between px-1 pt-2 text-[12px] font-semibold text-fg-subtle">
+                <span className="type-mono">1–6 / 24</span>
+                <span className="inline-flex items-center gap-1">
+                  <Kbd>J</Kbd>
+                  <Kbd>K</Kbd>
+                </span>
+              </div>
             </section>
           </main>
         </div>

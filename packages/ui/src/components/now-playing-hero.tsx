@@ -54,13 +54,13 @@ const scale = {
     eq: 16,
   },
   tv: {
-    cover: 500,
+    cover: 556,
     radius: "cover" as const,
     title: "text-[64px] leading-[1.1]",
     artist: "text-[34px]",
-    eyebrow: "text-[18px]",
+    eyebrow: "text-[22px]",
     gap: "gap-8",
-    eq: 36,
+    eq: 44,
   },
 } as const;
 
@@ -142,11 +142,7 @@ export function NowPlayingHero({
         <div className={pulsing ? "jm-beat" : undefined} style={beatStyle}>
           <motion.div
             className="relative"
-            style={
-              tiltEnabled
-                ? { rotateX, rotateY, transformStyle: "preserve-3d" }
-                : undefined
-            }
+            style={tiltEnabled ? { rotateX, rotateY } : undefined}
           >
             <Cover
               src={artworkUrl}
@@ -189,11 +185,16 @@ export function NowPlayingHero({
             !split && "justify-center",
           )}
         >
-          <Equalizer paused={paused} bpm={bpm} height={dims.eq} bars={size === "tv" ? 5 : 4} barWidth={size === "tv" ? 5 : 3} gap={size === "tv" ? 4 : 3} color="var(--jm-playing)" />
+          <Equalizer paused={paused} bpm={bpm} height={dims.eq} bars={size === "tv" ? 5 : 4} barWidth={size === "tv" ? 6 : 3} gap={size === "tv" ? 5 : 3} color="var(--jm-playing)" />
           <span>{nowPlayingLabel}</span>
           {bpm ? (
-            <span className="type-mono inline-flex items-center gap-1 rounded-pill bg-surface-3 px-2 py-0.5 normal-case tracking-normal text-fg-muted">
-              <Gauge aria-hidden="true" className={size === "tv" ? "size-5" : "size-3"} />
+            <span
+              className={cx(
+                "type-mono inline-flex items-center gap-1 rounded-pill bg-surface-3 normal-case tracking-normal text-fg-muted",
+                size === "tv" ? "px-4 py-1.5 !text-[24px]" : "px-2 py-0.5",
+              )}
+            >
+              <Gauge aria-hidden="true" className={size === "tv" ? "size-6" : "size-3"} />
               {Math.round(bpm)}
               {musicalKey ? ` · ${musicalKey}` : ""}
             </span>
