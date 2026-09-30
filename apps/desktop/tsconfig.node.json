@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM"],
+    "types": ["node", "vite/client"]
+  },
+  "include": [
+    "src/common",
+    "src/core",
+    "src/main",
+    "src/preload",
+    "tests/main",
+    "e2e",
+    "build",
+    "electron.vite.config.ts",
+    "electron-builder.config.ts",
+    "vitest.config.ts",
+    "vitest.e2e.config.ts",
+    "vite.shim.config.ts"
+  ]
+}

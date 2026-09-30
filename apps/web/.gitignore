@@ -1,0 +1,6 @@
+.next
+dist
+next-env.d.ts
+playwright-report
+test-results
+.lighthouse

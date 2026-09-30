@@ -1,0 +1,132 @@
+@import "@joymusic/ui/styles.css";
+
+@source "../";
+
+html {
+  scroll-behavior: smooth;
+  overscroll-behavior-y: none;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.guest-shell {
+  min-height: 100dvh;
+  min-height: 100svh;
+}
+
+.dock-fade {
+  background: linear-gradient(
+    to top,
+    var(--jm-canvas) 0%,
+    color-mix(in oklab, var(--jm-canvas) 92%, transparent) 55%,
+    transparent 100%
+  );
+}
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  display: flex;
+  flex-direction: column;
+  background: var(--jm-canvas);
+  animation: search-in 260ms var(--jm-ease-out) both;
+}
+
+@keyframes search-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.jm-rise {
+  animation: jm-rise-in 420ms var(--jm-ease-out) both;
+}
+
+.tv-root {
+  cursor: none;
+  user-select: none;
+}
+
+.tv-root * {
+  cursor: none !important;
+}
+
+@keyframes tv-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  25% {
+    transform: translate3d(5px, -4px, 0);
+  }
+  50% {
+    transform: translate3d(-4px, 5px, 0);
+  }
+  75% {
+    transform: translate3d(4px, 4px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.tv-drift {
+  animation: tv-drift 420s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes tv-aurora {
+  0% {
+    transform: translate3d(-6%, -4%, 0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate3d(6%, 5%, 0) rotate(14deg) scale(1.14);
+  }
+  100% {
+    transform: translate3d(-6%, -4%, 0) rotate(0deg) scale(1);
+  }
+}
+
+.tv-aurora {
+  animation: tv-aurora 38s ease-in-out infinite;
+  will-change: transform;
+}
+
+.tv-aurora[data-alt="true"] {
+  animation-duration: 53s;
+  animation-direction: reverse;
+}
+
+@keyframes tv-bar {
+  0%,
+  100% {
+    transform: scaleY(0.18);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.tv-bar {
+  transform-origin: 50% 100%;
+  animation: tv-bar var(--tv-bar-duration, 1400ms) ease-in-out var(--tv-bar-delay, 0ms) infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tv-drift,
+  .tv-aurora,
+  .tv-bar {
+    animation: none;
+  }
+  .search-overlay {
+    animation: none;
+  }
+}

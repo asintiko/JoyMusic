@@ -1,0 +1,129 @@
+name: Desktop release
+
+on:
+  push:
+    tags:
+      - "desktop-v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to stamp on a manual build, for example 0.1.0-test.1
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: desktop-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build ${{ matrix.label }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            label: macOS
+            platform: mac
+            artifact: desktop-mac
+          - os: windows-latest
+            label: Windows
+            platform: win
+            artifact: desktop-windows
+    env:
+      JOYMUSIC_BUILD_API_URL: ${{ vars.JOYMUSIC_API_URL || 'https://api.joymusic.uz' }}
+      JOYMUSIC_BUILD_ADMIN_URL: ${{ vars.JOYMUSIC_ADMIN_URL || 'https://admin.joymusic.uz' }}
+      JOYMUSIC_BUILD_WEB_URL: ${{ vars.JOYMUSIC_WEB_URL || 'https://joymusic.uz' }}
+      JOYMUSIC_RELEASE_OWNER: ${{ github.repository_owner }}
+      JOYMUSIC_RELEASE_REPO: ${{ github.event.repository.name }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Resolve version
+        id: version
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "value=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=${GITHUB_REF_NAME#desktop-v}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build the app bundle
+        run: pnpm --filter @joymusic/desktop build
+
+      - name: Package for macOS
+        if: matrix.platform == 'mac'
+        shell: bash
+        working-directory: apps/desktop
+        env:
+          CSC_LINK: ${{ secrets.MAC_CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.MAC_CSC_KEY_PASSWORD }}
+          CSC_IDENTITY_AUTO_DISCOVERY: ${{ secrets.MAC_CSC_LINK != '' && 'true' || 'false' }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          pnpm exec electron-builder --config electron-builder.config.ts --mac --publish never \
+            -c.extraMetadata.version="${{ steps.version.outputs.value }}"
+
+      - name: Package for Windows
+        if: matrix.platform == 'win'
+        shell: bash
+        working-directory: apps/desktop
+        env:
+          CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
+          CSC_IDENTITY_AUTO_DISCOVERY: ${{ secrets.WIN_CSC_LINK != '' && 'true' || 'false' }}
+        run: |
+          pnpm exec electron-builder --config electron-builder.config.ts --win --publish never \
+            -c.extraMetadata.version="${{ steps.version.outputs.value }}"
+
+      - name: Upload installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.artifact }}
+          if-no-files-found: error
+          path: |
+            apps/desktop/release/*.dmg
+            apps/desktop/release/*.zip
+            apps/desktop/release/*.exe
+            apps/desktop/release/*.blockmap
+            apps/desktop/release/latest*.yml
+
+  publish:
+    name: Attach to the release
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/desktop-v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+
+      - name: List files
+        run: ls -la dist
+
+      - name: Publish the release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          fail_on_unmatched_files: true
+          generate_release_notes: true

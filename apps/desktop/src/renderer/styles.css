@@ -1,0 +1,82 @@
+@import "@joymusic/ui/styles.css";
+@source "./";
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  user-select: none;
+}
+
+input,
+textarea {
+  user-select: text;
+}
+
+html[data-stage="true"] body {
+  cursor: none;
+}
+
+html[data-booth="true"] {
+  --jm-canvas: #000000;
+  --jm-surface-1: #050408;
+  --jm-surface-2: #0a0810;
+  --jm-surface-3: #100d16;
+  --jm-surface-4: #161220;
+  --jm-surface-5: #1d1829;
+  --jm-fg: #b9b3cf;
+  --jm-fg-muted: #857f9c;
+  --jm-fg-subtle: #736d8b;
+  --jm-fg-disabled: #4a4560;
+  --jm-line: rgb(255 255 255 / 0.05);
+  --jm-line-strong: rgb(255 255 255 / 0.1);
+  --jm-brand: #8073c4;
+  --jm-brand-from: #4a3aa0;
+  --jm-brand-to: #8a2f7c;
+  --jm-brand-strong-from: #3f3190;
+  --jm-brand-strong-to: #74206a;
+  --jm-brand-soft: rgb(122 92 255 / 0.09);
+  --jm-on-brand: #e6e1fa;
+  --jm-playing: #86ad34;
+  --jm-playing-fg: #8db538;
+  --jm-playing-soft: rgb(134 173 52 / 0.1);
+  --jm-next: #c98a1c;
+  --jm-next-fg: #c98a1c;
+  --jm-next-soft: rgb(201 138 28 / 0.1);
+  --jm-danger: #b8475c;
+  --jm-danger-fg: #c26074;
+  --jm-danger-soft: rgb(184 71 92 / 0.1);
+  --jm-glow-brand: 0 0 0 1px rgb(150 120 255 / 0.18);
+  --jm-glow-soft: none;
+  --jm-glow-playing: 0 0 0 1px rgb(182 255 59 / 0.15);
+  --jm-shadow-1: none;
+  --jm-shadow-2: 0 2px 6px rgb(0 0 0 / 0.6);
+  --jm-shadow-3: 0 8px 20px rgb(0 0 0 / 0.7);
+  --jm-shadow-4: 0 16px 40px rgb(0 0 0 / 0.8);
+  --jm-ambient-dim: rgb(0 0 0 / 0.85);
+}
+
+html[data-booth="true"] img,
+html[data-booth="true"] svg image {
+  filter: brightness(0.55) saturate(0.8);
+}
+
+html[data-booth="true"] .bg-brand-gradient-strong {
+  filter: brightness(0.75);
+}
+
+html[data-booth="true"][data-theme="lounge"] {
+  --jm-brand: #a88e50;
+  --jm-brand-strong-from: #8a7238;
+  --jm-brand-strong-to: #6b5524;
+  --jm-on-brand: #1a1306;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
