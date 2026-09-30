@@ -20,7 +20,8 @@ export function isThemeId(value: unknown): value is ThemeId {
 }
 
 export function applyTheme(theme: ThemeId, target?: HTMLElement): void {
-  const element = target ?? (typeof document === "undefined" ? undefined : document.documentElement);
+  const element =
+    target ?? (typeof document === "undefined" ? undefined : document.documentElement);
   if (!element) return;
   element.setAttribute("data-theme", theme);
   if (!target && typeof document !== "undefined") {

@@ -15,7 +15,8 @@ const variantClasses: Record<CardVariant, string> = {
   raised: "bg-surface-2 hairline shadow-2",
   glass: "jm-glass",
   outline: "bg-transparent hairline-strong",
-  brand: "bg-surface-1 shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--jm-brand)_35%,transparent),var(--jm-glow-soft)]",
+  brand:
+    "bg-surface-1 shadow-[inset_0_0_0_1px_color-mix(in_oklab,var(--jm-brand)_35%,transparent),var(--jm-glow-soft)]",
 };
 
 const paddingClasses: Record<CardPadding, string> = {

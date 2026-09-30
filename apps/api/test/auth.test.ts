@@ -130,7 +130,9 @@ describe("auth", () => {
       await context.deps.db
         .insert(users)
         .values({ id: `usr_${uniq()}`, email, name: "No Password", googleSub: uniq("sub") });
-      const response = await api().call("authLogin", { body: { email, password: "anything-at-all" } });
+      const response = await api().call("authLogin", {
+        body: { email, password: "anything-at-all" },
+      });
       expect(errorCode(response)).toBe("invalid_credentials");
     });
   });
@@ -168,7 +170,9 @@ describe("auth", () => {
       const owner = await registerOwner(context);
       const second = await api().ok("authRefresh", { body: { refreshToken: owner.refreshToken } });
       const third = await api().ok("authRefresh", { body: { refreshToken: second.refreshToken } });
-      const replay = await api().call("authRefresh", { body: { refreshToken: owner.refreshToken } });
+      const replay = await api().call("authRefresh", {
+        body: { refreshToken: owner.refreshToken },
+      });
       expect(replay.status).toBe(401);
       expect(errorCode(replay)).toBe("unauthorized");
       const afterReplay = await api().call("authRefresh", {
@@ -213,7 +217,9 @@ describe("auth", () => {
         .update(refreshTokens)
         .set({ expiresAt: new Date(Date.now() - 1000) })
         .where(eq(refreshTokens.userId, owner.userId));
-      const expired = await api().call("authRefresh", { body: { refreshToken: owner.refreshToken } });
+      const expired = await api().call("authRefresh", {
+        body: { refreshToken: owner.refreshToken },
+      });
       expect(expired.status).toBe(401);
     });
 
@@ -224,7 +230,9 @@ describe("auth", () => {
       const second = await api().ok("authLogout", { body: { refreshToken: rotated.refreshToken } });
       const unknown = await api().ok("authLogout", { body: { refreshToken: "never-issued" } });
       expect([first.ok, second.ok, unknown.ok]).toEqual([true, true, true]);
-      const attempt = await api().call("authRefresh", { body: { refreshToken: rotated.refreshToken } });
+      const attempt = await api().call("authRefresh", {
+        body: { refreshToken: rotated.refreshToken },
+      });
       expect(attempt.status).toBe(401);
     });
   });

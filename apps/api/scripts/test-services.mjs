@@ -208,7 +208,11 @@ function startPostgres() {
 
 function ensureDatabases(binDirectory) {
   for (const name of databaseNames) {
-    const exists = psql(binDirectory, "postgres", `select 1 from pg_database where datname='${name}'`);
+    const exists = psql(
+      binDirectory,
+      "postgres",
+      `select 1 from pg_database where datname='${name}'`,
+    );
     if (exists.stdout.trim() === "1") continue;
     const created = psql(binDirectory, "postgres", `create database ${name}`);
     if (created.status !== 0 && !created.stderr.includes("already exists")) {
@@ -321,7 +325,9 @@ function main() {
     process.stderr.write(`stopped: ${stopped.join(", ") || "nothing"}\n`);
     return;
   }
-  process.stderr.write("usage: test-services.mjs start|env|stop [--json] [--skip-postgres] [--skip-redis]\n");
+  process.stderr.write(
+    "usage: test-services.mjs start|env|stop [--json] [--skip-postgres] [--skip-redis]\n",
+  );
   process.exit(2);
 }
 
@@ -333,4 +339,3 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
     process.exit(1);
   }
 }
-

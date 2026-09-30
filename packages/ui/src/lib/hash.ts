@@ -12,7 +12,7 @@ export function hashString(input: string): number {
 }
 
 export function createRandom(seed: string): () => number {
-  let state = hashString(seed) % 4294967296 >>> 0;
+  let state = (hashString(seed) % 4294967296) >>> 0;
   return () => {
     state = (state + 0x6d2b79f5) >>> 0;
     let t = state;

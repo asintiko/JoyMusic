@@ -105,7 +105,8 @@ const horizontalGap = 30;
 const horizontalScale = horizontalCapHeight / wordmarkData.capHeight;
 const horizontalWordmarkWidth = wordmarkData.width * horizontalScale;
 const horizontalWordmarkX = logoMarkBounds.x + logoMarkBounds.width + horizontalGap;
-const horizontalWordmarkY = 64 - (wordmarkData.baseline - wordmarkData.capHeight / 2) * horizontalScale;
+const horizontalWordmarkY =
+  64 - (wordmarkData.baseline - wordmarkData.capHeight / 2) * horizontalScale;
 const horizontalWidth = horizontalWordmarkX + horizontalWordmarkWidth - logoMarkBounds.x;
 
 export const logoLockupHorizontal = {
@@ -312,5 +313,8 @@ export const logoMarkSvg = buildLogoSvg({ variant: "mark", tone: "gradient" });
 export const logoMarkWhiteSvg = buildLogoSvg({ variant: "mark", tone: "white" });
 export const logoMarkBlackSvg = buildLogoSvg({ variant: "mark", tone: "black" });
 export const logoWordmarkSvg = buildLogoSvg({ variant: "wordmark", tone: "default" });
-export const logoLockupHorizontalSvg = buildLogoSvg({ variant: "lockup-horizontal", tone: "default" });
+export const logoLockupHorizontalSvg = buildLogoSvg({
+  variant: "lockup-horizontal",
+  tone: "default",
+});
 export const logoLockupStackedSvg = buildLogoSvg({ variant: "lockup-stacked", tone: "default" });

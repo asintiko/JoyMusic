@@ -1,6 +1,12 @@
 import type { ComponentProps, ReactNode } from "react";
 import { cx } from "../lib/cx";
-import { Field, controlInvalidClasses, controlShellClasses, describedBy, useFieldIds } from "./field";
+import {
+  Field,
+  controlInvalidClasses,
+  controlShellClasses,
+  describedBy,
+  useFieldIds,
+} from "./field";
 
 export interface InputProps extends Omit<ComponentProps<"input">, "size"> {
   label?: ReactNode;
@@ -31,7 +37,14 @@ export function Input({
   const ids = useFieldIds(id);
   const isInvalid = invalid ?? Boolean(error);
   return (
-    <Field ids={ids} label={label} hint={hint} error={error} required={required} className={wrapperClassName}>
+    <Field
+      ids={ids}
+      label={label}
+      hint={hint}
+      error={error}
+      required={required}
+      className={wrapperClassName}
+    >
       <div
         className={cx(
           controlShellClasses,
@@ -40,7 +53,9 @@ export function Input({
           size === "lg" ? "h-12 px-4" : "h-10 px-3",
         )}
       >
-        {leading ? <span className="inline-flex shrink-0 text-fg-subtle [&>svg]:size-[18px]">{leading}</span> : null}
+        {leading ? (
+          <span className="inline-flex shrink-0 text-fg-subtle [&>svg]:size-[18px]">{leading}</span>
+        ) : null}
         <input
           id={ids.controlId}
           required={required}
@@ -54,7 +69,9 @@ export function Input({
           )}
           {...rest}
         />
-        {trailing ? <span className="inline-flex shrink-0 items-center gap-1 text-fg-subtle">{trailing}</span> : null}
+        {trailing ? (
+          <span className="inline-flex shrink-0 items-center gap-1 text-fg-subtle">{trailing}</span>
+        ) : null}
       </div>
     </Field>
   );

@@ -42,7 +42,8 @@ export function createGoogleVerifier(options: GoogleVerifierOptions): GoogleVeri
       if (payload.email_verified !== true && payload.email_verified !== "true") {
         throw new AppError("forbidden", 403, "Google account email is not verified");
       }
-      const name = typeof payload.name === "string" && payload.name.trim() ? payload.name.trim() : email;
+      const name =
+        typeof payload.name === "string" && payload.name.trim() ? payload.name.trim() : email;
       return {
         sub: payload.sub,
         email,

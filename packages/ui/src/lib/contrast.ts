@@ -23,10 +23,17 @@ export function parseColor(value: string): Rgba {
       a: full.length === 8 ? number(6) / 255 : 1,
     };
   }
-  const match = input.match(/^rgba?\(\s*([\d.]+)[\s,]+([\d.]+)[\s,]+([\d.]+)(?:\s*[/,]\s*([\d.]+%?))?\s*\)$/);
+  const match = input.match(
+    /^rgba?\(\s*([\d.]+)[\s,]+([\d.]+)[\s,]+([\d.]+)(?:\s*[/,]\s*([\d.]+%?))?\s*\)$/,
+  );
   if (!match) throw new Error(`Unsupported color: ${value}`);
   const alphaText = match[4];
-  const alpha = alphaText === undefined ? 1 : alphaText.endsWith("%") ? Number.parseFloat(alphaText) / 100 : Number.parseFloat(alphaText);
+  const alpha =
+    alphaText === undefined
+      ? 1
+      : alphaText.endsWith("%")
+        ? Number.parseFloat(alphaText) / 100
+        : Number.parseFloat(alphaText);
   return {
     r: Number.parseFloat(match[1] ?? "0"),
     g: Number.parseFloat(match[2] ?? "0"),
@@ -40,7 +47,12 @@ export function compositeOver(foreground: Rgba, background: Rgba): Rgba {
   if (alpha === 0) return { r: 0, g: 0, b: 0, a: 0 };
   const mix = (front: number, back: number) =>
     (front * foreground.a + back * background.a * (1 - foreground.a)) / alpha;
-  return { r: mix(foreground.r, background.r), g: mix(foreground.g, background.g), b: mix(foreground.b, background.b), a: alpha };
+  return {
+    r: mix(foreground.r, background.r),
+    g: mix(foreground.g, background.g),
+    b: mix(foreground.b, background.b),
+    a: alpha,
+  };
 }
 
 function channelLuminance(channel: number): number {
@@ -49,7 +61,11 @@ function channelLuminance(channel: number): number {
 }
 
 export function relativeLuminance(color: Rgba): number {
-  return 0.2126 * channelLuminance(color.r) + 0.7152 * channelLuminance(color.g) + 0.0722 * channelLuminance(color.b);
+  return (
+    0.2126 * channelLuminance(color.r) +
+    0.7152 * channelLuminance(color.g) +
+    0.0722 * channelLuminance(color.b)
+  );
 }
 
 export function contrastRatio(foreground: Rgba, background: Rgba): number {
@@ -60,6 +76,9 @@ export function contrastRatio(foreground: Rgba, background: Rgba): number {
 }
 
 export function toHex(color: Rgba): string {
-  const part = (value: number) => Math.round(Math.min(255, Math.max(0, value))).toString(16).padStart(2, "0");
+  const part = (value: number) =>
+    Math.round(Math.min(255, Math.max(0, value)))
+      .toString(16)
+      .padStart(2, "0");
   return `#${part(color.r)}${part(color.g)}${part(color.b)}`;
 }

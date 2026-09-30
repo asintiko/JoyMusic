@@ -38,7 +38,9 @@ describe("desktop PKCE flow", () => {
     expect(result.me.user.id).toBe(owner.userId);
     const me = await api().ok("me", { token: result.accessToken });
     expect(me.user.id).toBe(owner.userId);
-    const refreshed = await api().ok("authRefresh", { body: { refreshToken: result.refreshToken } });
+    const refreshed = await api().ok("authRefresh", {
+      body: { refreshToken: result.refreshToken },
+    });
     expect(refreshed.refreshToken).not.toBe(result.refreshToken);
   });
 

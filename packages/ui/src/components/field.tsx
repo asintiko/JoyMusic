@@ -20,10 +20,16 @@ export function useFieldIds(explicitId?: string): FieldIds {
   return { controlId, hintId: `${controlId}-hint`, errorId: `${controlId}-error` };
 }
 
-export function describedBy(ids: FieldIds, messages: FieldMessages, extra?: string): string | undefined {
-  const parts = [extra, messages.error ? ids.errorId : undefined, messages.hint ? ids.hintId : undefined].filter(
-    Boolean,
-  );
+export function describedBy(
+  ids: FieldIds,
+  messages: FieldMessages,
+  extra?: string,
+): string | undefined {
+  const parts = [
+    extra,
+    messages.error ? ids.errorId : undefined,
+    messages.hint ? ids.hintId : undefined,
+  ].filter(Boolean);
   return parts.length > 0 ? parts.join(" ") : undefined;
 }
 

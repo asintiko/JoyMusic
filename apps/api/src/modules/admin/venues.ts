@@ -121,7 +121,9 @@ export const adminVenueRoutes: FastifyPluginAsync = async (app) => {
         actorUserId: user.id,
         action: "venue.update",
         target: venue.id,
-        meta: { fields: Object.keys(body).filter((key) => body[key as keyof typeof body] !== undefined) },
+        meta: {
+          fields: Object.keys(body).filter((key) => body[key as keyof typeof body] !== undefined),
+        },
       });
     });
     if (settings) {
@@ -141,7 +143,10 @@ export const adminVenueRoutes: FastifyPluginAsync = async (app) => {
         .set({ endedAt: now })
         .where(and(eq(djSessions.venueId, venue.id), isNull(djSessions.endedAt)))
         .returning({ id: djSessions.id });
-      await tx.update(venues).set({ deletedAt: now, updatedAt: now }).where(eq(venues.id, venue.id));
+      await tx
+        .update(venues)
+        .set({ deletedAt: now, updatedAt: now })
+        .where(eq(venues.id, venue.id));
       await recordAudit(tx, {
         organizationId: venue.organizationId,
         actorUserId: user.id,

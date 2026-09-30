@@ -244,7 +244,11 @@ export function createAuthService(deps: Deps) {
         )
         .returning();
       if (!invite) throw new AppError("invite_invalid", 400, "Invite is invalid or has expired");
-      const [existing] = await tx.select().from(users).where(eq(users.email, invite.email)).limit(1);
+      const [existing] = await tx
+        .select()
+        .from(users)
+        .where(eq(users.email, invite.email))
+        .limit(1);
       let memberId: string;
       if (existing) {
         if (!existing.passwordHash) {
@@ -252,7 +256,11 @@ export function createAuthService(deps: Deps) {
         }
         const matches = await passwords.verify(existing.passwordHash, input.password);
         if (!matches) {
-          throw new AppError("invalid_credentials", 401, "Password does not match the existing account");
+          throw new AppError(
+            "invalid_credentials",
+            401,
+            "Password does not match the existing account",
+          );
         }
         memberId = existing.id;
       } else {

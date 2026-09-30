@@ -10,7 +10,10 @@ export const demoOrganizationName = "Joy Demo";
 export const demoOwnerEmail = "demo@joymusic.uz";
 export const demoDjEmail = "dj@joymusic.uz";
 export const demoVenueSlug = "joy-demo-club";
-export const demoQrLabels = [...Array.from({ length: 10 }, (_unused, index) => `Table ${index + 1}`), "Bar"];
+export const demoQrLabels = [
+  ...Array.from({ length: 10 }, (_unused, index) => `Table ${index + 1}`),
+  "Bar",
+];
 export const starterBannedWords = [
   "fuck",
   "shit",
@@ -108,9 +111,9 @@ export async function runSeed(db: Database, options: SeedOptions): Promise<SeedS
   const venueId = venue.id;
 
   const existingLabels = new Set(
-    (await db.select({ label: qrCodes.label }).from(qrCodes).where(eq(qrCodes.venueId, venueId))).map(
-      (row) => row.label,
-    ),
+    (
+      await db.select({ label: qrCodes.label }).from(qrCodes).where(eq(qrCodes.venueId, venueId))
+    ).map((row) => row.label),
   );
   const missingLabels = demoQrLabels.filter((label) => !existingLabels.has(label));
   if (missingLabels.length > 0) {

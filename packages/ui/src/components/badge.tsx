@@ -31,7 +31,15 @@ export const badgeDotClasses: Record<BadgeTone, string> = {
   info: "bg-info",
 };
 
-export function Badge({ tone = "neutral", size = "md", dot, icon, className, children, ...rest }: BadgeProps) {
+export function Badge({
+  tone = "neutral",
+  size = "md",
+  dot,
+  icon,
+  className,
+  children,
+  ...rest
+}: BadgeProps) {
   return (
     <span
       className={cx(
@@ -42,7 +50,9 @@ export function Badge({ tone = "neutral", size = "md", dot, icon, className, chi
       )}
       {...rest}
     >
-      {dot ? <span className={cx("size-1.5 rounded-full", badgeDotClasses[tone])} aria-hidden="true" /> : null}
+      {dot ? (
+        <span className={cx("size-1.5 rounded-full", badgeDotClasses[tone])} aria-hidden="true" />
+      ) : null}
       {icon ? <span className="inline-flex shrink-0 [&>svg]:size-3.5">{icon}</span> : null}
       {children}
     </span>

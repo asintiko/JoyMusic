@@ -93,9 +93,6 @@ importers:
       '@types/node':
         specifier: ^22.0.0
         version: 22.20.4
-      png2icons:
-        specifier: ^2.0.1
-        version: 2.0.1
       sharp:
         specifier: ^0.35.5
         version: 0.35.5(@types/node@22.20.4)
@@ -3106,10 +3103,6 @@ packages:
     engines: {node: '>=18'}
     hasBin: true
 
-  png2icons@2.0.1:
-    resolution: {integrity: sha512-GDEQJr8OG4e6JMp7mABtXFSEpgJa1CCpbQiAR+EjhkHJHnUL9zPPtbOrjsMD8gUbikgv3j7x404b0YJsV3aVFA==}
-    hasBin: true
-
   postcss-load-config@6.0.1:
     resolution: {integrity: sha512-oPtTM4oerL+UXmx+93ytZVN82RrlY/wPUV8IeDxFrzIjXOLF1pN+EmKPLbubvKHT2HC20xXsCAH2Z+CKV6Oz/g==}
     engines: {node: '>= 18'}
@@ -5868,8 +5861,6 @@ snapshots:
       pathe: 2.0.3
 
   playwright-core@1.56.1: {}
-
-  png2icons@2.0.1: {}
 
   postcss-load-config@6.0.1(jiti@2.7.0)(postcss@8.5.28)(tsx@4.23.15):
     dependencies:

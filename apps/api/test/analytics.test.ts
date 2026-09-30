@@ -94,14 +94,34 @@ describe("analytics overview", () => {
       .where(eq(venues.id, newYorkVenueId));
     rivalVenueId = (await createVenue(context, rival)).id;
 
-    const s1 = await startSession(context, tashkentVenueId, owner.userId, new Date("2026-09-20T14:00:00Z"));
+    const s1 = await startSession(
+      context,
+      tashkentVenueId,
+      owner.userId,
+      new Date("2026-09-20T14:00:00Z"),
+    );
     await context.deps.db
       .update(djSessions)
       .set({ endedAt: new Date("2026-09-20T18:00:00Z") })
       .where(eq(djSessions.id, s1));
-    const s2 = await startSession(context, tashkentVenueId, owner.userId, new Date("2026-09-21T09:00:00Z"));
-    const s3 = await startSession(context, newYorkVenueId, owner.userId, new Date("2026-09-21T11:00:00Z"));
-    const rivalSession = await startSession(context, rivalVenueId, rival.userId, new Date("2026-09-21T09:00:00Z"));
+    const s2 = await startSession(
+      context,
+      tashkentVenueId,
+      owner.userId,
+      new Date("2026-09-21T09:00:00Z"),
+    );
+    const s3 = await startSession(
+      context,
+      newYorkVenueId,
+      owner.userId,
+      new Date("2026-09-21T11:00:00Z"),
+    );
+    const rivalSession = await startSession(
+      context,
+      rivalVenueId,
+      rival.userId,
+      new Date("2026-09-21T09:00:00Z"),
+    );
     await startSession(
       context,
       (await createVenue(context, owner, { name: "Old" })).id,

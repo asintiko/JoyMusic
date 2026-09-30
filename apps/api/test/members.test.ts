@@ -36,9 +36,17 @@ describe("members and invites", () => {
         token: owner.accessToken,
         body: { email: `${uniq("other")}@example.com` },
       });
-      expect(invited.member).toMatchObject({ status: "invited", role: "dj", userId: null, name: null });
+      expect(invited.member).toMatchObject({
+        status: "invited",
+        role: "dj",
+        userId: null,
+        name: null,
+      });
       expect(invited.inviteToken.length).toBeGreaterThanOrEqual(40);
-      const [row] = await context.deps.db.select().from(invites).where(eq(invites.id, invited.member.id));
+      const [row] = await context.deps.db
+        .select()
+        .from(invites)
+        .where(eq(invites.id, invited.member.id));
       expect(row?.tokenHash).toBe(sha256Hex(invited.inviteToken));
       expect(row?.tokenHash).not.toBe(invited.inviteToken);
       expect(row?.invitedBy).toBe(owner.userId);
@@ -274,7 +282,7 @@ describe("members and invites", () => {
       expect(errorCode(acceptance)).toBe("invite_invalid");
       const removedAccess = await api().call("me", { token: dj.accessToken });
       expect(removedAccess.status).toBe(200);
-      expect(((removedAccess.body as { memberships: unknown[] }).memberships)).toEqual([]);
+      expect((removedAccess.body as { memberships: unknown[] }).memberships).toEqual([]);
     });
 
     it("refuses to remove the last owner", async () => {
@@ -332,7 +340,9 @@ describe("members and invites", () => {
       const remaining = await context.deps.db
         .select()
         .from(memberships)
-        .where(and(eq(memberships.organizationId, owner.organizationId), eq(memberships.role, "owner")));
+        .where(
+          and(eq(memberships.organizationId, owner.organizationId), eq(memberships.role, "owner")),
+        );
       expect(remaining).toHaveLength(1);
     });
   });
